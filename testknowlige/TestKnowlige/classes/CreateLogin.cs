@@ -15,10 +15,17 @@ namespace TestKnowlige.classes
                     && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(question) && !string.IsNullOrEmpty(answer)
                     ) {
                         SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);                        
-                        string str = "insert into users (firstname, lastname, login, password, question, answer, categories) values('" +
-                        firstname + "', '" + lastname + "', '" + login + "', '" + password.GetHashCode().ToString() + "', '" + question + "', '" + answer + "', '"+categor+"')";
+                        string str = "insert into users (firstname, lastname, login, password, question, answer, categories) values(@firstname, @lastname, @login, @password, @question, @answer, @categories)";                       
                         SqlCommand cmd = new SqlCommand(str, con);
-                        SqlCommand cmdlogin = new SqlCommand("select count(*) from user where login='"+login+"'", con);                        
+                        cmd.Parameters.AddWithValue("firstname", firstname);
+                        cmd.Parameters.AddWithValue("lastname", lastname);
+                        cmd.Parameters.AddWithValue("login", login);
+                        cmd.Parameters.AddWithValue("password", password.GetHashCode().ToString());
+                        cmd.Parameters.AddWithValue("question", question);
+                        cmd.Parameters.AddWithValue("answer", answer);
+                        cmd.Parameters.AddWithValue("categories", categor);
+                        SqlCommand cmdlogin = new SqlCommand("select count(*) from user where login=@login", con);
+                        cmdlogin.Parameters.AddWithValue("login", login);
                         try
                         {
                             con.Open();

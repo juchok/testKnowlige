@@ -31,8 +31,9 @@ namespace TestKnowlige.classes
 
         public static bool CheckLogin(string login) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString);
-            string str = "select firstname from users where login='" + login + "'";
+            string str = "select firstname from users where login=@login";
             SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("login", login);
             try
             {
                 con.Open();
