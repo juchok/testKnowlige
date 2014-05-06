@@ -1,0 +1,4 @@
+f:\project\TestKnowlige\TestKnowlige\bin\TestKnowlige.dll
+f:\project\TestKnowlige\TestKnowlige\bin\TestKnowlige.pdb
+f:\project\TestKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
+f:\project\TestKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
