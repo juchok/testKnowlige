@@ -13,6 +13,9 @@
         <asp:HyperLink ID="lnkChangePass" runat="server" Visible="false" NavigateUrl="~/login/ChangePassword.aspx">Change password</asp:HyperLink>
         <asp:LoginStatus ID="LogStat" runat="server" />        
     </div>
+    <div>
+        <asp:HyperLink ig="Discipline" runat="server" NavigateUrl="~/Discipline.aspx">Выбор дисциплины</asp:HyperLink>
+    </div>
     </form>
 </body>
 </html>

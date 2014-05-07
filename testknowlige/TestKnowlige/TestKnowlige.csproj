@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.aspx" />
+    <Content Include="Discipline.aspx" />
     <Content Include="login\ChangePassword.aspx" />
     <Content Include="login\CreateLogin.aspx" />
     <Content Include="login\login.aspx" />
@@ -77,6 +78,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Discipline.aspx.cs">
+      <DependentUpon>Discipline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Discipline.aspx.designer.cs">
+      <DependentUpon>Discipline.aspx</DependentUpon>
     </Compile>
     <Compile Include="login\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>

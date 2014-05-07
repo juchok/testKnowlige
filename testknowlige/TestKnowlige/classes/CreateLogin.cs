@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
+using System.Web.Security;
 
 namespace TestKnowlige.classes
 {
@@ -30,6 +31,13 @@ namespace TestKnowlige.classes
                         {
                             con.Open();
                             cmd.ExecuteNonQuery();
+                            if (categor == "Teacher")
+                            {
+                                Roles.AddUserToRole(login, "Teacher");
+                            }
+                            else {
+                                Roles.AddUserToRole(login, "Students");
+                            }
                             return true;
                         }
                         catch (Exception)
