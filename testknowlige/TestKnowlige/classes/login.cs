@@ -11,8 +11,10 @@ namespace TestKnowlige.classes
     {
         public static bool CheckUser(string log, string password) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString);
-            string str = "select firstname from users where login='"+log+"' and password='"+password.GetHashCode().ToString()+"'";
+            string str = "select firstname from users where login=@login and password=@password";
             SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.Add("login", log);
+            cmd.Parameters.Add("password", password.GetHashCode().ToString());
             try
             {
                 con.Open();
