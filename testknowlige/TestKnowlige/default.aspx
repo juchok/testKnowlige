@@ -4,16 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+<link rel="Stylesheet" type="text/css" href="style/style.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<title>Главная страница</title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:LoginName ID="LogName" runat="server" FormatString="Welcome, {0}" />        
+    <form id="main" runat="server" class="main">
+    <div class="over_header">
         <asp:HyperLink ID="lnkChangePass" runat="server" Visible="false" NavigateUrl="~/login/ChangePassword.aspx">Change password</asp:HyperLink>
+        <asp:LoginName ID="LogName" runat="server" FormatString="Welcome, {0}" />                
         <asp:LoginStatus ID="LogStat" runat="server" />        
     </div>
-    <div>
+    <div class="header">
+        <asp:Image ID="header_left" AlternateText="header_left" ImageUrl="img/test_tehno.png" runat="server" />
+        <p>Добро пожаловать на сайт проверки знаний</p>
+        <asp:Image ID="header_right" AlternateText="header_right" ImageUrl="img/voprosy.png" runat="server" />         
+    </div>
+    <div class="bod">
+        <h2>Выбирете интересующий вас тест</h2>
+        <div class="test">
+    	    <div class="head">
+        	    <div class="act_div">Дисциплина
+                </div>
+                <div>Категория
+                </div>                
+            </div>
+        <div class="body_div">
+        </div>
+    </div>
+    </div>
+    <div class="footer">
         <asp:HyperLink ig="Discipline" runat="server" NavigateUrl="~/Discipline.aspx">Выбор дисциплины</asp:HyperLink>
     </div>
     </form>

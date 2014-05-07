@@ -13,8 +13,8 @@ namespace TestKnowlige.classes
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString);
             string str = "select firstname from users where login=@login and password=@password";
             SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.Add("login", log);
-            cmd.Parameters.Add("password", password.GetHashCode().ToString());
+            cmd.Parameters.AddWithValue("login", log);
+            cmd.Parameters.AddWithValue("password", password.GetHashCode().ToString());
             try
             {
                 con.Open();
