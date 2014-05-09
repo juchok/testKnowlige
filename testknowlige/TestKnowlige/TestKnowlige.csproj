@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
+    <Compile Include="classes\SelectItem.cs" />
     <Compile Include="classes\UpdatePassword.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

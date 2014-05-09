@@ -9,7 +9,8 @@ namespace TestKnowlige.classes
 {
     public class LoGiN
     {
-        public static bool CheckUser(string log, string password) {
+        public static bool CheckUser(string log, string password)
+        {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString);
             string str = "select firstname from users where login=@login and password=@password";
             SqlCommand cmd = new SqlCommand(str, con);
@@ -26,12 +27,14 @@ namespace TestKnowlige.classes
 
                 throw;
             }
-            finally {
+            finally
+            {
                 con.Close();
             }
         }
 
-        public static bool CheckLogin(string login) {
+        public static bool CheckLogin(string login)
+        {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString);
             string str = "select firstname from users where login=@login";
             SqlCommand cmd = new SqlCommand(str, con);

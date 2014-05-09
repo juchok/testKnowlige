@@ -30,12 +30,29 @@
                 <div>Категория
                 </div>                
             </div>
-        <div class="body_div">
+        <div class="body_div">            
+            <div class="Discipline">
+                <asp:Repeater ID="DirDiscipline" runat="server" DataSourceID="">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="link1" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "discipline_name", "~/default.aspx?discipline={0}") %>'><%# Eval("discipline_name")%></asp:HyperLink>
+                    </ItemTemplate>                          
+                </asp:Repeater>          
+                <asp:Label ID="errDis" Visible="false" runat="server">No records</asp:Label>
+            </div>
+            <div class="Categories">
+                <asp:Label ID="categories_header" runat="server"></asp:Label>
+                <asp:Repeater ID="DirCategories" runat="server" DataSourceID="">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="link1" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "categories_name", "~/Discipline.aspx?discipline={0}") %>'><%# Eval("categories_name")%></asp:HyperLink>
+                    </ItemTemplate>                          
+                </asp:Repeater>          
+                <asp:Label ID="errCat" Visible="false" runat="server">No records</asp:Label>
+            </div>
         </div>
     </div>
     </div>
     <div class="footer">
-        <asp:HyperLink ig="Discipline" runat="server" NavigateUrl="~/Discipline.aspx">Выбор дисциплины</asp:HyperLink>
+        <asp:HyperLink id="Discipline" runat="server" NavigateUrl="~/Discipline.aspx">Выбор дисциплины</asp:HyperLink>
     </div>
     </form>
 </body>
