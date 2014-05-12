@@ -103,6 +103,15 @@ namespace TestKnowlige {
         protected global::System.Web.UI.WebControls.Repeater DirCategories;
         
         /// <summary>
+        /// SelectDiscipline элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SelectDiscipline;
+        
+        /// <summary>
         /// errCat элемент управления.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,33 @@ namespace TestKnowlige {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errCat;
+        
+        /// <summary>
+        /// DirTests элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater DirTests;
+        
+        /// <summary>
+        /// selectCategories элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label selectCategories;
+        
+        /// <summary>
+        /// errTests элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errTests;
         
         /// <summary>
         /// Discipline элемент управления.

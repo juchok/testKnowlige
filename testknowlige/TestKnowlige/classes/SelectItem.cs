@@ -12,29 +12,43 @@ namespace TestKnowlige.classes
 {
     public class SelectItem
     {
-        public static void Discipline(Repeater userControl){
-            SqlDataSource ds = new SqlDataSource(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString, "select discipline_name from discipline");            
-            userControl.DataSource = ds;
-            userControl.DataBind();            
+        public static bool Discipline(Repeater userControl){
+            if (Discipline(userControl, "select discipline_name from discipline")) {
+                return true;
+            }
+            return false;
         }
 
-        public static void Discipline(Repeater userControl, string command) {
+        public static bool Discipline(Repeater userControl, string command) {
             SqlDataSource ds = new SqlDataSource(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString, command);
-            userControl.DataSource = ds;
-            userControl.DataBind();
+            if (!Count(command))
+            {
+                return false;
+            }
+            try
+            {
+                userControl.DataSource = ds;
+                userControl.DataBind();
+                return true;                
+            }
+            catch (Exception)
+            {
+                return false;                
+            }            
         }
 
         public static bool Count(string command){
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            SqlCommand cmd = new SqlCommand(command, con);            
+            SqlCommand cmd = new SqlCommand(command, con);
             try
             {
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows) return true;
                 return false;
-            }            
-            finally {
+            }
+            finally
+            {
                 con.Close();
             }
         }
@@ -55,18 +69,38 @@ namespace TestKnowlige.classes
             }
         }
 
-        public static bool DefaultCategories(Repeater userControl)
+        public static bool Categories(Repeater userControl) {
+            string str = Categories(userControl, "").ToString();
+            if (string.IsNullOrEmpty(str)) 
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool? Categories(Repeater userControl, string getstr)
         {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("select top(1) discipline_id from discipline", con);            
+            if (string.IsNullOrEmpty(getstr))
+            {
+                return null;
+            }
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);            
+            SqlCommand cmd = new SqlCommand("select discipline_id from discipline where Discipline_name = @name", con);
+            cmd.Parameters.AddWithValue("name", getstr);
+            
             try
             {
                 con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
+                SqlDataReader dr = cmd.ExecuteReader();                
                 if (dr.HasRows)
                 {
-                    dr.Read();       
-                    string str = dr["discipline_id"].ToString();
+                    string str = "";
+                    while (dr.Read()) {
+                        str = dr["discipline_id"].ToString();
+                        if (!string.IsNullOrEmpty(str))
+                            break;
+                    }
+                    
                     dr.Close();
                     SqlCommand cm = new SqlCommand("select categories_name from categories where discipline_id = @id", con);
                     cm.Parameters.AddWithValue("id", str);
@@ -89,13 +123,26 @@ namespace TestKnowlige.classes
             }
             finally {
                 con.Close();
-            }
-           
+            }           
         }
 
-        public static string DefaultDiscipline() { 
+        public static bool? Tests(Repeater UserControl, string cat) {
+            if (string.IsNullOrEmpty(cat))
+            {
+                return null;
+            }
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "SELECT DISTINCT t.test_id FROM test_question t INNER JOIN question AS q ON t.question_id = q.question_id" + 
+                " INNER JOIN Categories AS c ON c.cat_id = q.cat_id WHERE c.categories_name = @cat_name";            
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);            
+            ds.SelectParameters.Add("cat_name", cat);
+            UserControl.DataSource = ds;
+            UserControl.DataBind();
             
+            
+            return false;
         }
+
 
     }
 }

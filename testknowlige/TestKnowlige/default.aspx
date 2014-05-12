@@ -25,16 +25,21 @@
         <h2>Выбирете интересующий вас тест</h2>
         <div class="test">
     	    <div class="head">
-        	    <div class="act_div">Дисциплина
+        	    <div class="act_div">
+                    Дисциплина
                 </div>
-                <div>Категория
+                <div>
+                    Категория
                 </div>                
+                <div>
+                    Тесты
+                </div>
             </div>
         <div class="body_div">            
             <div class="Discipline">
                 <asp:Repeater ID="DirDiscipline" runat="server" DataSourceID="">
                     <ItemTemplate>
-                        <asp:HyperLink ID="link1" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "discipline_name", "~/default.aspx?discipline={0}") %>'><%# Eval("discipline_name")%></asp:HyperLink>
+                        <asp:HyperLink ID="linkDiscipline" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "discipline_name", "~/default.aspx?discipline={0}") %>'><%# Eval("discipline_name")%></asp:HyperLink>
                     </ItemTemplate>                          
                 </asp:Repeater>          
                 <asp:Label ID="errDis" Visible="false" runat="server">No records</asp:Label>
@@ -43,10 +48,20 @@
                 <asp:Label ID="categories_header" runat="server"></asp:Label>
                 <asp:Repeater ID="DirCategories" runat="server" DataSourceID="">
                     <ItemTemplate>
-                        <asp:HyperLink ID="link1" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "categories_name", "~/Discipline.aspx?discipline={0}") %>'><%# Eval("categories_name")%></asp:HyperLink>
+                        <asp:HyperLink ID="linkCategories" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "categories_name", "~/default.aspx?discipline="+Request.QueryString["Discipline"]+"&categories={0}") %>'><%# Eval("categories_name")%></asp:HyperLink>
                     </ItemTemplate>                          
                 </asp:Repeater>          
-                <asp:Label ID="errCat" Visible="false" runat="server">No records</asp:Label>
+                <asp:Label ID="SelectDiscipline" Visible="false" runat="server">Выберите дисциплину</asp:Label>
+                <asp:Label ID="errCat" Visible="false" runat="server">Нет записей</asp:Label>
+            </div>
+            <div class="Tests">
+                <asp:Repeater ID="DirTests" runat="server" DataSourceID="">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="linkTests" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "test_id", "~/test.aspx?id={0}") %>'>Тест №<%# DirTests.Items.Count+1 %></asp:HyperLink>
+                    </ItemTemplate>                          
+                </asp:Repeater>
+                <asp:Label ID="selectCategories" Visible="false" runat="server">Выберите дисциплину и категорию</asp:Label>
+                <asp:Label ID="errTests" Visible="false" runat="server">Нет записей</asp:Label>                
             </div>
         </div>
     </div>

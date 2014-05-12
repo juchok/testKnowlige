@@ -13,27 +13,42 @@ namespace TestKnowlige
     public partial class _default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (SelectItem.Count("select discipline_name from discipline"))
-            {
-                SelectItem.Discipline(DirDiscipline);
-                if (!string.IsNullOrEmpty(Request.QueryString["discipline"]))
-                    categories_header.Text = Request.QueryString["discipline"];
-                else { 
-                }
-            }
-            else
+        {            
+            if (!SelectItem.Discipline(DirDiscipline, "select discipline_name from discipline"))            
             {
                 errDis.Visible = true;
             }
 
-            if (!SelectItem.DefaultCategories(DirCategories))
+            string str = SelectItem.Categories(DirCategories, Request.QueryString["Discipline"]).ToString();
+
+            if (string.IsNullOrEmpty(str)) {
+                SelectDiscipline.Visible = true;
+            }
+            if (str.ToLower()=="false")
+            {
                 errCat.Visible = true;
+            }
 
+            str = SelectItem.Tests(DirTests, Request.QueryString["categories"]).ToString();
 
-
+            if (string.IsNullOrEmpty(str)) {
+                selectCategories.Visible = true;
+            }
+            if (str.ToLower() == "false")
+            {
+                errTests.Visible = true;
+            }
+            
             if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
                 lnkChangePass.Visible = true;
+            }
+            
+        }
+
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            
         }
     }
 }
