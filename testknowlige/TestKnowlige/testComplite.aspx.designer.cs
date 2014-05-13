@@ -10,16 +10,7 @@
 namespace TestKnowlige {
     
     
-    public partial class test {
-        
-        /// <summary>
-        /// Tests элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm Tests;
+    public partial class testComplite {
         
         /// <summary>
         /// img_header элемент управления.
@@ -56,15 +47,6 @@ namespace TestKnowlige {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label header_test;
-        
-        /// <summary>
-        /// questions элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater questions;
         
         /// <summary>
         /// Complite элемент управления.

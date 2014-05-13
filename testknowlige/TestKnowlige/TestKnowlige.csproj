@@ -58,7 +58,9 @@
     <Content Include="login\login.aspx" />
     <Content Include="login\RecoveryPassword.aspx" />
     <Content Include="style\style.css" />
+    <Content Include="style\test.css" />
     <Content Include="test.aspx" />
+    <Content Include="testComplite.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -73,6 +75,7 @@
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
     <Compile Include="classes\SelectItem.cs" />
+    <Compile Include="classes\testComplite.cs" />
     <Compile Include="classes\UpdatePassword.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -123,6 +126,13 @@
     </Compile>
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testComplite.aspx.cs">
+      <DependentUpon>testComplite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testComplite.aspx.designer.cs">
+      <DependentUpon>testComplite.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

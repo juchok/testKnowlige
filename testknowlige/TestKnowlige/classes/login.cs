@@ -24,8 +24,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
             finally
             {
