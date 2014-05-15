@@ -6,3 +6,14 @@ f:\project\testKnowlige\testknowlige\TestKnowlige\bin\TestKnowlige.dll
 f:\project\testKnowlige\testknowlige\TestKnowlige\bin\TestKnowlige.pdb
 f:\project\testKnowlige\testknowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
 f:\project\testKnowlige\testknowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
+f:\project\testKnowlige\testknowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache
+D:\project\testKnowlige\testknowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache
+D:\project\testKnowlige\testknowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
+D:\project\testKnowlige\testknowlige\TestKnowlige\bin\TestKnowlige.dll
+D:\project\testKnowlige\testknowlige\TestKnowlige\bin\TestKnowlige.pdb
+D:\project\testKnowlige\testknowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
+D:\project\testKnowlige\TestKnowlige\bin\TestKnowlige.dll
+D:\project\testKnowlige\TestKnowlige\bin\TestKnowlige.pdb
+D:\project\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache
+D:\project\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
+D:\project\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb

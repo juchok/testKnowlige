@@ -22,13 +22,40 @@ namespace TestKnowlige {
         protected global::System.Web.UI.HtmlControls.HtmlForm Tests;
         
         /// <summary>
-        /// header элемент управления.
+        /// img_header элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label header;
+        protected global::System.Web.UI.WebControls.Image img_header;
+        
+        /// <summary>
+        /// header_discipline элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label header_discipline;
+        
+        /// <summary>
+        /// header_categories элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label header_categories;
+        
+        /// <summary>
+        /// header_test элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label header_test;
         
         /// <summary>
         /// questions элемент управления.
@@ -38,5 +65,14 @@ namespace TestKnowlige {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater questions;
+        
+        /// <summary>
+        /// Complite элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Complite;
     }
 }

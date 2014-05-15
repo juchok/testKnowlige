@@ -1,12 +1,16 @@
 ﻿body 
 {
     cursor: default;
+    font-family: Arial;
 }
 input[type="submit"], a
 {
     cursor: pointer;
     }
-
+a
+{
+    text-decoration: none;
+    }
 /*---------------------login----------------------------------------*/
 .login,.CreateAccaunt,.ChangePassword
 {
@@ -130,4 +134,168 @@ input[type="submit"], a
     font-size: 12px;
     line-height: 12px !important;        
     }    
-/*----------------------------------------------------------*/
+/*------------------------main------------------------------*/
+.main
+{
+    width: 800px;
+    height: auto;
+    margin: 0 auto;
+    }
+.over_header
+{
+    text-align: right;
+    background: #f2f2f2;
+    height: 40px;
+    }
+.over_header a 
+{
+    line-height: 40px;
+    margin: 0 10px;    
+    }    
+#LogStat
+{
+    color: #e5942a;
+    }    
+#lnkChangePass
+{
+    color: #999999;
+    }    
+#LogName
+{
+    color: #000000;
+    }    
+.over_header a:hover
+{
+    text-decoration: underline;
+    }    
+#header_left, #header_right
+{
+    width: 165px;
+    height: 165px;
+    display: inline-block;
+    }
+#header_left + p
+{
+    
+    font-size: 33px;
+    color: #e5942a;
+    display: inline-block;
+    width: 460px;
+    line-height: 50px;
+    margin: 40px 0 0 0;    
+    vertical-align: top;
+    }    
+.header
+{
+    margin: 10px 0;
+    border-bottom: 1px solid #333333;
+    }    
+.bod
+{
+    
+    }    
+.bod h2
+{
+    font-size: 24px;
+    color: #000000;
+    }    
+.footer
+{
+    background: #333333;
+    text-align: right;
+    width: inherit;    
+    height: 60px;
+    }  
+.footer a 
+{
+    color: #ffffff;
+    line-height: 60px;
+    margin: 0 10px;
+    text-decoration: none;    
+    }      
+.footer a:hover
+{
+    text-decoration: underline;
+    }    
+.test{
+	margin: 50px auto;
+	border:1px solid #aaaaaa;
+	height:auto;
+	width: 90%;
+	-o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.head{
+	border:1px solid #aaaaaa;
+	position:relative;
+	width:auto;
+	height:45px;
+	-o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	margin: 2px;
+	background:#e2e2e2;
+	
+	font-size: 24px;
+}
+.head div{
+	border:1px solid #a3a3a3;
+	background:url(../picture/head_div.png) repeat-x;
+	color:#555555;
+	padding: 0 10px;
+	height:40px;
+	line-height:40px;	
+	-o-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+	float: left;
+	width:auto;	
+	margin:4px 2px 0 2px;
+	cursor:pointer;
+	border-bottom:none;
+}
+.hov_div{
+	background:url(../picture/act_head_div.png) repeat-x !important;
+	color:#000 !important;
+	border-color: #555555 !important;
+}
+.act_div{
+	background:#FFF !important;
+	border-color: #999999 !important;
+	color:#000 !important;
+	border-bottom:1px solid #FFF !important;
+}
+
+.body_div a
+{
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    text-align: left;
+    margin: 10px 18px;
+    width: 300px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border: 3px solid #7c5848;
+    padding: 0 0 0 15px;
+    font-family: Monotype Corsiva;
+    font-size: 36px;
+    color: #7c5848;
+    }    
+.body_div span
+{
+    display: block;    
+    margin: 7px;    
+    }    
+.body_div a:hover, .active_discipline
+{
+    color: #e28b1a;
+    border: 3px solid #e28b1a;
+    }    
