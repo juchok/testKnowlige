@@ -58,6 +58,15 @@ namespace TestKnowlige {
         protected global::System.Web.UI.WebControls.Label header_test;
         
         /// <summary>
+        /// test_id элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField test_id;
+        
+        /// <summary>
         /// questions элемент управления.
         /// </summary>
         /// <remarks>

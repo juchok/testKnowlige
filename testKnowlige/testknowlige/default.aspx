@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="TestKnowlige._default" %>
 <%@ Register TagName="addItem" TagPrefix="uc" Src="~/usercontrol/AddDicciplineOrCaregories.ascx" %>
+<%@ Register TagName="errorMes" TagPrefix="uc" Src="~/usercontrol/MyMessageError.ascx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,8 +14,9 @@
     <form id="main" runat="server" class="main">
     <div class="over_header">
         <asp:HyperLink ID="lnkChangePass" runat="server" Visible="false" NavigateUrl="~/login/ChangePassword.aspx">Change password</asp:HyperLink>
+        <asp:HyperLink ID="register" runat="server" Visible="true" CssClass="LogStat" NavigateUrl="~/login/CreateLogin.aspx">Зарегистрироваться</asp:HyperLink>
         <asp:LoginName ID="LogName" runat="server" FormatString="Welcome, {0}" />                
-        <asp:LoginStatus ID="LogStat" runat="server" />        
+        <asp:LoginStatus ID="LogStat" runat="server" CssClass="LogStat"/>        
     </div>
     <div class="header">
         <asp:Image ID="header_left" AlternateText="header_left" ImageUrl="img/test_tehno.png" runat="server" />
@@ -34,8 +36,9 @@
                 <div>
                     Тесты
                 </div>
-                <asp:ImageButton ID="addDoC" AlternateText="addDis" Visible="true" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
-                <asp:ImageButton ID="addCat" AlternateText="addCat" Visible="true" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
+                <asp:ImageButton ID="addDoC" AlternateText="addDis" Visible="false" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
+                <asp:ImageButton ID="addCat" AlternateText="addCat" Visible="false" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
+                <asp:ImageButton ID="addTest" AlternateText="addTest" Visible="true" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
             </div>
         <div class="body_div">            
             <div class="Discipline">
@@ -72,6 +75,7 @@
         <asp:HyperLink id="Discipline" runat="server" NavigateUrl="~/Discipline.aspx">Выбор дисциплины</asp:HyperLink>
     </div>
     <uc:addItem ID="addNewItem" runat="server" Visible="false" />
+    <uc:errorMes ID="ErrorMes" runat="server" Visible="false" />
     </form>
 </body>
 </html>

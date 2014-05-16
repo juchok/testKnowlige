@@ -14,6 +14,7 @@ namespace TestKnowlige
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int points, test_points=0;
             if (PreviousPage == null) {
                 Response.Redirect("~/default.aspx");
             }
@@ -24,7 +25,7 @@ namespace TestKnowlige
              
             header_discipline.Text = (PreviousPage.FindControl("tests").FindControl("header_discipline") as Label).Text;
             header_categories.Text = (PreviousPage.FindControl("tests").FindControl("header_categories") as Label).Text;
-            header_test.Text = (PreviousPage.FindControl("tests").FindControl("header_test") as Label).Text;
+            header_test.Text = (PreviousPage.FindControl("tests").FindControl("header_test") as Label).Text;            
 
             foreach (RepeaterItem question in PreviousPage.FindControl("questions").Controls)
             {
@@ -32,9 +33,14 @@ namespace TestKnowlige
                 Label lb = new Label();
                 lb = (question.FindControl("question") as Label);
                 lb.CssClass = "question";
+                Label point = new Label();
+                point.Text = (question.FindControl("question_points") as HiddenField).Value + " баллов";
+                point.CssClass = "points";
+                lb.Controls.Add(point);
                 Page.FindControl("bodyAnswers").Controls.Add(lb);
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("id", id);
+                points = 0;
                 try
                 {
                     con.Open();
@@ -43,11 +49,24 @@ namespace TestKnowlige
                         while(dr.Read()){
                             CheckBox cb = testComplit.FindAnswer(dr["answer_text"].ToString(), bool.Parse(dr["correct"].ToString()), question.FindControl("answers").Controls);
                             if (cb != null)
-                            {
-                                Page.FindControl("bodyAnswers").Controls.Add(cb);
+                            {                                
+                                Page.FindControl("bodyAnswers").Controls.Add(cb);                                
+                                if (cb.Checked || cb.ForeColor != System.Drawing.Color.Empty) { 
+                                    if(bool.Parse(dr["correct"].ToString()) && cb.Checked)
+                                        points += testComplit.PointsToAnswer(id, (question.FindControl("question_points") as HiddenField).Value, true);
+                                    else
+                                        points += testComplit.PointsToAnswer(id, (question.FindControl("question_points") as HiddenField).Value, false);
+                                }
                             }
                         }                       
-                    }                        
+                    }
+                    if (points < 0)
+                        points = 0;
+                    Label your_question_point = new Label();
+                    your_question_point.Text = "Ваши балы за вопрос: " + points + " баллов";
+                    your_question_point.CssClass = "pointToQuestion";
+                    Page.FindControl("bodyAnswers").Controls.Add(your_question_point);
+                    test_points += points;
                 }
                 catch (Exception)
                 {
@@ -57,6 +76,31 @@ namespace TestKnowlige
                     con.Close();
                 }
 
+            }
+
+            Label test_point = new Label();
+            test_point.Text = "Ваши баллы за тест: " + test_points + " баллов";
+            test_point.CssClass = "test_points";
+            Page.FindControl("bodyAnswers").Controls.Add(test_point);
+
+            string ins = "insert into complite_test (user_id, test_id, dateComplite, points) values (@user_id, @test_id, @date, @points)";
+            SqlCommand cmd_ins = new SqlCommand(ins, con);            
+            cmd_ins.Parameters.AddWithValue("user_id", LoGiN.UserId(User.Identity.Name));
+            cmd_ins.Parameters.AddWithValue("test_id", (PreviousPage.FindControl("tests").FindControl("test_id") as HiddenField).Value);
+            cmd_ins.Parameters.AddWithValue("date", System.DateTime.Now);
+            cmd_ins.Parameters.AddWithValue("points", test_points);
+
+            try
+            {
+                con.Open();
+                cmd_ins.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
             }
         }
     }

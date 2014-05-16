@@ -21,13 +21,8 @@ $(document).ready(function(e) {
                 });
 		$(this).addClass('act_div');
 		$('.body_div div').hide();
-		$('.add').hide();		
-		/*if($('.head div').index(this) == 0){			
-				$('.Discipline').show();			
-			}
-			else {
-				$('.Categories').show();
-			}*/
+		$('.add').hide();	
+		
 		switch($('.head div').index(this)){
 			case 0: 
 				$('.Discipline').show();
@@ -47,7 +42,11 @@ $(document).ready(function(e) {
 				break;
 			case 2: 
 				$('.Tests').show();
-				$('.add').attr("alt","~/addTest.aspx");				
+$('.add').each(function(index, element) {
+                    if($(this).attr("name") == "addTest"){						
+						$(this).show();
+						}
+                });
 				break;
 			default: 
 				$('.Discipline').show();

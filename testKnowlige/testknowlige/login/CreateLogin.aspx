@@ -16,9 +16,9 @@
             <asp:TextBox ID="txtFirstname" runat="server"></asp:TextBox>        
         </div>
         <asp:RegularExpressionValidator runat="server" ControlToValidate="txtFirstname"
-            ErrorMessage="Имя должно быть только из Букв, длинной не менее 2 символов"
+            ErrorMessage="Имя должно быть только из Букв или цифр, длинной не менее 2 символов"
             Display="Dynamic" id="validFirstname"
-            ValidationExpression="[a-zA-z]{2,}"></asp:RegularExpressionValidator>
+            ValidationExpression="[a-zA-z0-9]{2,}"></asp:RegularExpressionValidator>
         <div>
             <asp:Label ID="lblLastname" runat="server" Text="Lastname"></asp:Label>
             <asp:TextBox ID="txtLastname" runat="server"></asp:TextBox>        
@@ -44,7 +44,7 @@
         <asp:RegularExpressionValidator runat="server" ControlToValidate="txtLogin"
             ErrorMessage="Длинна логина должна быть не менее 4 символов"
             Display="Dynamic" id="ValidLogin"
-            ValidationExpression="\S{4,}"></asp:RegularExpressionValidator>
+            ValidationExpression="\w{4,}"></asp:RegularExpressionValidator>
         <div>
             <asp:Label ID="lblPassword" runat="server" Text="Password"></asp:Label>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>        
@@ -52,7 +52,7 @@
         <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword"
             ErrorMessage="Длинна пароля должна быть не менее 6 символов"
             Display="Dynamic" id="ValidPassword"
-            ValidationExpression="\S{6,}"></asp:RegularExpressionValidator>
+            ValidationExpression="\w{6,}"></asp:RegularExpressionValidator>
         <div>
             <asp:Label ID="lblRePassword" runat="server" Text="Re-Password"></asp:Label>
             <asp:TextBox ID="txtRePassword" runat="server" TextMode="Password"></asp:TextBox>        
@@ -77,7 +77,8 @@
         <br />
         <asp:Button ID="btnCreate" runat="server" Text="Register" 
             onclick="btnCreate_Click" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
+            CausesValidation="false" onclick="btnCancel_Click"/>
     </div>
     </form>
 </body>

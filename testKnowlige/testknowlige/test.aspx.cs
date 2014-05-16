@@ -18,6 +18,7 @@ namespace TestKnowlige
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(Request.QueryString["id"])) {
+                test_id.Value = Request.QueryString["id"];
                 SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
                 string str = "select TOP(1) t.name, c.categories_name, d.discipline_name from test_question as ts "+
                     " inner join test as t on ts.test_id = t.test_id " +
@@ -45,7 +46,7 @@ namespace TestKnowlige
                     throw;
                 }
                 
-                str = "select q.text, t.question_id from question as q inner join test_question as t on q.question_id = t.question_id " +
+                str = "select q.text, q.points, t.question_id from question as q inner join test_question as t on q.question_id = t.question_id " +
                     " where t.test_id = @id";
                 SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
                 ds.SelectParameters.Add("id", Request.QueryString["id"]);
@@ -72,7 +73,6 @@ namespace TestKnowlige
              else {
 //                 Response.Redirect("~/default.aspx");
             }
-        }
-       
+        }       
     }
 }

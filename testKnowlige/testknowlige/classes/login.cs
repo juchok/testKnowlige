@@ -53,5 +53,29 @@ namespace TestKnowlige.classes
                 con.Close();
             }
         }
+
+        public static int UserId(string User) {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("select user_id from users where login = @log", con);
+            cmd.Parameters.AddWithValue("log", User);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    return int.Parse(dr["user_id"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+            return 0;
+        }
     }
 }

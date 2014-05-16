@@ -11,8 +11,12 @@
     <form id="changepassword" runat="server" class="ChangePassword">
     <div>
         <asp:Label ID="lblChangePasswordHeader" runat="server" Text="Change password" CssClass="changeheader"></asp:Label>
-        <asp:Label ID="lblOldPass" runat="server" Text="Enter old password"></asp:Label>
-        <asp:TextBox ID="txtOldPass" TextMode="Password" runat="server"></asp:TextBox>
+        <div>
+            <asp:Label ID="lblOldPass" runat="server" Text="Enter old password"></asp:Label>
+            <asp:TextBox ID="txtOldPass" TextMode="Password" runat="server"></asp:TextBox>
+        </div>
+        <asp:RequiredFieldValidator ID="ValidOldPass" runat="server" ControlToValidate="txtOldPass" 
+        ErrorMessage="Пароль не может быть пустым" Display="Dynamic"></asp:RequiredFieldValidator>
         <div>
             <asp:Label ID="lblNewPass" runat="server" Text="Enter new password"></asp:Label>
             <asp:TextBox ID="txtNewPass" TextMode="Password" runat="server"></asp:TextBox>
@@ -28,10 +32,13 @@
         <asp:CompareValidator runat="server" ID="ValidRepass" ControlToValidate="txtNewRePass"
         ControlToCompare="txtNewPass" Display="Dynamic" Type="String"
         ErrorMessage="Пароли не одинаковые"></asp:CompareValidator>
+        <div>
+            <asp:Label ID="errorPas" runat="server" CssClass="errorPas" Visible="false">Не верный текущий пароль</asp:Label>
+        </div>
         <br />
         <asp:Button ID="btnChangePass" runat="server" Text="Change" 
             onclick="btnChangePass_Click" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel"  CausesValidation="false"
             onclick="btnCancel_Click" />
     </div>
     </form>

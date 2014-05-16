@@ -19,9 +19,14 @@ namespace TestKnowlige.login
 
         protected void btnChangePass_Click(object sender, EventArgs e)
         {
-            if (LoGiN.CheckUser(HttpContext.Current.User.Identity.Name, txtOldPass.Text)
-                && UpdatePassword.update(txtNewPass.Text, HttpContext.Current.User.Identity.Name))
-                FormsAuthentication.RedirectFromLoginPage(HttpContext.Current.User.Identity.Name, true);
+            if (LoGiN.CheckUser(User.Identity.Name, txtOldPass.Text)
+                && UpdatePassword.update(txtNewPass.Text, User.Identity.Name))
+            {
+                FormsAuthentication.RedirectFromLoginPage(User.Identity.Name, true);
+            }
+            else {
+                errorPas.Visible = true;
+            }
                 
         }
 

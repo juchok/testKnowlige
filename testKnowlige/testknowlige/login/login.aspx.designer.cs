@@ -40,6 +40,15 @@ namespace TestKnowlige.login {
         protected global::System.Web.UI.WebControls.TextBox txtLogin;
         
         /// <summary>
+        /// validLogin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validLogin;
+        
+        /// <summary>
         /// lblPassword элемент управления.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,24 @@ namespace TestKnowlige.login {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        
+        /// <summary>
+        /// ValidPassword элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidPassword;
+        
+        /// <summary>
+        /// ErrorMessage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorMessage;
         
         /// <summary>
         /// btnLogin элемент управления.

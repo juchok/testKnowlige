@@ -19,7 +19,17 @@ namespace TestKnowlige.login
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             if (LoGiN.CheckUser(txtLogin.Text, txtPassword.Text))
+            {
                 FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
+            }
+            else {
+                ErrorMessage.Visible = true;
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
     }
 }

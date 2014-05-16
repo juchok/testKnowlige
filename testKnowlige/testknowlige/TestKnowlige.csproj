@@ -52,18 +52,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="add.aspx" />
+    <Content Include="addTest.aspx" />
     <Content Include="default.aspx" />
     <Content Include="Discipline.aspx" />
     <Content Include="login\ChangePassword.aspx" />
     <Content Include="login\CreateLogin.aspx" />
     <Content Include="login\login.aspx" />
     <Content Include="login\RecoveryPassword.aspx" />
+    <Content Include="style\Addtest.css" />
     <Content Include="style\style.css" />
     <Content Include="style\test.css" />
     <Content Include="style\testComplite.css" />
     <Content Include="test.aspx" />
     <Content Include="testComplite.aspx" />
     <Content Include="usercontrol\AddDicciplineOrCaregories.ascx" />
+    <Content Include="usercontrol\AddTest.ascx" />
+    <Content Include="usercontrol\MyMessageError.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -82,8 +86,16 @@
     <Compile Include="add.aspx.designer.cs">
       <DependentUpon>add.aspx</DependentUpon>
     </Compile>
+    <Compile Include="addTest.aspx.cs">
+      <DependentUpon>addTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="addTest.aspx.designer.cs">
+      <DependentUpon>addTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
+    <Compile Include="classes\MyRoles.cs" />
     <Compile Include="classes\SelectItem.cs" />
     <Compile Include="classes\testComplit.cs" />
     <Compile Include="classes\UpdatePassword.cs" />
@@ -150,6 +162,20 @@
     </Compile>
     <Compile Include="usercontrol\AddDicciplineOrCaregories.ascx.designer.cs">
       <DependentUpon>AddDicciplineOrCaregories.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\AddTest.ascx.cs">
+      <DependentUpon>AddTest.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\AddTest.ascx.designer.cs">
+      <DependentUpon>AddTest.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\MyMessageError.ascx.cs">
+      <DependentUpon>MyMessageError.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\MyMessageError.ascx.designer.cs">
+      <DependentUpon>MyMessageError.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

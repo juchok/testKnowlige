@@ -19,9 +19,15 @@ namespace TestKnowlige.login
         protected void btnCreate_Click(object sender, EventArgs e)
         {
             if (!LoGiN.CheckLogin(txtLogin.Text)
-                && CreateLoGiN.createAccaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue)) {
-                    FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
-            }
+                && CreateLoGiN.createAccaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue))
+            {
+                FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
+            }          
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
     }
 }

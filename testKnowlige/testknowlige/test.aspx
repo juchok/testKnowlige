@@ -15,12 +15,15 @@
             <asp:Label ID="header_discipline" runat="server" CssClass=""></asp:Label>
             <asp:Label ID="header_categories" runat="server" CssClass=""></asp:Label>
             <asp:Label ID="header_test" runat="server" CssClass=""></asp:Label>
+            <asp:HiddenField ID="test_id" Visible="false" runat="server" />
         </div>
         <asp:Repeater runat="server" ID="questions">        
             <ItemTemplate>
                 <div class="question">
                 <asp:Label ID="question" runat="server"><%# (questions.Items.Count+1).ToString()+".  "+ Eval("text") %></asp:Label>
+                <asp:Label ID="question_point" runat="server" CssClass="points"><%# Eval("points") + " баллов"%></asp:Label>
                 <asp:HiddenField ID="question_id" Visible="false" runat="server" Value='<%# Eval("question_id") %>'/>
+                <asp:HiddenField ID="question_points" Visible="false" runat="server" Value='<%# Eval("points") %>'/>                
                     <div class="answers">
                         <asp:Repeater ID="answers" runat="server">
                             <ItemTemplate>                        
@@ -33,8 +36,7 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>                    
-    <asp:Button ID="Complite" Text="Завершить" runat="server" 
-            PostBackUrl="~/testComplite.aspx" />    
+    <asp:Button ID="Complite" Text="Завершить" runat="server" PostBackUrl="~/testComplite.aspx" />    
     </div>
     </form>
 </body>

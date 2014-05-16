@@ -79,7 +79,7 @@ namespace TestKnowlige.classes
         }
 
         public static bool? Categories(Repeater userControl, string getstr)
-        {
+        {            
             if (string.IsNullOrEmpty(getstr))
             {
                 return null;
@@ -175,6 +175,30 @@ namespace TestKnowlige.classes
             return "";
         }
 
-
+        public static int DisciplineID(string discipline) {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select discipline_id from discipline where discipline_name = @name";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("name", discipline);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    return int.Parse(dr["discipline_id"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return 0;
+        }
     }
 }

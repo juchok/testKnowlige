@@ -31,6 +31,15 @@ namespace TestKnowlige {
         protected global::System.Web.UI.WebControls.HyperLink lnkChangePass;
         
         /// <summary>
+        /// register элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink register;
+        
+        /// <summary>
         /// LogName элемент управления.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace TestKnowlige {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton addCat;
+        
+        /// <summary>
+        /// addTest элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton addTest;
         
         /// <summary>
         /// DirDiscipline элемент управления.
@@ -182,5 +200,14 @@ namespace TestKnowlige {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::TestKnowlige.usercontrol.AddDicciplineOrCaregories addNewItem;
+        
+        /// <summary>
+        /// ErrorMes элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::TestKnowlige.usercontrol.MyMessageError ErrorMes;
     }
 }

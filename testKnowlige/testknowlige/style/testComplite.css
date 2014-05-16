@@ -28,7 +28,7 @@ form
 {
     padding: 15px;
     border-bottom: 2px ridge #999999;
-    margin: 30px 0 10px 0;
+    margin: 50px 0 10px 0;
     display:block;
     }   
 .answer
@@ -39,13 +39,32 @@ form
     }     
 #home
 {
-    display:block;
-    text-align: center;
-    margin: 20px 0 0 0;
     color: #E5942A;
-    text-decoration: none;    
+    display: block;
+    font-family: comic sans ms;
+    font-size: 20px;
+    margin: 20px 0 0;
+    text-align: center;
+    text-decoration: none;
     }    
 #home:hover
 {
     text-decoration: underline;
+    }    
+.points
+{
+    float: right;
+    }  
+.pointToQuestion      
+{
+    border-top: 1px dashed #999999;
+    float: left;
+    margin: 0 0 0 20px;
+    }    
+.test_points
+{
+    display: block;
+    font-family: comic sans ms;
+    font-size: 24px;
+    margin: 60px 0 15px;
     }    
