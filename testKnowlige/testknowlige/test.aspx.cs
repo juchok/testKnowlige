@@ -20,10 +20,8 @@ namespace TestKnowlige
             if (!string.IsNullOrEmpty(Request.QueryString["id"])) {
                 test_id.Value = Request.QueryString["id"];
                 SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-                string str = "select TOP(1) t.name, c.categories_name, d.discipline_name from test_question as ts "+
-                    " inner join test as t on ts.test_id = t.test_id " +
-                    " inner join question as q on q.question_id = ts.question_id " +                    
-                    " inner join categories as c on c.cat_id = q.cat_id " +
+                string str = "select TOP(1) t.name, c.categories_name, d.discipline_name from test as t "+
+                    " inner join categories as c on c.cat_id = t.cat_id " +
                     " inner join discipline as d on d.discipline_id = c.discipline_id " +
                     " where t.test_id = @id";
                 SqlCommand cmd = new SqlCommand(str, con);

@@ -67,6 +67,7 @@
     <Content Include="testComplite.aspx" />
     <Content Include="usercontrol\AddDicciplineOrCaregories.ascx" />
     <Content Include="usercontrol\AddTest.ascx" />
+    <Content Include="usercontrol\confirm.ascx" />
     <Content Include="usercontrol\MyMessageError.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -93,11 +94,15 @@
     <Compile Include="addTest.aspx.designer.cs">
       <DependentUpon>addTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="classes\AnswerItem.cs" />
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
     <Compile Include="classes\MyRoles.cs" />
+    <Compile Include="classes\QuestionItem.cs" />
     <Compile Include="classes\SelectItem.cs" />
+    <Compile Include="classes\Test.cs" />
     <Compile Include="classes\testComplit.cs" />
+    <Compile Include="classes\testItem.cs" />
     <Compile Include="classes\UpdatePassword.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -170,6 +175,13 @@
     <Compile Include="usercontrol\AddTest.ascx.designer.cs">
       <DependentUpon>AddTest.ascx</DependentUpon>
     </Compile>
+    <Compile Include="usercontrol\confirm.ascx.cs">
+      <DependentUpon>confirm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\confirm.ascx.designer.cs">
+      <DependentUpon>confirm.ascx</DependentUpon>
+    </Compile>
     <Compile Include="usercontrol\MyMessageError.ascx.cs">
       <DependentUpon>MyMessageError.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -190,7 +202,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>48985</DevelopmentServerPort>
+          <DevelopmentServerPort>47078</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

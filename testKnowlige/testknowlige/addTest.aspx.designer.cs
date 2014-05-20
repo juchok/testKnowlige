@@ -40,15 +40,6 @@ namespace TestKnowlige {
         protected global::System.Web.UI.WebControls.ImageButton AddQuestion;
         
         /// <summary>
-        /// AddAnswer элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton AddAnswer;
-        
-        /// <summary>
         /// testName элемент управления.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,15 @@ namespace TestKnowlige {
         protected global::System.Web.UI.WebControls.HiddenField test_id;
         
         /// <summary>
+        /// cat_id элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField cat_id;
+        
+        /// <summary>
         /// questions элемент управления.
         /// </summary>
         /// <remarks>
@@ -94,12 +94,30 @@ namespace TestKnowlige {
         protected global::TestKnowlige.usercontrol.AddTest NewTest;
         
         /// <summary>
-        /// HyperLink1 элемент управления.
+        /// FormConfirm элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::TestKnowlige.usercontrol.confirm FormConfirm;
+        
+        /// <summary>
+        /// save элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button save;
+        
+        /// <summary>
+        /// cancel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancel;
     }
 }

@@ -104,8 +104,9 @@ namespace TestKnowlige
                     ErrorMes.Visible = true;
                 }
             }
-            if ((sender as ImageButton).AlternateText == "addTest") { 
-                Response.Redirect("~/addTest.aspx");
+            if ((sender as ImageButton).AlternateText == "addTest") {
+                Response.Cookies["categories"].Value = Request.QueryString["categories"];
+                Response.Redirect("~/addTest.aspx?cat=2");                
             }
         }
 

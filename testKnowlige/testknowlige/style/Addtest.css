@@ -1,5 +1,9 @@
 ﻿body {
 }
+span
+{
+    cursor: default;
+    }
 .main
 {
     width: 800px;
@@ -27,7 +31,7 @@
     left: 40%;
     position: absolute;
     top: 10%;
-    width: 300px;
+    width: 320px;
     border-radius: 10px;
      -o-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -66,9 +70,21 @@
 .add
 {
     float: right;
-    height: 40px;
-    margin: 3px 6px 0 0;
+    height: 20px;
+    margin: 0 5px 0 0;
     } 
+.AnswerInput    
+{
+    float: right;
+    height: 20px;
+    margin: 0 5px 0 0;
+    }
+.addQuestion
+{
+    float: right;
+    height: 30px;
+    margin: 10px 5px 0 0;
+    }    
 .otherFilds {
     margin: 0 0 10px 10px;
     width: 92%;
@@ -89,4 +105,78 @@
     font-size: 10px;
     padding: 5px 0 0 10px;
     width: 100%;
+    }    
+.testname
+{
+    display: block;
+    font-family: Monotype Corsiva;
+    font-size: 34px;
+    }    
+.testauthor {
+    display: block;
+    font-family: monotype corsiva;
+    font-size: 20px;
+    margin: 10px 0 30px;
+}
+.question > span:first-child {
+    display: inline-block;
+    margin: 15px 0;
+}
+
+.question  > div
+{
+    margin: 20px 0;
+    }
+
+.points {
+    display: inline-block;
+    float: right;
+    margin: 0 20px;
+}
+.answer{
+    margin: 0 15px;
+}    
+.answers > div
+{
+    margin: 4px 0;
+    }
+.text
+{
+    display: block;
+    padding: 5px 10px;
+    }
+.save, .cancel
+{
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-family: monotype corsiva;
+    font-size: 30px;    
+    }    
+.save
+{
+    margin: 50px 0 20px 250px;
+    }    
+.cancel
+{
+    margin: 50px 0 20px 50px;
+    }
+    
+.save:hover, .cancel:hover
+{
+    color:  #E5942A;
+    }    
+    
+.AnswerInput:hover, .addQuestion:hover, .add:hover
+{
+    opacity: 0.3;
+    }    
+.question > div:first-child:hover, .answers > div:hover
+{
+    background: #f0f0f0;
+    }    
+
+.answer > input 
+{
+    margin: 0 15px 0 0;
     }    

@@ -7,8 +7,8 @@
         <asp:Label ID="lblAdd" CssClass="lblAdd" runat="server"></asp:Label>
         <asp:TextBox ID="txtAdd" CssClass="txtAdd" runat="server"></asp:TextBox>
         <asp:RegularExpressionValidator ID="ValidtxtAdd" runat="server" 
-            ErrorMessage="Поле должно быть больше 3 символов"
-            Display="Dynamic" ValidationExpression="\S{3,}"  CssClass="errorTxtAdd"
+            ErrorMessage="Не должно содержать специальных символов"
+            Display="Dynamic" ValidationExpression="[\S ]+"  CssClass="errorTxtAdd"
             ControlToValidate="txtAdd"></asp:RegularExpressionValidator>
         <asp:RequiredFieldValidator ID="EmptyField" runat="server" 
             ErrorMessage="Поле должно быть заполненым" Display="Dynamic"
@@ -33,6 +33,8 @@
             onclick="btnAddQuestion_Click" Visible="false"/>
         <asp:Button ID="btnAddAnswer" runat="server" Text="Добавить" 
             onclick="btnAddAnswer_Click" Visible="false"/>
+        <asp:Button ID="RedactQuestion" Text="Редактировать" Visible="false" runat="server" OnClick="RedactQuestion_Click"/>
+        <asp:Button ID="RedactAnswer" Text="Редактировать" Visible="false" runat="server" OnClick="RedactAnswer_Click" />
         <asp:Button ID="btnCancel" runat="server" Text="Отмена" CssClass="UC_cancel" 
             CausesValidation="false" onclick="btnCancel_Click" />
     </div>

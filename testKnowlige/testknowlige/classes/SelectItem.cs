@@ -132,8 +132,8 @@ namespace TestKnowlige.classes
                 return null;
             }
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "SELECT DISTINCT t.test_id FROM test_question t INNER JOIN question AS q ON t.question_id = q.question_id" + 
-                " INNER JOIN Categories AS c ON c.cat_id = q.cat_id WHERE c.categories_name = @cat_name";            
+            string str = "SELECT DISTINCT t.test_id FROM test t INNER JOIN categories AS c ON c.cat_id = t.cat_id" + 
+                " WHERE c.categories_name = @cat_name";            
             SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);            
             ds.SelectParameters.Add("cat_name", cat);            
             try
