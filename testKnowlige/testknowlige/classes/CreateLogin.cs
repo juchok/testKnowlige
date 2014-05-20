@@ -33,10 +33,10 @@ namespace TestKnowlige.classes
                             cmd.ExecuteNonQuery();
                             if (categor == "Teacher")
                             {
-                                MyRoles.AddUserToRole(login, "Teacher");
+                                Roles.AddUserToRole(login, "Teacher");
                             }
                             else {
-                                MyRoles.AddUserToRole(login, "Student");                                
+                                Roles.AddUserToRole(login, "Student");                                
                             }
                             return true;
                         }

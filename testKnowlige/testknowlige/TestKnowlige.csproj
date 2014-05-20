@@ -97,7 +97,6 @@
     <Compile Include="classes\AnswerItem.cs" />
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
-    <Compile Include="classes\MyRoles.cs" />
     <Compile Include="classes\QuestionItem.cs" />
     <Compile Include="classes\SelectItem.cs" />
     <Compile Include="classes\Test.cs" />

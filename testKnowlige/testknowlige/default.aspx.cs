@@ -22,7 +22,7 @@ namespace TestKnowlige
                     Response.Cookies["Discipline"].Value = Request.QueryString["Discipline"];
                     Response.Cookies["Discipline"].Expires = DateTime.Now.AddDays(1);
                 }
-                if (!string.IsNullOrEmpty(User.Identity.Name) && MyRoles.IsUserInRole(User.Identity.Name, "Teacher"))
+                if (!string.IsNullOrEmpty(User.Identity.Name) && Roles.IsUserInRole(User.Identity.Name, "Teacher"))
                 {
                     addDoC.Visible = true;
                     addCat.Visible = true;
