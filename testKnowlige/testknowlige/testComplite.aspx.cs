@@ -103,5 +103,33 @@ namespace TestKnowlige
                 con.Close();
             }
         }
+
+        internal static void Show(GridView ListTests, string UserName)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select d.Discipline_name, c.categories_name, t.name, ct.points, ct.dateComplite " +
+                " from Complite_test as ct inner join test as t on ct.test_id = t.test_id " +
+                " inner join Categories as c on c.cat_id = t.cat_id " + 
+                " inner join discipline as d on d.discipline_id = c.discipline_id " +
+                " inner join users as u on u.user_id = ct.user_id where u.login = @login";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("login", UserName);
+            try
+            {
+                con.Open();
+                SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+                Parameter p = new Parameter("login", System.Data.DbType.String, UserName);                
+                ds.SelectParameters.Add(p);
+                ListTests.DataSource = ds;
+                ListTests.DataBind();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+        }
     }
 }

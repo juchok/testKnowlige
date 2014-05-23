@@ -12,10 +12,9 @@
 </head>
 <body>
     <form id="main" runat="server" class="main">
-    <div class="over_header">
-        <asp:HyperLink ID="lnkChangePass" runat="server" Visible="false" NavigateUrl="~/login/ChangePassword.aspx">Change password</asp:HyperLink>
+    <div class="over_header">        
         <asp:HyperLink ID="register" runat="server" Visible="true" CssClass="LogStat" NavigateUrl="~/login/CreateLogin.aspx">Зарегистрироваться</asp:HyperLink>
-        <asp:LoginName ID="LogName" runat="server" FormatString="Welcome, {0}" />                
+        <asp:HyperLink NavigateUrl="~/profile/general.aspx" runat="server"><asp:LoginName ID="LogName" runat="server" FormatString="Welcome, {0}" /></asp:HyperLink>                        
         <asp:LoginStatus ID="LogStat" runat="server" CssClass="LogStat"/>        
     </div>
     <div class="header">

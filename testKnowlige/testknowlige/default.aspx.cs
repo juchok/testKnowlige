@@ -61,12 +61,7 @@ namespace TestKnowlige
                     if (str.ToLower() == "false")
                     {
                         errTests.Visible = true;
-                    }
-
-                if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    lnkChangePass.Visible = true;
-                }
+                    }                              
             }
             catch (Exception ex)
             {

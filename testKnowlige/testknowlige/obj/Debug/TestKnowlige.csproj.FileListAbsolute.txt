@@ -23,3 +23,7 @@ D:\juk\testKnowlige\TestKnowlige\obj\Debug\ResolveAssemblyReference.cache
 D:\juk\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
 D:\juk\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
 D:\project\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache
+D:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.dll
+D:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.pdb
+D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
+D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
