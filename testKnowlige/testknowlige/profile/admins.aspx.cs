@@ -20,10 +20,15 @@ namespace TestKnowlige.profile
             SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
             listAdmins.DataSource = ds;
             listAdmins.DataBind();
+            sendMessage.Visible = true;            
         }
 
         protected void writeMessage_Click(object sender, EventArgs e) 
-        { 
+        {            
+            MailMessage.ToUsers = (sender as Button).CommandArgument;
+            MailMessage.FromUser = "qweqwe";
+            MailMessage.EnableFrom = false;
+            MailMessage.Visible = true;
         }
     }
 }

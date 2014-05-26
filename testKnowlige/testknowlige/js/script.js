@@ -54,4 +54,7 @@ $('.add').each(function(index, element) {
 				break;	
 			}	
 		});
+function hideMessage(){
+	alert(1);
+}
 });

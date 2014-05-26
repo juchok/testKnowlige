@@ -45,7 +45,7 @@
 
         <asp:Button ID="Change" runat="server" Text="Редактировать" 
             onclick="Change_Click"  />
-        <asp:Button ID="Save" runat="server" Text="Сохранить" Visible="false" 
+        <asp:Button ID="Save" runat="server" Text="Сохранить" Visible="false" PostBackUrl="~/profile/general.aspx"
             onclick="Save_Click" />
         <asp:Button ID="Cancel" runat="server" Visible="false" Text="Отмена" 
             CausesValidation="false" onclick="Cancel_Click"/>

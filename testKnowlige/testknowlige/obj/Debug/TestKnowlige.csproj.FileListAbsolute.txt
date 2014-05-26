@@ -27,3 +27,4 @@ D:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.dll
 D:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.pdb
 D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
 D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
+D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache

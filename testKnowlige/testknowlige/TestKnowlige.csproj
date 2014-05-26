@@ -76,6 +76,7 @@
     <Content Include="usercontrol\AddTest.ascx" />
     <Content Include="usercontrol\confirm.ascx" />
     <Content Include="usercontrol\menu.ascx" />
+    <Content Include="usercontrol\Message.ascx" />
     <Content Include="usercontrol\MyMessageError.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -105,6 +106,7 @@
     <Compile Include="classes\AnswerItem.cs" />
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
+    <Compile Include="classes\Mail.cs" />
     <Compile Include="classes\Profile.cs" />
     <Compile Include="classes\QuestionItem.cs" />
     <Compile Include="classes\SelectItem.cs" />
@@ -238,6 +240,13 @@
     </Compile>
     <Compile Include="usercontrol\menu.ascx.designer.cs">
       <DependentUpon>menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\Message.ascx.cs">
+      <DependentUpon>Message.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\Message.ascx.designer.cs">
+      <DependentUpon>Message.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\MyMessageError.ascx.cs">
       <DependentUpon>MyMessageError.ascx</DependentUpon>

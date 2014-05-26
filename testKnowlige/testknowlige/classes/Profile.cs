@@ -70,7 +70,7 @@ namespace TestKnowlige.classes
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "select m.phone, m.address, m.mail from moreinformation as m inner join" + 
-            " user as u on u.user_id = m.user_id where u.login = @login";
+            " users as u on u.user_id = m.user_id where u.login = @login";
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("login", username);
             try
@@ -84,6 +84,7 @@ namespace TestKnowlige.classes
                 else {
                     str = " insert into moreinformation (phone, mail, address, user_id) values (@phone, @mail, @address, @id)";
                 }
+                dr.Close();
                 cmd.CommandText = str;
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("mail", mail);

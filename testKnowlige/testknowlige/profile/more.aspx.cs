@@ -16,9 +16,12 @@ namespace TestKnowlige.profile
             {
                 Response.Redirect("~/default.aspx");
             }
-            Profile.MoreInformation(User.Identity.Name, txtMail, "Mail");
-            Profile.MoreInformation(User.Identity.Name, txtPhone, "Phone");
-            Profile.MoreInformation(User.Identity.Name, txtAddress, "address");
+            if (!Page.IsPostBack)
+            {
+                Profile.MoreInformation(User.Identity.Name, txtMail, "Mail");
+                Profile.MoreInformation(User.Identity.Name, txtPhone, "Phone");
+                Profile.MoreInformation(User.Identity.Name, txtAddress, "address");
+            }
             menu.ActiveItem(2);
         }
 
@@ -35,7 +38,12 @@ namespace TestKnowlige.profile
         protected void Save_Click(object sender, EventArgs e)
         {
             Profile.SaveMoreInformation(User.Identity.Name, txtMail.Text, txtPhone.Text, txtAddress.Text);
-            Page.DataBind();
+            txtAddress.Enabled = false;
+            txtMail.Enabled = false;
+            txtPhone.Enabled = false;
+            Change.Visible = true;
+            Save.Visible = false;
+            Cancel.Visible = false;
         }
 
         protected void Cancel_Click(object sender, EventArgs e)
