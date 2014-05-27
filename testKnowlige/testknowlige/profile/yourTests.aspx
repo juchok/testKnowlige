@@ -6,12 +6,28 @@
 <head runat="server">
     <title>Ваши тесты</title>
     <link href="../style/general.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../js/script.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="yourTests" runat="server">
     <div>
     <uc:menu Visible="true" ID="menu" runat="server"/>
-    <div class="main"></div>
+    <div class="main">
+        <asp:Label Text="Список тестов созданных вами" runat="server" ID="header"/>
+        <div class="listTests">
+        <asp:Repeater runat="server" ID="listTest">        
+            <ItemTemplate>
+            <div>
+                <asp:Label runat="server" ID="Discipline_name"><%# Eval("discipline_name") %></asp:Label>
+                <asp:Label runat="server" ID="Categories_name"><%# Eval("categories_name") %></asp:Label>
+                <asp:Label runat="server" ID="test_name"><%# Eval("name") %></asp:Label>
+                <asp:HyperLink ID="testRedact" runat="server" NavigateUrl='<%# "~/testRedact.aspx?id=" + Eval("test_id") %>'>Редактировать</asp:HyperLink>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+        </div>
+    </div>
     
     </div>
     </form>

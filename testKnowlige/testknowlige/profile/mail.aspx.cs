@@ -33,12 +33,10 @@ namespace TestKnowlige.profile
         {
             if (WhatList.Value.ToLower() == "sent")
             {
-                Mail.SentMessage(listMessage, LoGiN.UserId(User.Identity.Name));
-                WhatList.Value = "sent";
+                SenderMessage_Click(sender, e);
             }
             else {
-                Mail.GiveMessage(listMessage, LoGiN.UserId(User.Identity.Name));
-                WhatList.Value = "new";
+                NewMessage_Click(sender, e);
             }
         }
 
@@ -64,12 +62,16 @@ namespace TestKnowlige.profile
         {            
             Mail.SentMessage(listMessage, LoGiN.UserId(User.Identity.Name));
             WhatList.Value = "sent";
+            SenderMessage.CssClass = "active_mail";
+            NewMessage.CssClass = "";
         }
 
         protected void NewMessage_Click(object sender, EventArgs e)
         {         
             Mail.GiveMessage(listMessage, LoGiN.UserId(User.Identity.Name));
             WhatList.Value = "new";
+            NewMessage.CssClass = "active_mail";
+            SenderMessage.CssClass = "";
         }
     }
 }

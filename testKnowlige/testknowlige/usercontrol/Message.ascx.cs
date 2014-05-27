@@ -28,6 +28,8 @@ namespace TestKnowlige.usercontrol
                 FromUser = txtFrom.Text;
                 ToUsers = txtToUser.Text;
                 Text = txtMessage.Text;
+                EnableToUser = txtToUser.Enabled;
+                EnableFrom = txtFrom.Enabled;
             }
         }
 
@@ -65,8 +67,7 @@ namespace TestKnowlige.usercontrol
         protected void Page_PreRender(object sender, EventArgs e) {
             txtFrom.Text = FromUser;
             txtToUser.Text = ToUsers;
-            txtMessage.Text = Text;
-            txtMessage.Text = "";
+            txtMessage.Text = Text;            
 
             txtFrom.Enabled = EnableFrom;
             txtToUser.Enabled = EnableToUser;

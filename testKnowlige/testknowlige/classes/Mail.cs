@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 using System.Web.Configuration;
+using System.Web.UI;
 
 namespace TestKnowlige.classes
 {
@@ -14,7 +15,7 @@ namespace TestKnowlige.classes
 
             int id_FromUer = LoGiN.UserId(FromUser);
             if (id_FromUer <= 0) {
-                errorMessage.Text = "Не существует такого отправителя";
+                errorMessage.Text = "Не существует такого отправителя";                
                 return 0;
             }
 

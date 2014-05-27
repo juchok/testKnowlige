@@ -54,7 +54,4 @@ $(document).ready(function (e) {
                 break;
         }
     });
-    function animePass() {
-        alert(1);
-    };
 });

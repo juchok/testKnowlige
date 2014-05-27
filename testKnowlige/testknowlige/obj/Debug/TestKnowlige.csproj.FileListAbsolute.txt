@@ -28,3 +28,8 @@ D:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.pdb
 D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
 D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb
 D:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache
+f:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.dll
+f:\testKnowlige\testKnowlige\TestKnowlige\bin\TestKnowlige.pdb
+f:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.csprojResolveAssemblyReference.cache
+f:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.dll
+f:\testKnowlige\testKnowlige\TestKnowlige\obj\Debug\TestKnowlige.pdb

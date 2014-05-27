@@ -70,7 +70,6 @@ ul
     text-align: center;
     width: 70%;
 }    
-
 .main span {
     display: inline-block;
     text-align: right;
@@ -222,3 +221,49 @@ input[disabled="disabled"],textarea[disabled="disabled"]
 {
     margin: 0 5px;
     }
+.active_mail
+{
+    background: url("../img/bg_active_mail.png") no-repeat bottom center !important;
+    }    
+.listMessage div span + span {
+    padding: 0 15px;
+    text-align: left;
+    width: 460px;
+}
+.listMessage div input + span {
+    width: 100px;
+}
+    
+.listTests
+{
+    padding: 0 0 0 15px;
+    }    
+    
+.listTests span
+{
+    display: inline-block;
+    text-align: left;
+    width: 25%;
+    }
+
+.listTests a {
+    color: #0000FF;
+    font-family: comic sans ms;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.listTests a:hover {
+    color: #00008B;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.listTests div:hover
+{
+    background: url("../img/bglistTests.png") repeat-y;
+    background-size: 100%;
+    }
+.listTests div:hover span+span
+{
+    color:White;
+    }    

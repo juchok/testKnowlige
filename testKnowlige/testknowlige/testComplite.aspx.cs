@@ -14,10 +14,11 @@ namespace TestKnowlige
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            float test_points = 0;
+
             if (PreviousPage==null) {
                 Response.Redirect("~/default.aspx");
             }
-            int points, test_points=0;
             if (PreviousPage == null) {
                 Response.Redirect("~/default.aspx");
             }
@@ -43,7 +44,7 @@ namespace TestKnowlige
                 Page.FindControl("bodyAnswers").Controls.Add(lb);
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("id", id);
-                points = 0;
+                float points = 0;
                 try
                 {
                     con.Open();
@@ -54,11 +55,16 @@ namespace TestKnowlige
                             if (cb != null)
                             {                                
                                 Page.FindControl("bodyAnswers").Controls.Add(cb);                                
-                                if (cb.Checked || cb.ForeColor != System.Drawing.Color.Empty) { 
-                                    if(bool.Parse(dr["correct"].ToString()) && cb.Checked)
+                                if (cb.Checked || cb.ForeColor != System.Drawing.Color.Empty) {
+                                    if (bool.Parse(dr["correct"].ToString()) && cb.Checked)
                                         points += testComplit.PointsToAnswer(id, (question.FindControl("question_points") as HiddenField).Value, true);
                                     else
-                                        points += testComplit.PointsToAnswer(id, (question.FindControl("question_points") as HiddenField).Value, false);
+                                    {
+                                        if (bool.Parse(dr["correct"].ToString()) && !cb.Checked)
+                                            points -= testComplit.PointsToAnswer(id, (question.FindControl("question_points") as HiddenField).Value, true);
+                                        else 
+                                            points += testComplit.PointsToAnswer(id, (question.FindControl("question_points") as HiddenField).Value, false);
+                                    }
                                 }
                             }
                         }                       
@@ -66,7 +72,7 @@ namespace TestKnowlige
                     if (points < 0)
                         points = 0;
                     Label your_question_point = new Label();
-                    your_question_point.Text = "Ваши балы за вопрос: " + points + " баллов";
+                    your_question_point.Text = "Ваши балы за вопрос: " + Math.Ceiling(points) + " баллов";
                     your_question_point.CssClass = "pointToQuestion";
                     Page.FindControl("bodyAnswers").Controls.Add(your_question_point);
                     test_points += points;

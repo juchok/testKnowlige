@@ -60,7 +60,7 @@ namespace TestKnowlige.classes
             return System.Drawing.Color.Empty;
         }
 
-        public static int PointsToAnswer(string question_id, string question_points, bool correct) {
+        public static float PointsToAnswer(string question_id, string question_points, bool correct) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);            
             string str_answer = "select COUNT(*) from answer where question_id = @id and correct = @cor";                        
             SqlCommand cmd_answer = new SqlCommand(str_answer, con);
@@ -69,13 +69,13 @@ namespace TestKnowlige.classes
             try
             {
                 con.Open();                
-                int ans = (int)cmd_answer.ExecuteScalar();
+                float ans = float.Parse(((int)cmd_answer.ExecuteScalar()).ToString());
                 if (correct)
                 {
-                    return int.Parse(question_points) / ans;
+                    return float.Parse(question_points) / ans;
                 }
                 else {
-                    return -int.Parse(question_points) / ans;
+                    return -float.Parse(question_points) / ans;
                 }
                 
             }

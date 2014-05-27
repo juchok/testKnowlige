@@ -24,21 +24,23 @@
         </div>
         <div class="mail_menu">
         <asp:HiddenField runat="server" ID="WhatList" />
-            <asp:Button runat="server" ID="SenderMessage" Text="Полученные" 
+            <asp:Button runat="server" ID="NewMessage" Text="Полученные" 
                 onclick="NewMessage_Click" />
-            <asp:Button runat="server" ID="NewMessage" Text="Отправленные" 
+            <asp:Button runat="server" ID="SenderMessage" Text="Отправленные" 
                 onclick="SenderMessage_Click"  />            
         </div>
-        <asp:Repeater runat="server" ID="listMessage">
-            <ItemTemplate>
-            <div>
-                <asp:CheckBox ID="selectMessage" runat="server" />
-                <asp:HiddenField ID="message_id" runat="server" Value='<%# Eval("message_id") %>'/>
-                <asp:Label ID="User" runat="server"><%# Eval("login") %></asp:Label>
-                <asp:Label ID="Message" runat="server"><%# Eval("Text") %></asp:Label>
-            </div>
-            </ItemTemplate>
-        </asp:Repeater>
+        <div class="listMessage">        
+            <asp:Repeater runat="server" ID="listMessage">
+                <ItemTemplate>
+                <div>
+                    <asp:CheckBox ID="selectMessage" runat="server" />
+                    <asp:HiddenField ID="message_id" runat="server" Value='<%# Eval("message_id") %>'/>
+                    <asp:Label ID="User" runat="server"><%# Eval("login") %></asp:Label>
+                    <asp:Label ID="Message" runat="server"><%# Eval("Text") %></asp:Label>
+                </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
     </div>
     </div>
     <uc:message ID="messageItem" runat="server" Visible="false"/>

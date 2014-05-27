@@ -58,15 +58,6 @@ namespace TestKnowlige.profile {
         protected global::System.Web.UI.WebControls.HiddenField WhatList;
         
         /// <summary>
-        /// SenderMessage элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SenderMessage;
-        
-        /// <summary>
         /// NewMessage элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace TestKnowlige.profile {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button NewMessage;
+        
+        /// <summary>
+        /// SenderMessage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SenderMessage;
         
         /// <summary>
         /// listMessage элемент управления.

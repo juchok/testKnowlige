@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace TestKnowlige.usercontrol
 {
@@ -11,7 +12,12 @@ namespace TestKnowlige.usercontrol
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Roles.IsUserInRole(Page.User.Identity.Name, "Teacher")) {
+                yourtests.Visible = false;
+            }
+            if (!Roles.IsUserInRole(Page.User.Identity.Name, "Admin")) {
+                administration.Visible = false;
+            }
         }
                 
         public void ActiveItem(int i) {
