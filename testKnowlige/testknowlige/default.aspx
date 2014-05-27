@@ -5,10 +5,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<link rel="Stylesheet" type="text/css" href="style/style.css" />
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<title>Главная страница</title>
+    <link rel="Stylesheet" type="text/css" href="style/style.css" />
+    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
+    <title>Главная страница</title>
 </head>
 <body>
     <form id="main" runat="server" class="main">
@@ -37,7 +37,7 @@
                 </div>
                 <asp:ImageButton ID="addDoC" AlternateText="addDis" Visible="false" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
                 <asp:ImageButton ID="addCat" AlternateText="addCat" Visible="false" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
-                <asp:ImageButton ID="addTest" AlternateText="addTest" Visible="true" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
+                <asp:ImageButton ID="addTest" AlternateText="addTest" Visible="false" CssClass="add" ImageUrl="~/img/plus.png" runat="server" OnClick="addDoC_Click"/>                
             </div>
         <div class="body_div">            
             <div class="Discipline">
@@ -70,8 +70,7 @@
         </div>        
     </div>    
     </div>
-    <div class="footer">
-        <asp:HyperLink id="Discipline" runat="server" NavigateUrl="~/Discipline.aspx">Выбор дисциплины</asp:HyperLink>
+    <div class="footer">        
     </div>
     <uc:addItem ID="addNewItem" runat="server" Visible="false" />
     <uc:errorMes ID="ErrorMes" runat="server" Visible="false" />

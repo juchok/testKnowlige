@@ -18,11 +18,23 @@ namespace TestKnowlige.login
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            if (!LoGiN.CheckLogin(txtLogin.Text)
-                && CreateLoGiN.createAccaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue))
+            if (!LoGiN.CheckLogin(txtLogin.Text))
             {
-                FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
-            }          
+                if (CreateLoGiN.createAccaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue))                
+                {
+                    FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
+                }
+                else {
+                    ErrorMessage.Text = "Не удалось создать пользователя";
+                    ErrorMessage.Visible = true;
+                }
+            }
+            else {
+                LoginBusy.Text = "Логин занят";
+                LoginBusy.Visible = true;
+                txtLogin.Text = "";
+                txtLogin.Focus();
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

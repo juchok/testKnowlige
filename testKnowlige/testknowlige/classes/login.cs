@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
+using System.IO;
 
 namespace TestKnowlige.classes
 {
@@ -14,8 +15,8 @@ namespace TestKnowlige.classes
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString);
             string str = "select firstname from users where login=@login and password=@password";
             SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("login", log);
-            cmd.Parameters.AddWithValue("password", password.GetHashCode().ToString());
+            cmd.Parameters.AddWithValue("login", log);            
+            cmd.Parameters.AddWithValue("password", CreateLoGiN.EncodePassword(password));
             try
             {
                 con.Open();
@@ -76,6 +77,84 @@ namespace TestKnowlige.classes
                 con.Close();
             }
             return 0;
+        }
+
+        public static string SpetialQuestion(string login) {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select question from users where login = @login";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("login", login);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows) {
+                    dr.Read();
+                    return dr["question"].ToString();
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+
+        }
+
+        internal static bool checkAnswer(string login, string question, string answer)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select firstname from users where login =@login and question = @question and answer = @answer";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("login", login);
+            cmd.Parameters.AddWithValue("question", question);
+            cmd.Parameters.AddWithValue("answer", answer);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if(dr.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+        }
+
+        public static string RandomePassword()
+        {         
+            string path = Path.GetRandomFileName();
+            path = path.Replace(".", ""); // Remove period.
+            return path.Remove(8);         
+        }
+
+        internal static void UpdatePassword(string login, string pass)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update users set password = @password where login = @login";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("login", login);
+            cmd.Parameters.AddWithValue("password",CreateLoGiN.EncodePassword(pass));
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
         }
     }
 }

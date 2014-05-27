@@ -11,6 +11,7 @@
     <form id="CreateAccaunt" runat="server" class="CreateAccaunt">
     <div>
         <asp:Label ID="lblCreateLoginHeader" runat="server" Text="Create accaunt" CssClass="loginHeader"></asp:Label>
+        <asp:Label ID="ErrorMessage" runat="server" CssClass="messError" Visible="false"></asp:Label>
         <div>
             <asp:Label ID="lblFirsname" runat="server" Text="Firstname"></asp:Label>
             <asp:TextBox ID="txtFirstname" runat="server"></asp:TextBox>        
@@ -45,6 +46,7 @@
             ErrorMessage="Длинна логина должна быть не менее 4 символов"
             Display="Dynamic" id="ValidLogin"
             ValidationExpression="\w{4,}"></asp:RegularExpressionValidator>
+         <asp:Label ID="LoginBusy" runat="server" CssClass="messError" Visible="false"></asp:Label>
         <div>
             <asp:Label ID="lblPassword" runat="server" Text="Password"></asp:Label>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>        

@@ -6,9 +6,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Список администраторов</title>
-    <link href="../style/general.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <link href="../style/general.css" rel="stylesheet" type="text/css" />    
+    <script src="../js/jquery-1.10.2.min.js" type="text/javascript"></script> 
+    <script src="../js/script.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="admins" runat="server">

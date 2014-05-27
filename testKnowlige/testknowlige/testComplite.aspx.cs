@@ -14,6 +14,9 @@ namespace TestKnowlige
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (PreviousPage==null) {
+                Response.Redirect("~/default.aspx");
+            }
             int points, test_points=0;
             if (PreviousPage == null) {
                 Response.Redirect("~/default.aspx");

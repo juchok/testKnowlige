@@ -26,6 +26,7 @@ namespace TestKnowlige
                 {
                     addDoC.Visible = true;
                     addCat.Visible = true;
+                    addTest.Visible = true;
                 }
                 if (string.IsNullOrEmpty(User.Identity.Name))
                 {
@@ -99,14 +100,20 @@ namespace TestKnowlige
                     ErrorMes.Visible = true;
                 }
             }
-            if ((sender as ImageButton).AlternateText == "addTest") {
-                Response.Cookies["categories"].Value = Request.QueryString["categories"];
-                Response.Redirect("~/addTest.aspx?cat=2");                
-            }
-        }
-
-        protected void Page_PreInit(object sender, EventArgs e) {
-            
-        }
+            if ((sender as ImageButton).AlternateText == "addTest")            
+            {
+                if (!string.IsNullOrEmpty(Request.QueryString["categories"]))
+                {
+                    Response.Cookies["categories"].Value = Request.QueryString["categories"];
+                    Response.Redirect("~/addTest.aspx?cat=2");
+                }
+                else
+                {
+                    ErrorMes.ErrorHeader = "Ошибочка";
+                    ErrorMes.MesError = "Для того что бы добавить тест необходимо выбрать категорию!";
+                    ErrorMes.Visible = true;
+                }
+            }            
+        }                
     }
 }

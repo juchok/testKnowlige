@@ -51,10 +51,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="add.aspx" />
     <Content Include="addTest.aspx" />
     <Content Include="default.aspx" />
-    <Content Include="Discipline.aspx" />
+    <Content Include="js\jquery-1.10.2.min.js" />
+    <Content Include="js\script.js" />
     <Content Include="profile\ChangePassword.aspx" />
     <Content Include="login\CreateLogin.aspx" />
     <Content Include="login\login.aspx" />
@@ -89,13 +89,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="add.aspx.cs">
-      <DependentUpon>add.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="add.aspx.designer.cs">
-      <DependentUpon>add.aspx</DependentUpon>
-    </Compile>
     <Compile Include="addTest.aspx.cs">
       <DependentUpon>addTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -120,13 +113,6 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Discipline.aspx.cs">
-      <DependentUpon>Discipline.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Discipline.aspx.designer.cs">
-      <DependentUpon>Discipline.aspx</DependentUpon>
     </Compile>
     <Compile Include="profile\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
@@ -258,7 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
-    <Folder Include="js\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

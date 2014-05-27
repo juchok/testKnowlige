@@ -13,8 +13,6 @@ namespace TestKnowlige.usercontrol
 {
     public partial class Message : System.Web.UI.UserControl
     {
-        string _from, _toUser;
-
         public string FromUser { get; set; }
         public string ToUsers { get; set; }
         public string Text { get; set; }
@@ -47,8 +45,8 @@ namespace TestKnowlige.usercontrol
                 Text = null;                
                 errorMessage.Visible = false;
                 Page.FindControl("sendMessage").Visible = true;
-                string js = "setTimeout($('.send').fadeOut(2000),2000);";
-                Page.ClientScript.RegisterStartupScript(typeof(Page), "calling", "alert($('.send'));", true);
+                string js = "$('.send').animate({'opacity':'0.2'},500).animate({'opacity':'1'},500).animate({'opacity':'0.2'},500).animate({'opacity':'1'},500).animate({'opacity':'0.2'},500).animate({'opacity':'1'},500).fadeOut(2000)";
+                Page.ClientScript.RegisterStartupScript(GetType(), "hideMessage", js, true);
             }
         }
 

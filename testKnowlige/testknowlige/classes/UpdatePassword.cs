@@ -13,7 +13,7 @@ namespace TestKnowlige.classes
                 SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
                 string str = "update users set password = @password where login=@login";
                 SqlCommand cmd = new SqlCommand(str, con);
-                cmd.Parameters.AddWithValue("password", pass.GetHashCode().ToString());
+                cmd.Parameters.AddWithValue("password", CreateLoGiN.EncodePassword(pass));
                 cmd.Parameters.AddWithValue("login", login);
                 try
                 {

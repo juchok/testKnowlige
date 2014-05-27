@@ -20,7 +20,7 @@ namespace TestKnowlige.profile
             SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
             listAdmins.DataSource = ds;
             listAdmins.DataBind();
-            sendMessage.Visible = true;            
+
         }
 
         protected void writeMessage_Click(object sender, EventArgs e) 

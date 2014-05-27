@@ -5,12 +5,14 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.Security;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TestKnowlige.classes
 {
     public class CreateLoGiN
     {
-        static public bool createAccaunt(string firstname, string lastname, string login, string password, string question, string answer, string categor) {
+        static public bool createAccaunt(string firstname, string lastname, string login, string password, string question, string answer, string categor) {                               
             if(!LoGiN.CheckLogin(login))
                 if (!string.IsNullOrEmpty(firstname) && !string.IsNullOrEmpty(lastname) && !string.IsNullOrEmpty(login)
                     && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(question) && !string.IsNullOrEmpty(answer)
@@ -21,7 +23,7 @@ namespace TestKnowlige.classes
                         cmd.Parameters.AddWithValue("firstname", firstname);
                         cmd.Parameters.AddWithValue("lastname", lastname);
                         cmd.Parameters.AddWithValue("login", login);
-                        cmd.Parameters.AddWithValue("password", password.GetHashCode().ToString());
+                        cmd.Parameters.AddWithValue("password", EncodePassword(password));
                         cmd.Parameters.AddWithValue("question", question);
                         cmd.Parameters.AddWithValue("answer", answer);
                         cmd.Parameters.AddWithValue("categories", categor);
@@ -49,6 +51,16 @@ namespace TestKnowlige.classes
                         }    
                 }
             return false;
+        }
+
+        public static string EncodePassword(string pass)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(pass);            
+            byte[] dst = new byte[bytes.Length];            
+            Buffer.BlockCopy(bytes, 0, dst, 0, bytes.Length);
+            HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
+            byte[] inArray = algorithm.ComputeHash(dst);
+            return Convert.ToBase64String(inArray);
         }
     }
 }

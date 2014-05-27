@@ -23,10 +23,11 @@
                 ImageUrl="~/img/deleteMessage.png" onclick="deleteMessage_Click" />            
         </div>
         <div class="mail_menu">
-            <asp:Button runat="server" ID="NewMessage" Text="Полученные" 
-                onclick="NewMessage_Click"/>
-            <asp:Button runat="server" ID="SenderMessage" Text="Отправленные" 
-                onclick="SenderMessage_Click" />
+        <asp:HiddenField runat="server" ID="WhatList" />
+            <asp:Button runat="server" ID="SenderMessage" Text="Полученные" 
+                onclick="NewMessage_Click" />
+            <asp:Button runat="server" ID="NewMessage" Text="Отправленные" 
+                onclick="SenderMessage_Click"  />            
         </div>
         <asp:Repeater runat="server" ID="listMessage">
             <ItemTemplate>
@@ -41,6 +42,9 @@
     </div>
     </div>
     <uc:message ID="messageItem" runat="server" Visible="false"/>
+    <div runat="server" id="Div1" class="send" visible ="false">
+        <asp:Label ID="goodSend" runat="server">Сообщение успешно отправленно</asp:Label>
+    </div>
     </form>
 </body>
 </html>

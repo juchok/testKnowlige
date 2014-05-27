@@ -71,7 +71,7 @@ a
 .loginHeader, .changeheader
 {
     background: #4585c7;
-    width: 270px !important;
+    width: 100% !important;
     display: block;    
     line-height: 30px;    
     text-align: center !important;
@@ -129,12 +129,16 @@ a
 {
     width: 100% !important;
     }    
-.CreateAccaunt div+span, .ChangePassword div+span, .login div+span, #ErrorMessage, .errorPas
+.CreateAccaunt div+span, .ChangePassword div+span, .login div+span, #ErrorMessage, .errorPas, .messError
 {
     color: #ff0000;
     font-size: 12px;
     line-height: 12px !important;        
     }    
+
+#LoginBusy {
+    margin: 0 0 0 102px;
+}    
 /*------------------------main------------------------------*/
 .main
 {
@@ -424,3 +428,16 @@ a
     margin: 0 auto 10px;
     width: 80%;
 }
+#lblQuestion
+{
+    font-weight: bold;
+    }
+#answerError
+{
+    display: block;
+    }    
+#lblPass
+{
+    padding: 5px 10px;    
+    font-weight: bold;
+    }    
