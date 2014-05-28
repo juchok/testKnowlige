@@ -71,6 +71,12 @@ namespace TestKnowlige.classes
                 case "tempanswer":
                     str = "select text from tempanswer where answer_id = @id";
                     break;
+                case "question":
+                    str = "select text from question where question_id = @id";
+                    break;
+                case "answer":
+                    str = "select answer_text from answer where answer_id = @id";
+                    break;
                 default:
                     return "";                    
             }
@@ -83,6 +89,8 @@ namespace TestKnowlige.classes
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows) {
                     dr.Read();
+                    if (table == "answer")
+                        return dr["answer_text"].ToString();
                     return dr["text"].ToString(); ;
                 }
             }
@@ -154,9 +162,21 @@ namespace TestKnowlige.classes
             }
         }
 
-        public static bool CheckTempAnswer(string id) {
+        public static bool CheckAnswer(string id, string table) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select correct from tempanswer where answer_id = @id";
+            string str = "";
+            switch (table)
+            {
+                case "tempanswer":
+                    str = "select correct from tempanswer where answer_id = @id";
+                    break;
+                case "answer":
+                    str = "select correct from answer where answer_id = @id";
+                    break;
+                default:
+                    return false;                    
+            }
+            
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("id", id);
             try
@@ -203,9 +223,21 @@ namespace TestKnowlige.classes
             }
         }
 
-        public static string PointsToQuestion(string id){
+        public static string PointsToQuestion(string id, string table){
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select points from tempquestions where question_id = @id";
+            string str = "";
+            switch (table)
+            {
+                case "tempquestions":
+                    str = "select points from tempquestions where question_id = @id";
+                    break;
+                case "question":
+                    str = "select points from question where question_id = @id";
+                    break;
+                default:
+                    break;
+            }
+            
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("id", id);
             try
@@ -611,6 +643,338 @@ namespace TestKnowlige.classes
                 con.Close();
             }
             
+        }
+
+        internal static void TestBind(Page page)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+
+            string str = "select q.text, q.points, q.question_id from test_question as tq inner join question as q on q.question_id = tq.question_id " 
+                + " where tq.test_id = @id";
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+            ds.SelectParameters.Add("id", (page.FindControl("test_id") as HiddenField).Value);
+
+            (page.FindControl("questions") as Repeater).DataSource = ds;
+            (page.FindControl("questions") as Repeater).DataBind();
+
+
+            foreach (RepeaterItem item in (page.FindControl("questions") as Repeater).Items)
+            {
+                string id = (item.FindControl("question_id") as HiddenField).Value;
+                str = "select * from answer where question_id = @id";
+                SqlDataSource ds1 = new SqlDataSource(con.ConnectionString, str);
+                ds1.SelectParameters.Add("id", id);
+                (item.FindControl("answers") as Repeater).DataSource = ds1;
+                (item.FindControl("answers") as Repeater).DataBind();
+            }
+            
+        }
+
+        internal static string TestName(string test_id)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select name from test where test_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows) {
+                    dr.Read();
+                    return dr["name"].ToString();
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+
+        }
+
+        internal static void UpdateQuestion(string id, string text, string points)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update  Question set text=@text, points=@points where question_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", id);
+            cmd.Parameters.AddWithValue("text", text);
+            cmd.Parameters.AddWithValue("points", points);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void UpdateAnswer(string id, string text, bool check)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update  answer set answer_text=@text, correct=@correct where answer_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", id);
+            cmd.Parameters.AddWithValue("text", text);
+            cmd.Parameters.AddWithValue("correct", check);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void UpdateTestName(string test_id, string test_name)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update Test set name=@name where test_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("name", test_name);
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+        }
+
+        internal static void TestNameBind(Page Page)
+        {
+            (Page.FindControl("testName") as Label).Text = Test.TestName((Page.FindControl("test_id") as HiddenField).Value);
+        }
+
+        internal static void DelQuestion(string question_id, string test_id)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select * from test_question where question_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", question_id);
+            try
+            {
+                con.Open();
+                int i = int.Parse(cmd.ExecuteScalar().ToString());
+                if (i > 1) {
+                    cmd.CommandText = "delete from test_question where test_id = @test_id and question_id = @question_id";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("test_id", test_id);
+                    cmd.Parameters.AddWithValue("question_id", question_id);
+                    cmd.ExecuteNonQuery();
+                }
+                else if (i == 1) {
+                    DelAnswer(question_id, false);
+                    cmd.CommandText = "delete from question where question_id = @id";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("id", question_id);
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "delete from test_question where test_id = @test_is and question_id = @question_id";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("test_id", test_id);
+                    cmd.Parameters.AddWithValue("question_id", question_id);
+                    cmd.ExecuteNonQuery();
+                }
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void DelAnswer(string id, bool answer)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "";
+            if (answer)
+            {
+                str = "delete from answer where answer_id = @id";
+            }
+            else {
+                str = "delete from answer where question_id = @id";
+            }
+            SqlCommand cmd = new SqlCommand(str, con);            
+            cmd.Parameters.AddWithValue("id", id);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+            
+        }
+        
+        internal static void DisciplineList(DropDownList discipline)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select discipline_name from discipline";
+            SqlCommand cmd = new SqlCommand(str, con);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {                    
+                    discipline.Items.Add(new ListItem(dr["discipline_name"].ToString()));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
+        }
+
+        internal static void activeDiscipline(DropDownList discipline, string test_id)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select d.discipline_name from discipline as d "
+            + " inner join categories as c on c.discipline_id = d.discipline_id "
+            + " inner join test as t on c.cat_id = t.cat_id where t.test_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows) {
+                    dr.Read();
+                    int i = 0;
+                    foreach (ListItem item in discipline.Items)
+                    {
+                        if (item.Text == dr["discipline_name"].ToString()) {
+                            discipline.Items[i].Selected = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void CategoriesList(DropDownList categories)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select categories_name from categories";
+            SqlCommand cmd = new SqlCommand(str, con);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    categories.Items.Add(new ListItem(dr["categories_name"].ToString()));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void activeCategories(DropDownList categories, string test_id)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select c.categories_name from categories as c "
+            + " inner join test as t on c.cat_id = t.cat_id where t.test_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    int i = 0;
+                    foreach (ListItem item in categories.Items)
+                    {
+                        if (item.Text == dr["categories_name"].ToString())
+                        {
+                            categories.Items[i].Selected = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void ChangeCategories(string test_id, int categories_id)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update test set cat_id = @cat_id where test_id = @test_id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("test_id", test_id);
+            cmd.Parameters.AddWithValue("cat_id", categories_id);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                con.Close();
+            }
         }
     }
 }

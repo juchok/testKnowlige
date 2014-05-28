@@ -71,6 +71,11 @@ namespace TestKnowlige
              else {
 //                 Response.Redirect("~/default.aspx");
             }
-        }       
+        }
+
+        internal static void activeCategories(DropDownList categories, string p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

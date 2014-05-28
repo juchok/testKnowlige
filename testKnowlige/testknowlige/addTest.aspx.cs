@@ -19,7 +19,7 @@ namespace TestKnowlige
                 testAuthor.Text = "Автор: " + User.Identity.Name;                
                 defaultButton();
                 addNewTest.Visible = true;
-                if (!string.IsNullOrEmpty(Request.Cookies["categories"].Value)) { 
+                if (!string.IsNullOrEmpty(Response.Cookies["categories"].Value)) { 
                     cat_id.Value = Test.CategoriesId(Request.Cookies["categories"].Value).ToString();
                 }                
             }
@@ -82,7 +82,7 @@ namespace TestKnowlige
             NewTest.HeaderToControl = "Редактирование";
             NewTest.TextControl = "Введите текст вопроса";
             NewTest.Text = Test.TextForId((sender as ImageButton).AlternateText, "tempquestions");
-            NewTest.Points = Test.PointsToQuestion((sender as ImageButton).AlternateText);
+            NewTest.Points = Test.PointsToQuestion((sender as ImageButton).AlternateText, "tempquestions");
             NewTest.HideField = (sender as ImageButton).AlternateText;            
             NewTest.QuestionPanel = true;
             NewTest.VisibleBtnQuestion = false;
@@ -97,7 +97,7 @@ namespace TestKnowlige
             NewTest.Text = Test.TextForId((sender as ImageButton).AlternateText, "tempanswer");
             NewTest.HideField = (sender as ImageButton).AlternateText;
             NewTest.VisibleBtnAnswer = false;
-            NewTest.CorrectAnswer = Test.CheckTempAnswer((sender as ImageButton).AlternateText);
+            NewTest.CorrectAnswer = Test.CheckAnswer((sender as ImageButton).AlternateText, "tempanswer");
             NewTest.AnswerPanel = true;
             NewTest.btnRedactAnswer = true;
             NewTest.Visible = true;

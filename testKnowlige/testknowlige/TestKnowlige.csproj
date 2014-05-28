@@ -63,8 +63,9 @@
     <Content Include="profile\general.aspx" />
     <Content Include="profile\mail.aspx" />
     <Content Include="profile\more.aspx" />
+    <Content Include="profile\Teacher\TestEdit.aspx" />
     <Content Include="profile\Tests.aspx" />
-    <Content Include="profile\yourTests.aspx" />
+    <Content Include="profile\Teacher\yourTests.aspx" />
     <Content Include="style\Addtest.css" />
     <Content Include="style\general.css" />
     <Content Include="style\style.css" />
@@ -78,6 +79,8 @@
     <Content Include="usercontrol\menu.ascx" />
     <Content Include="usercontrol\Message.ascx" />
     <Content Include="usercontrol\MyMessageError.ascx" />
+    <Content Include="usercontrol\TestRedact.ascx" />
+    <Content Include="usercontrol\confirmTestEdit.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -170,6 +173,13 @@
     <Compile Include="profile\more.aspx.designer.cs">
       <DependentUpon>more.aspx</DependentUpon>
     </Compile>
+    <Compile Include="profile\Teacher\TestEdit.aspx.cs">
+      <DependentUpon>TestEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profile\Teacher\TestEdit.aspx.designer.cs">
+      <DependentUpon>TestEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="profile\Tests.aspx.cs">
       <DependentUpon>Tests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -177,11 +187,11 @@
     <Compile Include="profile\Tests.aspx.designer.cs">
       <DependentUpon>Tests.aspx</DependentUpon>
     </Compile>
-    <Compile Include="profile\yourTests.aspx.cs">
+    <Compile Include="profile\Teacher\yourTests.aspx.cs">
       <DependentUpon>yourTests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="profile\yourTests.aspx.designer.cs">
+    <Compile Include="profile\Teacher\yourTests.aspx.designer.cs">
       <DependentUpon>yourTests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -240,6 +250,20 @@
     </Compile>
     <Compile Include="usercontrol\MyMessageError.ascx.designer.cs">
       <DependentUpon>MyMessageError.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\TestRedact.ascx.cs">
+      <DependentUpon>TestRedact.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\TestRedact.ascx.designer.cs">
+      <DependentUpon>TestRedact.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\confirmTestEdit.ascx.cs">
+      <DependentUpon>confirmTestEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\confirmTestEdit.ascx.designer.cs">
+      <DependentUpon>confirmTestEdit.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

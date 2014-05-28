@@ -53,5 +53,5 @@ $(document).ready(function (e) {
                 $('.add').attr("alt", "~/addDiscipline.aspx");
                 break;
         }
-    });
+    });	
 });
