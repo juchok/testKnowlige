@@ -20,13 +20,30 @@ namespace TestKnowlige.login
         {
             if (!LoGiN.CheckLogin(txtLogin.Text))
             {
-                if (CreateLoGiN.createAccaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue))                
+                if (DDList.SelectedValue.ToLower() != "admin")
                 {
-                    FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
+                    if (CreateLoGiN.createAccaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue))
+                    {
+                        FormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
+                    }
+                    else
+                    {
+                        ErrorMessage.Text = "Не удалось создать пользователя";
+                        ErrorMessage.Visible = true;
+                    }
                 }
                 else {
-                    ErrorMessage.Text = "Не удалось создать пользователя";
-                    ErrorMessage.Visible = true;
+                    if (CreateLoGiN.WaitAcaunt(txtFirstname.Text, txtLastname.Text, txtLogin.Text, txtPassword.Text, txtQuestion.Text, txtAnswer.Text, DDList.SelectedValue, txtPhone.Text, txtMail.Text))
+                    {
+                        ErrorMessage.Text = "Акаунт успешно добавлен, в скором времени с вами свяжутся";
+                        ErrorMessage.Visible = true;
+                         
+                    }
+                    else
+                    {
+                        ErrorMessage.Text = "Не удалось создать пользователя";
+                        ErrorMessage.Visible = true;
+                    }
                 }
             }
             else {
@@ -40,6 +57,18 @@ namespace TestKnowlige.login
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/default.aspx");
+        }
+
+        protected void ChangedCategories(object sender, EventArgs e) {
+            if ((sender as DropDownList).SelectedIndex == 3)
+            {
+                mail.Visible = true;
+                phone.Visible = true;
+            }
+            else {
+                mail.Visible = false;
+                phone.Visible = false;
+            }
         }
     }
 }

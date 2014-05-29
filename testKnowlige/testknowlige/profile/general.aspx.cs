@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TestKnowlige.classes;
+using System.Web.Security;
 
 namespace TestKnowlige.profile
 {
@@ -12,7 +13,7 @@ namespace TestKnowlige.profile
     {     
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
             if (string.IsNullOrEmpty(User.Identity.Name))
             {
                 Response.Redirect("~/default.aspx");

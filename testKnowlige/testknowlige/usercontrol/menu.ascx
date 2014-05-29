@@ -23,7 +23,7 @@
                 <asp:HyperLink ID="yourtests" runat="server" NavigateUrl="~/profile/Teacher/yourTests.aspx">Ваши тесты</asp:HyperLink>
                 </li>
             <li>
-                <asp:HyperLink ID="administration" runat="server">Администрирование</asp:HyperLink>
+                <asp:HyperLink ID="administration" runat="server" NavigateUrl="~/administration/main.aspx">Администрирование</asp:HyperLink>
                 </li>    
         </ul>
     </div>

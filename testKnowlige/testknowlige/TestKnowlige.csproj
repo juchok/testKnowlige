@@ -52,6 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="addTest.aspx" />
+    <Content Include="administration\Categories.aspx" />
+    <Content Include="administration\Disciplines.aspx" />
+    <Content Include="administration\main.aspx" />
+    <Content Include="administration\Questions.aspx" />
+    <Content Include="administration\Tests.aspx" />
+    <Content Include="administration\Users.aspx" />
+    <Content Include="administration\WaitUsers.aspx" />
     <Content Include="default.aspx" />
     <Content Include="js\jquery-1.10.2.min.js" />
     <Content Include="js\script.js" />
@@ -67,6 +74,7 @@
     <Content Include="profile\Tests.aspx" />
     <Content Include="profile\Teacher\yourTests.aspx" />
     <Content Include="style\Addtest.css" />
+    <Content Include="style\admins.css" />
     <Content Include="style\general.css" />
     <Content Include="style\style.css" />
     <Content Include="style\test.css" />
@@ -81,6 +89,7 @@
     <Content Include="usercontrol\MyMessageError.ascx" />
     <Content Include="usercontrol\TestRedact.ascx" />
     <Content Include="usercontrol\confirmTestEdit.ascx" />
+    <Content Include="usercontrol\AdminMenu.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -99,6 +108,56 @@
     <Compile Include="addTest.aspx.designer.cs">
       <DependentUpon>addTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="administration\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\Disciplines.aspx.cs">
+      <DependentUpon>Disciplines.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\Disciplines.aspx.designer.cs">
+      <DependentUpon>Disciplines.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\main.aspx.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\main.aspx.designer.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\Questions.aspx.cs">
+      <DependentUpon>Questions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\Questions.aspx.designer.cs">
+      <DependentUpon>Questions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\Tests.aspx.cs">
+      <DependentUpon>Tests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\Tests.aspx.designer.cs">
+      <DependentUpon>Tests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\WaitUsers.aspx.cs">
+      <DependentUpon>WaitUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\WaitUsers.aspx.designer.cs">
+      <DependentUpon>WaitUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="classes\Administraion.cs" />
     <Compile Include="classes\AnswerItem.cs" />
     <Compile Include="classes\CreateLogin.cs" />
     <Compile Include="classes\login.cs" />
@@ -264,6 +323,13 @@
     </Compile>
     <Compile Include="usercontrol\confirmTestEdit.ascx.designer.cs">
       <DependentUpon>confirmTestEdit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\AdminMenu.ascx.cs">
+      <DependentUpon>AdminMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\AdminMenu.ascx.designer.cs">
+      <DependentUpon>AdminMenu.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

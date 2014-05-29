@@ -13,19 +13,14 @@ namespace TestKnowlige.profile.Teacher
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Roles.IsUserInRole(User.Identity.Name, "Teacher") || string.IsNullOrEmpty(Request.QueryString["id"])) {
+            if (!(!Roles.IsUserInRole(User.Identity.Name, "Teacher") || !Roles.IsUserInRole(User.Identity.Name, "Admin")) || string.IsNullOrEmpty(Request.QueryString["id"]))
+            {
                 Response.Redirect("~/default.aspx");
             }
             
             testAuthor.Text = "Автор: " + User.Identity.Name;                            
             test_id.Value = Request.QueryString["id"];
             testName.Text = Test.TestName(test_id.Value);
-
-            Test.DisciplineList(discipline);
-            Test.activeDiscipline(discipline, test_id.Value);
-
-            Test.CategoriesList(categories);
-            Test.activeCategories(categories, test_id.Value);
             
             Test.TestBind(Page);            
         }
@@ -119,19 +114,6 @@ namespace TestKnowlige.profile.Teacher
             EditTest.Text = Test.TestName(test_id.Value);
             EditTest.VisibleBtnTest = true;            
             EditTest.Visible = true;
-        }
-
-        protected void categories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int s = Test.CategoriesId((sender as DropDownList).SelectedValue);
-            Test.ChangeCategories(test_id.Value, s);
-            Test.activeCategories(categories, test_id.Value);
-            Test.TestBind(Page);                       
-        }
-
-        protected void discipline_SelectedIndexChanged(object sender, EventArgs e)
-        {
-                       
-        }
+        }              
     }
 }

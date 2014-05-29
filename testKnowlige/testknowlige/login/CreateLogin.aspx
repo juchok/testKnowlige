@@ -30,14 +30,33 @@
             ValidationExpression="[a-zA-z]{2,}"></asp:RegularExpressionValidator>
         <div>
             <asp:Label ID="lblCategories" runat="server" Text="Categories"></asp:Label>
-            <asp:DropDownList ID="DDList" runat="server">
+            <asp:DropDownList ID="DDList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ChangedCategories">
                 <asp:ListItem></asp:ListItem>
-                <asp:ListItem>Students</asp:ListItem>
+                <asp:ListItem>Student</asp:ListItem>
                 <asp:ListItem>Teacher</asp:ListItem>
+                <asp:ListItem>Admin</asp:ListItem>
             </asp:DropDownList>        
         </div>
         <asp:RequiredFieldValidator ID="validCategories" runat="server" ControlToValidate="DDList"
         ErrorMessage="Необходимо выбрать категорию" Display="Dynamic"></asp:RequiredFieldValidator>
+        <asp:Panel runat="server" ID="mail" Visible="false">
+            <div>
+                <asp:Label Text="Email" runat="server" ID="lblMail" />
+                <asp:TextBox runat="server" ID="txtMail"/>
+            </div>
+        <asp:RegularExpressionValidator ID="ValidtxtMail" runat="server" ControlToValidate="txtMail"  
+        ValidationExpression=".+@.{2,}\..{2,4}" Display="Dynamic"
+        ErrorMessage="E-Mail введен не корректно! привер коректного - имя@сайт.домен"></asp:RegularExpressionValidator>
+        </asp:Panel>
+        <asp:Panel runat="server" Visible="false" ID="phone">        
+            <div>
+                <asp:Label ID="lblPhone" runat="server" Text="Phone"></asp:Label>
+                <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
+            </div>
+        <asp:RegularExpressionValidator ID="ValidtxtPhone" runat="server" ControlToValidate="txtPhone"  
+            ValidationExpression="\+\(\d{3}\)\-\d{2}\-\d{3}\-\d{2}\-\d{2}" Display="Dynamic"
+            ErrorMessage="формат телефон должен быть +(nnn)-nn-nnn-nn-nn"></asp:RegularExpressionValidator>
+        </asp:Panel>
         <div>
             <asp:Label ID="lblLogin" runat="server" Text="Login"></asp:Label>
             <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>        

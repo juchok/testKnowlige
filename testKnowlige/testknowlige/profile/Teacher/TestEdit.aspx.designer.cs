@@ -58,24 +58,6 @@ namespace TestKnowlige.profile.Teacher {
         protected global::System.Web.UI.WebControls.HiddenField test_id;
         
         /// <summary>
-        /// discipline элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList discipline;
-        
-        /// <summary>
-        /// categories элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList categories;
-        
-        /// <summary>
         /// questions элемент управления.
         /// </summary>
         /// <remarks>

@@ -23,14 +23,6 @@
             <asp:HiddenField ID="test_id" runat="server" />             
         </div>
 
-        <asp:DropDownList runat="server" ID="discipline" AutoPostBack="true" 
-            OnSelectedIndexChanged="discipline_SelectedIndexChanged">                        
-        </asp:DropDownList>
-        <asp:DropDownList runat="server" ID="categories" AutoPostBack="true" 
-            OnSelectedIndexChanged="categories_SelectedIndexChanged">                        
-        </asp:DropDownList>
-        
-
         <asp:Repeater runat="server" ID="questions">        
             <ItemTemplate>
                 <div class="question">
