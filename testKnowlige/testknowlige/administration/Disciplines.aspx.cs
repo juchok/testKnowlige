@@ -24,6 +24,8 @@ namespace TestKnowlige.administration
         {
             DisciplineList.EditIndex = e.NewEditIndex;
             RefreshDisciplineList();
+            GridViewRow row = DisciplineList.Rows[e.NewEditIndex];
+            string st = (row.Cells[1].Controls[0] as TextBox).Text;
 
         }
 

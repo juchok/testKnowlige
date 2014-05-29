@@ -19,20 +19,22 @@
             AutoGenerateColumns="false" 
             OnRowEditing="CategoriesList_RowEditing"
                 >
-                <Columns>                
-                    <asp:BoundField HeaderText="Дисциплина" DataField="Discipline_name"></asp:BoundField>
-                    <asp:BoundField HeaderText="Категория" DataField="Categories_name"></asp:BoundField>
-                     <asp:TemplateField HeaderText="Дисциплина">
+                <Columns>
+                    <asp:TemplateField HeaderText = "Дисциплина">
+                    <ItemTemplate>
+                            <asp:Label ID="lblDiscipline_name" runat="server" Text='<%# Eval("Discipline_name") %>' />                                                        
+                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:DropDownList ID="DropDownDiscipline" runat="server" 
-                            DataTextField="Дисциплина" DataValueField="Discipline_name"                             
-                            >
-                        </asp:DropDownList>
-                    </EditItemTemplate>                    
-                </asp:TemplateField>
-                </Columns>
-                
-            <EditRowStyle Font-Bold="True"/>    
+                        <asp:DropDownList runat="server" ID="ddDiscipline" 
+                            DataTextField="Discipline_Name" 
+                            DataValueField="Discipline_Name">                            
+                        </asp:DropDownList>                        
+                    </EditItemTemplate>                        
+                    </asp:TemplateField>                    
+                </Columns>    
+                <Columns>
+                    <asp:BoundField HeaderText="Категория" DataField="Categories_name" />
+                </Columns>    
             </asp:GridView>
         </div>     
     </div>

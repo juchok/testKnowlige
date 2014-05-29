@@ -26,10 +26,15 @@ namespace TestKnowlige.administration
         }
 
         protected void CategoriesList_RowEditing(object sender, GridViewEditEventArgs e)
-        {            
-            GridViewRow row = CategoriesList.Rows[e.NewEditIndex];            
-            CategoriesList.EditIndex = e.NewEditIndex;                        
-            RefreshCategories();            
+        {
+            GridViewRow trow = CategoriesList.Rows[e.NewEditIndex];
+            string disc = (trow.Cells[1].FindControl("lblDiscipline_name") as Label).Text;
+            CategoriesList.EditIndex = e.NewEditIndex;            
+            RefreshCategories();
+            GridViewRow row = CategoriesList.Rows[e.NewEditIndex];
+            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataSource = Administraion.DisciplineList();
+            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataBind();
+            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).SelectedValue = disc;            
         }
     }
 }
