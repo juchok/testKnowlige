@@ -92,6 +92,16 @@ namespace TestKnowlige.classes
             return ds;
         }
 
+        internal static SqlDataSource DisciplineListHasCategories()
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select d.discipline_name from discipline as d "
+                + " inner join Categories as c on c.discipline_id = d.discipline_id "
+                + " where c.categories_name is not null";
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+            return ds;
+        }
+
         internal static void UpdateDisciplineName(int indexRow, string new_name)
         {            
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
@@ -296,6 +306,29 @@ namespace TestKnowlige.classes
             return new SqlDataSource(con.ConnectionString, str);
         }
 
-       
+
+
+        internal static void UpdateTest(string test_id, string test_name, string Select_Categories)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update test set name = @test_name, cat_id = @cat_id where test_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("test_name", test_name);
+            cmd.Parameters.AddWithValue("cat_id",Test.CategoriesId(Select_Categories));
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось сохранить тест");
+            }
+            finally {
+                con.Close();
+            }
+            
+        }
     }
 }
