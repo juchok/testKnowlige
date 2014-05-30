@@ -12,10 +12,7 @@
                 </li>                    
             <li>
                 <asp:HyperLink ID="categories" runat="server" NavigateUrl="~/administration/Categories.aspx">Категории</asp:HyperLink>
-                </li>
-            <li>
-                <asp:HyperLink ID="questions" runat="server" NavigateUrl="~/administration/Questions.aspx">Вопросы</asp:HyperLink>
-                </li>
+                </li>            
             <li>
                 <asp:HyperLink ID="test" runat="server" NavigateUrl="~/administration/Tests.aspx">Тесты</asp:HyperLink>
                 </li>

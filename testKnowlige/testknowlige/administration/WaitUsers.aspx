@@ -13,6 +13,7 @@
         <uc:menu ID="AdminMenu" runat="server" />
         <div class="main">
             <asp:Label Text="Список ожидающих ответа на админку" runat="server" ID="lblHeader"/>
+            <asp:Label runat="server" ID="MessageError" Visible="false"/>
             <asp:Label Text="Нет записей" runat="server" Visible="false" ID="MessageForAdmin" CssClass="MessageForAdmin"/>
             <asp:Repeater runat="server" ID="waitUserslist">
                 <ItemTemplate>

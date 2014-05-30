@@ -17,24 +17,30 @@ namespace TestKnowlige.administration
             {
                 RefreshDisciplineList();
             }
-            
+            MessageError.Visible = false;
         }
 
         protected void Disciplinelist_RowEditing(object sender, GridViewEditEventArgs e)
         {
             DisciplineList.EditIndex = e.NewEditIndex;
             RefreshDisciplineList();
-            GridViewRow row = DisciplineList.Rows[e.NewEditIndex];
-            string st = (row.Cells[1].Controls[0] as TextBox).Text;
-
         }
 
         protected void Disciplinelist_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {                                          
-            GridViewRow row = DisciplineList.Rows[e.RowIndex];
-            Administraion.UpdateDisciplineName(e.RowIndex, ((TextBox)(row.Cells[1].Controls[0])).Text);
-            DisciplineList.EditIndex = -1;
-            RefreshDisciplineList();
+        {
+            try
+            {
+                GridViewRow row = DisciplineList.Rows[e.RowIndex];
+                Administraion.UpdateDisciplineName(e.RowIndex, ((TextBox)(row.Cells[1].Controls[0])).Text);
+                DisciplineList.EditIndex = -1;
+                RefreshDisciplineList();
+            }
+            catch (Exception ex)
+            {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }      
+            
         }
 
         protected void Disciplinelist_RowCancelEditing(object sender, GridViewCancelEditEventArgs e)
@@ -51,10 +57,17 @@ namespace TestKnowlige.administration
 
         protected void Disciplinelist_RowDeleting(object sender, GridViewDeleteEventArgs e) 
         {
-            TableRow row = DisciplineList.Rows[e.RowIndex];                        
-            if (!Administraion.deleteDiscipline(row.Cells[1].Text))
+            try
             {
-                MessageError.Text = "Не удалось удалить дисциплину";
+                TableRow row = DisciplineList.Rows[e.RowIndex];
+                if (!Administraion.deleteDiscipline(row.Cells[1].Text))
+                {
+                    MessageError.Text = "Не удалось удалить дисциплину";
+                    MessageError.Visible = true;
+                }
+            }
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
                 MessageError.Visible = true;
             }
             RefreshDisciplineList();

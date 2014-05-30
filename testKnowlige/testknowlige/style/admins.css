@@ -107,6 +107,7 @@ ul
 }
 .main table td {
     padding: 0 10px;
+    height: 22px;
 }
 .main table a {
     color: #A0522D;

@@ -19,47 +19,67 @@ namespace TestKnowlige.administration
             {
                 RefreshWaitList();
             }
+            MessageError.Visible = false;
         }
 
         protected void AddUser_Click(object sender, EventArgs e)
         {
-            foreach (RepeaterItem item in waitUserslist.Controls)
-	        {
-                if ((item.FindControl("login") as CheckBox).Checked) 
+            try
+            {
+                foreach (RepeaterItem item in waitUserslist.Controls)
                 {
-                    Administraion.AddAdmin((item.FindControl("login") as CheckBox).Text);
-                    RefreshWaitList();
+                    if ((item.FindControl("login") as CheckBox).Checked)
+                    {
+                        Administraion.AddAdmin((item.FindControl("login") as CheckBox).Text);
+                    }
                 }
-	        }
-                
+            }
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
+            RefreshWaitList();                
         }
 
         protected void DeleteUser_Click(object sender, EventArgs e)
         {
-            foreach (RepeaterItem item in waitUserslist.Controls)
+            try
             {
-                if ((item.FindControl("login") as CheckBox).Checked)
+                foreach (RepeaterItem item in waitUserslist.Controls)
                 {
-                    Administraion.DeleteWaitUser((item.FindControl("login") as CheckBox).Text);
-                    RefreshWaitList();
+                    if ((item.FindControl("login") as CheckBox).Checked)
+                    {
+                        Administraion.DeleteWaitUser((item.FindControl("login") as CheckBox).Text);
+                    }
                 }
             }
-
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
+            RefreshWaitList();
         }
 
         private void RefreshWaitList()
         {
-            SqlDataSource ds = Administraion.waitUserList();
-            if (ds == null)
+            try
             {
-                MessageForAdmin.Text = "Нет записей";
-                MessageForAdmin.Visible = true;
-                waitUserslist.Visible = false;
+                SqlDataSource ds = Administraion.waitUserList();
+                if (ds == null)
+                {
+                    MessageForAdmin.Text = "Нет записей";
+                    MessageForAdmin.Visible = true;
+                    waitUserslist.Visible = false;
+                }
+                else
+                {
+                    waitUserslist.DataSource = ds;
+                    waitUserslist.DataBind();
+                }
             }
-            else
-            {
-                waitUserslist.DataSource = ds;
-                waitUserslist.DataBind();
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
             }
         }
     }

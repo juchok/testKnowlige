@@ -30,16 +30,13 @@ namespace TestKnowlige.usercontrol
                 case 4:
                     categories.CssClass = "active";
                     break;
-                case 5:
-                    questions.CssClass = "active";
-                    break;
-                case 6:
+                case 5:                    
                     test.CssClass = "active";
                     break;
-                case 7:
+                case 6:
                     users.CssClass = "active";
                     break;
-                case 8:
+                case 7:
                     newAdmin.CssClass = "active";
                     break;
                 default:
