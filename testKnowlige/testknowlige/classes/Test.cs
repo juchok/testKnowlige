@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -162,6 +159,28 @@ namespace TestKnowlige.classes
             }
         }
 
+        public static void AddTempAnswer(string question_id, string text, bool correct) {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "insert into tempanswer (question_id, text, correct) values (@id, @text, @cur)";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", question_id);
+            cmd.Parameters.AddWithValue("text", text);
+            cmd.Parameters.AddWithValue("cur", correct);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public static bool CheckAnswer(string id, string table) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "";
@@ -223,6 +242,28 @@ namespace TestKnowlige.classes
             }
         }
 
+        public static void AddTempQuestion(string text, string points, string test_id) {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "insert into tempquestions (text, points, test_id) values (@text, @points, @id)";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("text", text);
+            cmd.Parameters.AddWithValue("points", points);
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось сохранить вопрос");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public static string PointsToQuestion(string id, string table){
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "";
@@ -260,8 +301,7 @@ namespace TestKnowlige.classes
 
             return "";
         }
-
-
+        
         internal static void UpdateTempAnswer(string id, string text, bool check)
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
@@ -284,34 +324,7 @@ namespace TestKnowlige.classes
                 con.Close();
             }
         }
-      
-        public static int CategoriesId(string name) {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select cat_id from categories where categories_name = @name";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("name", name);
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    dr.Read();
-                    return int.Parse(dr["cat_id"].ToString());
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally {
-                con.Close();
-            }
-            return 0;
-
-        }
-
+             
         public static string QuestionTempId(string text)
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
@@ -339,7 +352,6 @@ namespace TestKnowlige.classes
             }
             return null;
         }
-
 
         public static string QuestionId(string text) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
@@ -809,6 +821,89 @@ namespace TestKnowlige.classes
                 con.Close();
             }
         }
+                        
+        internal static void QuestionsBind(Repeater questions, string test_id) {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select q.text, q.points, t.question_id from question as q inner join test_question as t on q.question_id = t.question_id " +
+                    " where t.test_id = @id";
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+            ds.SelectParameters.Add("id", test_id);
+            questions.DataSource = ds;
+            questions.DataBind();
+
+            int i = 0;
+            foreach (RepeaterItem item in questions.Items)
+            {
+                Repeater answer = (Repeater)questions.Items[i].FindControl("answers");
+                string id = (item.FindControl("question_id") as HiddenField).Value;
+                str = "select answer_text from answer where question_id = @id";
+                SqlDataSource ds1 = new SqlDataSource(con.ConnectionString, str);
+                ds1.SelectParameters.Add("id", id);
+                answer.DataSource = ds1;
+                answer.DataBind();
+                i++;
+            }
+        }
+
+        internal static SqlDataSource TestList()
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select d.discipline_name, c.categories_name, t.name, t.test_id from test as t "
+                + " inner join categories as c on c.cat_id = t.cat_id "
+                + " inner join discipline as d on c.discipline_id = d.discipline_id";
+            return new SqlDataSource(con.ConnectionString, str);
+        }
+
+        internal static void UpdateTest(string test_id, string test_name, string Select_Categories)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update test set name = @test_name, cat_id = @cat_id where test_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("test_name", test_name);
+            cmd.Parameters.AddWithValue("cat_id", Categorieses.CategoriesId(Select_Categories));
+            cmd.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось сохранить тест");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public static bool? Tests(Repeater UserControl, string cat)
+        {
+            if (string.IsNullOrEmpty(cat))
+            {
+                return null;
+            }
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "SELECT DISTINCT t.test_id FROM test t INNER JOIN categories AS c ON c.cat_id = t.cat_id" +
+                " WHERE c.categories_name = @cat_name";
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+            ds.SelectParameters.Add("cat_name", cat);
+            try
+            {
+                UserControl.DataSource = ds;
+                UserControl.DataBind();
+                if (UserControl.Controls.Count != 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return false;
+        }
 
         internal static void DelAnswer(string id, bool answer)
         {
@@ -818,10 +913,11 @@ namespace TestKnowlige.classes
             {
                 str = "delete from answer where answer_id = @id";
             }
-            else {
+            else
+            {
                 str = "delete from answer where question_id = @id";
             }
-            SqlCommand cmd = new SqlCommand(str, con);            
+            SqlCommand cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("id", id);
             try
             {
@@ -832,137 +928,21 @@ namespace TestKnowlige.classes
             {
                 throw;
             }
-            finally {
-                con.Close();
-            }
-            
-        }
-        
-        internal static void DisciplineList(DropDownList discipline)
-        {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select discipline_name from discipline";
-            SqlCommand cmd = new SqlCommand(str, con);
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {                    
-                    discipline.Items.Add(new ListItem(dr["discipline_name"].ToString()));
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally {
-                con.Close();
-            }
-        }
-
-        internal static void activeDiscipline(DropDownList discipline, string test_id)
-        {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select d.discipline_name from discipline as d "
-            + " inner join categories as c on c.discipline_id = d.discipline_id "
-            + " inner join test as t on c.cat_id = t.cat_id where t.test_id = @id";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("id", test_id);
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows) {
-                    dr.Read();
-                    int i = 0;
-                    foreach (ListItem item in discipline.Items)
-                    {
-                        if (item.Text == dr["discipline_name"].ToString()) {
-                            discipline.Items[i].Selected = true;
-                            break;
-                        }
-                        i++;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
             finally
             {
                 con.Close();
             }
+
         }
 
-        internal static void CategoriesList(DropDownList categories)
+        internal static void AddTempTest(string TestName, string Login, string Categories_ID)
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select categories_name from categories";
+            string str = "insert into temptest (name, user_id, cat_id) values (@name, @id, @cat_id)";
             SqlCommand cmd = new SqlCommand(str, con);
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    categories.Items.Add(new ListItem(dr["categories_name"].ToString()));
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
-        internal static void activeCategories(DropDownList categories, string test_id)
-        {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select c.categories_name from categories as c "
-            + " inner join test as t on c.cat_id = t.cat_id where t.test_id = @id";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("id", test_id);
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    dr.Read();
-                    int i = 0;
-                    foreach (ListItem item in categories.Items)
-                    {
-                        if (item.Text == dr["categories_name"].ToString())
-                        {
-                            categories.Items[i].Selected = true;
-                            break;
-                        }
-                        i++;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
-        internal static void ChangeCategories(string test_id, int categories_id)
-        {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "update test set cat_id = @cat_id where test_id = @test_id";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("test_id", test_id);
-            cmd.Parameters.AddWithValue("cat_id", categories_id);
+            cmd.Parameters.AddWithValue("name", TestName);
+            cmd.Parameters.AddWithValue("id", LoGiN.UserId(Login));
+            cmd.Parameters.AddWithValue("cat_id", Categories_ID);
             try
             {
                 con.Open();
@@ -970,11 +950,74 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось сохранить тест");
             }
             finally {
                 con.Close();
             }
+        }
+
+        internal static void AddQuestion(string text, string points, string UserName, string test_id){
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "insert into question (text, points, user_id) values (@text, @points, @id) SELECT SCOPE_IDENTITY()";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("text", text);
+            cmd.Parameters.AddWithValue("points", points);
+            cmd.Parameters.AddWithValue("id", LoGiN.UserId(UserName));
+            try
+            {
+                con.Open();
+                int i = int.Parse(cmd.ExecuteScalar().ToString());
+                str = "insert into test_question (test_id, question_id) values (@test_id, @question_id)";
+                cmd.CommandText = str;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("test_id", test_id);
+                cmd.Parameters.AddWithValue("question_id", i.ToString());
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось сохнатить вопрос");
+            }
+            finally
+            {
+                con.Close();
+            }
+            
+        }
+
+        internal static void AddAnswer(string question_id, string Answer_text, bool correct)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "insert into answer (question_id, answer_text, correct) values (@id, @text, @cur)";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", question_id);
+            cmd.Parameters.AddWithValue("text", Answer_text);
+            cmd.Parameters.AddWithValue("cur", correct);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось сохранить ответ");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static SqlDataSource YourTests(string UserName)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select t.test_id, t.name, cat.categories_name, d.discipline_name from test as t inner join categories as cat on cat.cat_id = t.cat_id "
+                + " inner join discipline as d on d.discipline_id = cat.discipline_id "
+                + " where t.user_id = @id";
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+            ds.SelectParameters.Add("id", LoGiN.UserId(UserName).ToString());
+            return ds;
         }
     }
 }

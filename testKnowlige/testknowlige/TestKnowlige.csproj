@@ -158,11 +158,9 @@
     <Compile Include="classes\Mail.cs" />
     <Compile Include="classes\Profile.cs" />
     <Compile Include="classes\QuestionItem.cs" />
-    <Compile Include="classes\SelectItem.cs" />
     <Compile Include="classes\Test.cs" />
     <Compile Include="classes\testComplit.cs" />
     <Compile Include="classes\testItem.cs" />
-    <Compile Include="classes\UpdatePassword.cs" />
     <Compile Include="classes\UserInfo.cs" />
     <Compile Include="classes\Users.cs" />
     <Compile Include="default.aspx.cs">

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Web.Configuration;
 using TestKnowlige.classes;
 
 namespace TestKnowlige.usercontrol
@@ -115,7 +110,7 @@ namespace TestKnowlige.usercontrol
             {
                 if (int.Parse(discipline_id.Value) == 0)
                 {
-                    Disciplines.NewDiscipline(txtDisciplineOrCategories.Text, author.Text.Split(':')[1].Trim());
+                    Discipliness.NewDiscipline(txtDisciplineOrCategories.Text, author.Text.Split(':')[1].Trim());
                     (Page.FindControl("DirDiscipline") as Repeater).DataBind();
                 }
                 else

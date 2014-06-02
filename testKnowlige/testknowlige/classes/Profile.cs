@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Web.Configuration;
-using System.Web.UI;
 
 
 namespace TestKnowlige.classes
 {
     public class Profile
     {
-        public static void General(string userName) { 
-        }
-
         internal static void Information(string UserName, TextBox txtFirstname, string Field)
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
@@ -39,8 +32,6 @@ namespace TestKnowlige.classes
                 con.Close();
             }
         }
-
-
         
         internal static void Save(string username, string firstname, string lastname, string question, string answer)
         {

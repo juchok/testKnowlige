@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Specialized;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using TestKnowlige.classes;
@@ -15,10 +11,7 @@ namespace TestKnowlige
         protected void Page_Load(object sender, EventArgs e)
         {
             float test_points = 0;
-
-            if (PreviousPage==null) {
-                Response.Redirect("~/default.aspx");
-            }
+                        
             if (PreviousPage == null) {
                 Response.Redirect("~/default.aspx");
             }

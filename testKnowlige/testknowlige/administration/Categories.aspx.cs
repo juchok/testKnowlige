@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TestKnowlige.classes;
@@ -25,9 +22,9 @@ namespace TestKnowlige.administration
 
         private void RefreshCategories()
         {
-            CategoriesList.DataSource = Administraion.CategoriesList();
+            CategoriesList.DataSource = Categorieses.CategoriesList();
             CategoriesList.DataBind();
-            Test.DisciplineList((CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList));
+            Discipliness.DisciplineList((CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList));
             (CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList).DataBind();
             AdminMenu.ActiveItem(4);
         }
@@ -39,7 +36,7 @@ namespace TestKnowlige.administration
             CategoriesList.EditIndex = e.NewEditIndex;            
             RefreshCategories();
             GridViewRow row = CategoriesList.Rows[e.NewEditIndex];
-            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataSource = Administraion.DisciplineList();
+            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataSource = TestKnowlige.classes.Discipliness.DisciplineList();
             (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataBind();
             (row.Cells[1].FindControl("ddDiscipline") as DropDownList).SelectedValue = disc;            
         }
@@ -57,8 +54,8 @@ namespace TestKnowlige.administration
             string cat_name = (row.Cells[2].FindControl("EditCaategories") as TextBox).Text;
             try
             {
-                int cat_old_id = Administraion.CategoriesID(e.RowIndex);
-                Administraion.UpdateCategories(disc, cat_name, cat_old_id);
+                int cat_old_id = Categorieses.CategoriesID(e.RowIndex);
+                Categorieses.UpdateCategories(disc, cat_name, cat_old_id);
 
             }
             catch (Exception ex) {
@@ -72,7 +69,7 @@ namespace TestKnowlige.administration
         protected void CategoriesList_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             TableRow row = CategoriesList.Rows[e.RowIndex];
-            if (!Administraion.deleteCategories((row.Cells[2].FindControl("CatName") as Label).Text))
+            if (!Categorieses.deleteCategories((row.Cells[2].FindControl("CatName") as Label).Text))
             {
                 MessageError.Text = "Не удалось удалить категорию";
                 MessageError.Visible = true;
@@ -92,7 +89,7 @@ namespace TestKnowlige.administration
                         throw new ApplicationException("Поле имя категории не может быть пустым или меньше 3 символов");
 
                     Categorieses.NewCategories((row.Cells[1].FindControl("newCategories") as TextBox).Text,
-                         Administraion.DisciplineId((CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList).SelectedValue), 
+                         Discipliness.DisciplineId((CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList).SelectedValue), 
                          User.Identity.Name);                         
                 }
                 catch (Exception ex)

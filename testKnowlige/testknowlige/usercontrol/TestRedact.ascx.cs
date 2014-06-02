@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Security;
-using System.Web.Configuration;
-using System.Data.SqlClient;
 using TestKnowlige.classes;
 
 namespace TestKnowlige.usercontrol
@@ -136,32 +130,15 @@ namespace TestKnowlige.usercontrol
 
         protected void btnAddQuestion_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "insert into question (text, points, user_id) values (@text, @points, @id) SELECT SCOPE_IDENTITY()";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("text",txtAdd.Text);
-            cmd.Parameters.AddWithValue("points", txtPoints.Text);
-            cmd.Parameters.AddWithValue("id", LoGiN.UserId(Page.User.Identity.Name));
             try
             {
-                con.Open();                
-                int i = int.Parse(cmd.ExecuteScalar().ToString());
-                str = "insert into test_question (test_id, question_id) values (@test_id, @question_id)";
-                cmd.CommandText = str;
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("test_id", (Page.FindControl("test_id") as HiddenField).Value);
-                cmd.Parameters.AddWithValue("question_id", i.ToString());
-                cmd.ExecuteNonQuery();
+                Test.AddQuestion(txtAdd.Text, txtPoints.Text, Page.User.Identity.Name, (Page.FindControl("test_id") as HiddenField).Value);
             }
-            catch (Exception)
-            {
-
-                throw;
+            catch (Exception ex) { 
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
             }
-            finally {
-                con.Close();
-            }
-
+            
             Test.TestBind(Page);
             this.Visible = false;
             SaveComplite();
@@ -169,24 +146,15 @@ namespace TestKnowlige.usercontrol
 
         protected void btnAddAnswer_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "insert into answer (question_id, answer_text, correct) values (@id, @text, @cur)";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("id", hideField.Value);
-            cmd.Parameters.AddWithValue("text", txtAdd.Text);
-            cmd.Parameters.AddWithValue("cur", ckbCorrect.Checked);
             try
             {
-                con.Open();
-                cmd.ExecuteNonQuery();
+                Test.AddAnswer(hideField.Value, txtAdd.Text, ckbCorrect.Checked);
             }
-            catch (Exception)
-            {
-                throw;
+            catch (Exception ex) {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
             }
-            finally {
-                con.Close();
-            }
+            
             this.Visible = false;            
             Test.TestBind(Page);
             SaveComplite();

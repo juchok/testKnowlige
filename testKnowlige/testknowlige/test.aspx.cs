@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Web.Configuration;
-using System.Web.Security;
-using System.Net;
-using System.Text;
-using System.IO;
-
+using TestKnowlige.classes;
 namespace TestKnowlige
 {
     public partial class test : System.Web.UI.Page
@@ -19,63 +8,22 @@ namespace TestKnowlige
         {
             if (!string.IsNullOrEmpty(Request.QueryString["id"])) {
                 test_id.Value = Request.QueryString["id"];
-                SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-                string str = "select TOP(1) t.name, c.categories_name, d.discipline_name from test as t "+
-                    " inner join categories as c on c.cat_id = t.cat_id " +
-                    " inner join discipline as d on d.discipline_id = c.discipline_id " +
-                    " where t.test_id = @id";
-                SqlCommand cmd = new SqlCommand(str, con);
-                cmd.Parameters.AddWithValue("id",Request.QueryString["id"]);
                 try
                 {
-                    con.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.HasRows)
-                    {
-                        dr.Read();                        
-                        header_discipline.Text = "Дисциплина: " + dr["discipline_name"].ToString();
-                        
-                        header_categories.Text = "Категория: " + dr["categories_name"].ToString();
-                        header_test.Text = "Тест: " + dr["name"].ToString();
-                    }
+                    header_discipline.Text = "Дисциплина: " + Discipliness.DisciplineForTest(Request.QueryString["id"]);
+                    header_categories.Text = "Категория: " + Categorieses.CategoriesForTest(Request.QueryString["id"]);
+                    header_test.Text = "Тест: " + Test.TestName(Request.QueryString["id"]);
+                    Test.QuestionsBind(questions, test_id.Value);
                 }
-                catch (Exception)
-                {                    
-                    throw;
-                }
-                
-                str = "select q.text, q.points, t.question_id from question as q inner join test_question as t on q.question_id = t.question_id " +
-                    " where t.test_id = @id";
-                SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
-                ds.SelectParameters.Add("id", Request.QueryString["id"]);
-                questions.DataSource = ds;                
-                questions.DataBind();
-
-                int i = 0;
-                foreach (RepeaterItem item in questions.Items)
+                catch (Exception ex)
                 {
-                    Repeater answer = (Repeater)questions.Items[i].FindControl("answers");
-                    string id = (item.FindControl("question_id") as HiddenField).Value;
-                    str = "select answer_text from answer where question_id = @id";
-                    SqlDataSource ds1 = new SqlDataSource(con.ConnectionString, str);
-                    ds1.SelectParameters.Add("id", id);
-                    answer.DataSource = ds1;
-                    answer.DataBind();
-                    i++;
-                }
-                
-                
-                //(Page.FindControl("answer") as Repeater).DataSource = ds1;
-                
+                    MessageError.Text = ex.Message;
+                    MessageError.Visible = true;
+                }                
             }
              else {
-//                 Response.Redirect("~/default.aspx");
+                 Response.Redirect("~/default.aspx");
             }
-        }
-
-        internal static void activeCategories(DropDownList categories, string p)
-        {
-            throw new NotImplementedException();
-        }
+        }               
     }
 }

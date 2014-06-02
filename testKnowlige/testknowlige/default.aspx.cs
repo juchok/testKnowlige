@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Web.Configuration;
 using TestKnowlige.classes;
 using System.Web.Security;
 
@@ -22,7 +16,7 @@ namespace TestKnowlige
                     Response.Cookies["Discipline"].Value = Request.QueryString["Discipline"];
                     Response.Cookies["Discipline"].Expires = DateTime.Now.AddDays(1);
                 }
-                if (!string.IsNullOrEmpty(User.Identity.Name) && Roles.IsUserInRole(User.Identity.Name, "Teacher"))
+                if (!string.IsNullOrEmpty(User.Identity.Name) &&( Roles.IsUserInRole(User.Identity.Name, "Teacher") || Roles.IsUserInRole(User.Identity.Name, "Admin")))
                 {
                     addDoC.Visible = true;
                     addCat.Visible = true;
@@ -35,12 +29,12 @@ namespace TestKnowlige
                 else {
                     register.Visible = false;
                 }
-                if (!SelectItem.Discipline(DirDiscipline, "select discipline_name from discipline"))
+                if (!Discipliness.Discipline(DirDiscipline, "select discipline_name from discipline"))
                 {
                     errDis.Visible = true;
                 }
                                 
-                string str = SelectItem.Categories(DirCategories, Request.QueryString["Discipline"]).ToString();
+                string str = Categorieses.Categories(DirCategories, Request.QueryString["Discipline"]).ToString();
 
                 if (string.IsNullOrEmpty(str))
                 {
@@ -52,7 +46,7 @@ namespace TestKnowlige
                         errCat.Visible = true;
                     }
 
-                str = SelectItem.Tests(DirTests, Request.QueryString["categories"]).ToString();
+                str = Test.Tests(DirTests, Request.QueryString["categories"]).ToString();
 
                 if (string.IsNullOrEmpty(str))
                 {
@@ -91,7 +85,7 @@ namespace TestKnowlige
                     addNewItem.Discipline = "Дисциплина: " + Request.QueryString["discipline"];
                     addNewItem.DisciplineOrCategories = "Введите название категории";
                     addNewItem.Author = "Автор: " + User.Identity.Name;
-                    addNewItem.DisciplineId = SelectItem.DisciplineID(Request.QueryString["discipline"]);
+                    addNewItem.DisciplineId = int.Parse(Discipliness.DisciplineId(Request.QueryString["discipline"]));
                     addNewItem.Visible = true;
                 }
                 else {

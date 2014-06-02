@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TestKnowlige.classes;
@@ -19,7 +16,7 @@ namespace TestKnowlige.administration
         }
 
         private void RefreshTest() {
-            TestList.DataSource = Administraion.TestList();
+            TestList.DataSource = Test.TestList();
             TestList.DataBind();
             AdminMenu.ActiveItem(5);
         }
@@ -31,17 +28,17 @@ namespace TestKnowlige.administration
             TestList.EditIndex = e.NewEditIndex;
             RefreshTest();
             GridViewRow row = TestList.Rows[e.NewEditIndex];
-            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataSource = Administraion.DisciplineListHasCategories();
+            (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataSource = Discipliness.DisciplineListHasCategories();
             (row.Cells[1].FindControl("ddDiscipline") as DropDownList).DataBind();
             (row.Cells[1].FindControl("ddDiscipline") as DropDownList).SelectedValue = dis_name;
-            (row.Cells[2].FindControl("ddCategories") as DropDownList).DataSource = Administraion.CategoriesList(dis_name);
+            (row.Cells[2].FindControl("ddCategories") as DropDownList).DataSource = Categorieses.CategoriesList(dis_name);
             (row.Cells[2].FindControl("ddCategories") as DropDownList).DataBind();
             (row.Cells[2].FindControl("ddCategories") as DropDownList).SelectedValue = dis_name;
         }
 
         protected void ddDiscipline_ChangeIndex(object sender, EventArgs e) 
-        {            
-            ((sender as DropDownList).Parent.FindControl("ddCategories") as DropDownList).DataSource = Administraion.CategoriesList((sender as DropDownList).SelectedValue);
+        {
+            ((sender as DropDownList).Parent.FindControl("ddCategories") as DropDownList).DataSource = Categorieses.CategoriesList((sender as DropDownList).SelectedValue);
             ((sender as DropDownList).Parent.FindControl("ddCategories") as DropDownList).DataBind();
         }
 
@@ -57,7 +54,7 @@ namespace TestKnowlige.administration
             string test_id = ((sender as GridView).Rows[e.RowIndex].Cells[4].FindControl("TestEditLink") as HyperLink).NavigateUrl.Split('=')[1];
             try
             {
-                Administraion.UpdateTest(test_id, test_name, Select_Categories);
+                Test.UpdateTest(test_id, test_name, Select_Categories);
             }
             catch (Exception ex) {
                 MessageError.Text = ex.Message;

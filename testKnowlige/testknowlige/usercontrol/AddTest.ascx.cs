@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Security;
-using System.Web.Configuration;
-using System.Data.SqlClient;
 using TestKnowlige.classes;
 
 namespace TestKnowlige.usercontrol
@@ -136,84 +131,51 @@ namespace TestKnowlige.usercontrol
 
         protected void btnAddQuestion_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "insert into tempquestions (text, points, test_id) values (@text, @points, @id)";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("text",txtAdd.Text);
-            cmd.Parameters.AddWithValue("points", txtPoints.Text);
-            cmd.Parameters.AddWithValue("id", (Page.FindControl("test_id") as HiddenField).Value);
             try
             {
-                con.Open();
-                cmd.ExecuteNonQuery();
+                Test.AddTempQuestion(txtAdd.Text, txtPoints.Text, (Page.FindControl("test_id") as HiddenField).Value);
             }
-            catch (Exception)
-            {
-
-                throw;
+            catch (Exception ex) {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
             }
-            finally {
-                con.Close();
-            }
-
             Test.AnswerBind(Page);
             this.Visible = false;
         }
 
         protected void btnAddAnswer_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "insert into tempanswer (question_id, text, correct) values (@id, @text, @cur)";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("id", hideField.Value);
-            cmd.Parameters.AddWithValue("text", txtAdd.Text);
-            cmd.Parameters.AddWithValue("cur", ckbCorrect.Checked);
             try
             {
-                con.Open();
-                cmd.ExecuteNonQuery();
+                Test.AddTempAnswer(hideField.Value, txtAdd.Text, ckbCorrect.Checked);
             }
-            catch (Exception)
-            {
-                throw;
+            catch (Exception ex) {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
             }
-            finally {
-                con.Close();
-            }
+           
             this.Visible = false;
-
             Test.AnswerBind(Page);
         }
 
         protected void btnAddTest_Click(object sender, EventArgs e)
-        {            
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "insert into temptest (name, user_id, cat_id) values (@name, @id, @cat_id)";
-            SqlCommand cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("name", txtAdd.Text);
-            cmd.Parameters.AddWithValue("id", LoGiN.UserId(HttpContext.Current.User.Identity.Name));
-            cmd.Parameters.AddWithValue("cat_id", (Page.FindControl("cat_id") as HiddenField).Value);
-            (Page.FindControl("testName") as Label).Text = "Тест: " + txtAdd.Text;
-            this.Visible = false;
-            (Page.FindControl("addNewTest") as ImageButton).Visible = false;
-            (Page.FindControl("AddQuestion") as ImageButton).Visible = true;
+        {
             try
             {
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally {
-                con.Close();
-            }
+                Test.AddTempTest(txtAdd.Text, HttpContext.Current.User.Identity.Name, (Page.FindControl("cat_id") as HiddenField).Value);
 
-            (Page.FindControl("save") as Button).Visible = true;
-
-            (Page.FindControl("test_id") as HiddenField).Value = Test.AddTestId(txtAdd.Text).ToString();
-            Test.AnswerBind(Page);
+                this.Visible = false;
+                (Page.FindControl("testName") as Label).Text = "Тест: " + txtAdd.Text;                
+                (Page.FindControl("addNewTest") as ImageButton).Visible = false;
+                (Page.FindControl("AddQuestion") as ImageButton).Visible = true;
+                (Page.FindControl("save") as Button).Visible = true;
+                (Page.FindControl("test_id") as HiddenField).Value = Test.AddTestId(txtAdd.Text).ToString();
+                Test.AnswerBind(Page);
+            }
+            catch (Exception ex) {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
+            }
         }
 
         protected void RedactQuestion_Click(object sender, EventArgs e) {

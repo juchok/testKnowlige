@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.IO;
@@ -155,6 +152,54 @@ namespace TestKnowlige.classes
             finally {
                 con.Close();
             }
+        }
+
+        public static bool UpdatePass(string pass, string login)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            string str = "update users set password = @password where login=@login";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("password", CreateLoGiN.EncodePassword(pass));
+            cmd.Parameters.AddWithValue("login", login);
+            try
+            {
+                con.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static string LoginForID(int user_id)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select login from users where user_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("id", user_id.ToString());
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    return dr["login"].ToString();
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
     }
 }

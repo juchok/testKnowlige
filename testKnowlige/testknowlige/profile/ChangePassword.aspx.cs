@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Security;
-using System.Web.Configuration;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using TestKnowlige.classes;
 
 namespace TestKnowlige.login
@@ -20,7 +14,7 @@ namespace TestKnowlige.login
         protected void btnChangePass_Click(object sender, EventArgs e)
         {
             if (LoGiN.CheckUser(User.Identity.Name, txtOldPass.Text)
-                && UpdatePassword.update(txtNewPass.Text, User.Identity.Name))
+                && LoGiN.UpdatePass(txtNewPass.Text, User.Identity.Name))
             {
                 FormsAuthentication.RedirectFromLoginPage(User.Identity.Name, true);
             }

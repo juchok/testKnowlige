@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using TestKnowlige.classes;
 
 namespace TestKnowlige
@@ -20,13 +15,15 @@ namespace TestKnowlige
                 defaultButton();
                 addNewTest.Visible = true;
                 if (!string.IsNullOrEmpty(Response.Cookies["categories"].Value)) { 
-                    cat_id.Value = Test.CategoriesId(Request.Cookies["categories"].Value).ToString();
+                    cat_id.Value = Categorieses.CategoriesId(Request.Cookies["categories"].Value).ToString();
                 }                
             }
             if (!string.IsNullOrEmpty(test_id.Value))
             {
                 Test.AnswerBind(Page);
             }
+
+            MessageError.Visible = false;
         }
 
         protected void addTest_Click(object sender, ImageClickEventArgs e)

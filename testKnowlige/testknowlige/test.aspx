@@ -15,6 +15,7 @@
             <asp:Label ID="header_discipline" runat="server" CssClass=""></asp:Label>
             <asp:Label ID="header_categories" runat="server" CssClass=""></asp:Label>
             <asp:Label ID="header_test" runat="server" CssClass=""></asp:Label>
+            <asp:Label ID="MessageError" runat="server" Visible="false" CssClass="error" />
             <asp:HiddenField ID="test_id" Visible="false" runat="server" />
         </div>
         <asp:Repeater runat="server" ID="questions">        
@@ -36,7 +37,7 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>                    
-    <asp:Button ID="Complite" Text="Завершить" runat="server" PostBackUrl="~/testComplite.aspx" />    
+    <asp:Button ID="Complite" Text="Завершить" runat="server"  PostBackUrl="~/testComplite.aspx" />    
     </div>
     </form>
 </body>

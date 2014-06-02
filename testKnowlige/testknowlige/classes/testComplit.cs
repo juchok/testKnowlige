@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 using System.Web.Configuration;
@@ -14,7 +11,6 @@ namespace TestKnowlige.classes
         public static void FindQuestion(ControlCollection collection, int id) { 
             
         }
-
 
         public static bool? CheckAnswer(CheckBox cb, string DataAnswerText, bool DataAnswerCorrect) {     
                 if (DataAnswerCorrect && cb.Checked)
@@ -44,9 +40,7 @@ namespace TestKnowlige.classes
             }
             return null;
         }
-
-
-
+        
         public static System.Drawing.Color ColorAnswer(bool? bl) {
             if (bl == null) {
                 return System.Drawing.Color.Empty;
