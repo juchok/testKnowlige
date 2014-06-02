@@ -58,7 +58,7 @@ namespace TestKnowlige.classes
         public static int UserId(string User) {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             SqlCommand cmd = new SqlCommand("select user_id from users where login = @log", con);
-            cmd.Parameters.AddWithValue("log", User);
+            cmd.Parameters.AddWithValue("log", User.Trim());
             try
             {
                 con.Open();

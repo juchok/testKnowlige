@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace TestKnowlige.classes
 {
@@ -95,7 +96,7 @@ namespace TestKnowlige.classes
         internal static SqlDataSource DisciplineListHasCategories()
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str = "select d.discipline_name from discipline as d "
+            string str = "select distinct d.discipline_name from discipline as d "
                 + " inner join Categories as c on c.discipline_id = d.discipline_id "
                 + " where c.categories_name is not null";
             SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
@@ -128,7 +129,7 @@ namespace TestKnowlige.classes
             }
         }
 
-        private static int DisciplineId(int indexRow)
+        internal static int DisciplineId(int indexRow)
         {            
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "select discipline_id from discipline";
@@ -155,7 +156,7 @@ namespace TestKnowlige.classes
             }
         }
 
-        private static string DisciplineId(string disc)
+        internal static string DisciplineId(string disc)
         {            
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "select discipline_id from discipline where discipline_name = @name";
@@ -305,9 +306,7 @@ namespace TestKnowlige.classes
                 + " inner join discipline as d on c.discipline_id = d.discipline_id";
             return new SqlDataSource(con.ConnectionString, str);
         }
-
-
-
+        
         internal static void UpdateTest(string test_id, string test_name, string Select_Categories)
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
@@ -330,5 +329,72 @@ namespace TestKnowlige.classes
             }
             
         }
+
+        internal static SqlDataSource UserList()
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "select user_id, firstname, lastname, login, question, answer, categories from users";
+            SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
+            return ds;
+        }
+                       
+        internal static void UpdateUser(UserInfo info)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "update users set firstname = @firstname, lastname = @lastname, login = @login, question = @question, answer = @answer, categories = @categories where user_id = @id";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("firstname", info.FirstName);
+            cmd.Parameters.AddWithValue("lastname", info.LastName);
+            cmd.Parameters.AddWithValue("login", info.Login);
+            cmd.Parameters.AddWithValue("question", info.Question);
+            cmd.Parameters.AddWithValue("answer", info.Answer);
+            cmd.Parameters.AddWithValue("categories", info.Categories);            
+            cmd.Parameters.AddWithValue("id", info.UserId);
+
+            try
+            {
+                string login = Users.LoginForID(info.UserId);
+                string usRole="";
+                if(Roles.GetRolesForUser(login)[0].Length > 0)
+                    usRole = Roles.GetRolesForUser(login)[0];                               
+
+                con.Open();
+                cmd.ExecuteNonQuery();  
+                
+                if (usRole != info.Categories) {
+                    if(!string.IsNullOrEmpty(usRole))
+                        Roles.RemoveUserFromRole(login, usRole);
+                    Roles.AddUserToRole(login, info.Categories);
+                }
+
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось обновить информация о пользователе");
+            }
+            finally {
+                con.Close();
+            }
+        }
+
+        internal static void deleteUser(string login)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string str = "delete users where login = @login";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.Parameters.AddWithValue("login", login);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось удалить пользователя");
+            }
+            finally {
+                con.Close();
+            }
+        }
     }
-}
+};

@@ -17,6 +17,9 @@ namespace TestKnowlige.administration
                 AdminMenu.ActiveItem(4);
                 RefreshCategories();
             }
+
+            
+
             MessageError.Visible = false;
         }
 
@@ -24,6 +27,9 @@ namespace TestKnowlige.administration
         {
             CategoriesList.DataSource = Administraion.CategoriesList();
             CategoriesList.DataBind();
+            Test.DisciplineList((CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList));
+            (CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList).DataBind();
+            AdminMenu.ActiveItem(4);
         }
 
         protected void CategoriesList_RowEditing(object sender, GridViewEditEventArgs e)
@@ -48,7 +54,7 @@ namespace TestKnowlige.administration
         {
             GridViewRow row = CategoriesList.Rows[e.RowIndex];
             string disc = (row.Cells[1].FindControl("ddDiscipline") as DropDownList).SelectedValue;
-            string cat_name = (row.Cells[2].Controls[0] as TextBox).Text;
+            string cat_name = (row.Cells[2].FindControl("EditCaategories") as TextBox).Text;
             try
             {
                 int cat_old_id = Administraion.CategoriesID(e.RowIndex);
@@ -66,12 +72,36 @@ namespace TestKnowlige.administration
         protected void CategoriesList_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             TableRow row = CategoriesList.Rows[e.RowIndex];
-            if (!Administraion.deleteCategories(row.Cells[2].Text))
+            if (!Administraion.deleteCategories((row.Cells[2].FindControl("CatName") as Label).Text))
             {
-                MessageError.Text = "Не удалось удалить дисциплину";
+                MessageError.Text = "Не удалось удалить категорию";
                 MessageError.Visible = true;
             }
             RefreshCategories();
+        }
+
+        protected void CategoriesList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("Insert"))
+            {
+                try
+                {
+                    GridViewRow row = CategoriesList.FooterRow;
+                    if (string.IsNullOrEmpty((row.Cells[1].FindControl("newCategories") as TextBox).Text)
+                        || (row.Cells[1].FindControl("newCategories") as TextBox).Text.Length < 3)
+                        throw new ApplicationException("Поле имя категории не может быть пустым или меньше 3 символов");
+
+                    Categorieses.NewCategories((row.Cells[1].FindControl("newCategories") as TextBox).Text,
+                         Administraion.DisciplineId((CategoriesList.FooterRow.FindControl("DisciplineList") as DropDownList).SelectedValue), 
+                         User.Identity.Name);                         
+                }
+                catch (Exception ex)
+                {
+                    MessageError.Text = ex.Message;
+                    MessageError.Visible = true;
+                }
+                RefreshCategories();
+            }
         }
     }
 }

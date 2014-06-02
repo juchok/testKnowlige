@@ -24,6 +24,7 @@
     </div>
     <div class="bod">
         <h2>Выбирете интересующий вас тест</h2>
+        <asp:Label ID="MessageError" runat="server" Visible="false" CssClass="errorPas"/>
         <div class="test">
     	    <div class="head">
         	    <div class="act_div">

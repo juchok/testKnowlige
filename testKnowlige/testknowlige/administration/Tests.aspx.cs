@@ -21,6 +21,7 @@ namespace TestKnowlige.administration
         private void RefreshTest() {
             TestList.DataSource = Administraion.TestList();
             TestList.DataBind();
+            AdminMenu.ActiveItem(5);
         }
 
         protected void TestList_RowEditing(object sender, GridViewEditEventArgs e) {            

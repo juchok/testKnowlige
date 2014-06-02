@@ -111,38 +111,27 @@ namespace TestKnowlige.usercontrol
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
-            string str;
-            SqlCommand cmd = new SqlCommand("",con);
-            if (int.Parse(discipline_id.Value) == 0)
-            {
-                str = "insert into discipline (discipline_name, user_id) values (@name, @id)";
-                cmd.CommandText = str;
-                cmd.Parameters.AddWithValue("name", txtDisciplineOrCategories.Text);
-                cmd.Parameters.AddWithValue("id", LoGiN.UserId(author.Text));
-            }
-            else {
-                str = "insert into categories (discipline_id, categories_name, user_id) values (@dis_id, @name, @id)";
-                cmd.CommandText = str;
-                cmd.Parameters.AddWithValue("dis_id", discipline_id.Value);
-                cmd.Parameters.AddWithValue("name", txtDisciplineOrCategories.Text);
-                cmd.Parameters.AddWithValue("id", LoGiN.UserId(author.Text));
-            }
-
             try
             {
-                con.Open();
-                cmd.ExecuteNonQuery();
+                if (int.Parse(discipline_id.Value) == 0)
+                {
+                    Disciplines.NewDiscipline(txtDisciplineOrCategories.Text, author.Text.Split(':')[1].Trim());
+                    (Page.FindControl("DirDiscipline") as Repeater).DataBind();
+                }
+                else
+                {
+                    Categorieses.NewCategories(txtDisciplineOrCategories.Text, discipline_id.Value, author.Text.Split(':')[1].Trim());
+                    (Page.FindControl("DirCategories") as Repeater).DataBind();
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
             }
             finally {
-                con.Close();
-            }
-
-            this.Visible = false;
+                this.Visible = false;                
+            }        
         }
 
     }

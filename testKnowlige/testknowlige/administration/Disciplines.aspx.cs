@@ -31,7 +31,10 @@ namespace TestKnowlige.administration
             try
             {
                 GridViewRow row = DisciplineList.Rows[e.RowIndex];
-                Administraion.UpdateDisciplineName(e.RowIndex, ((TextBox)(row.Cells[1].Controls[0])).Text);
+                if (string.IsNullOrEmpty((row.Cells[1].FindControl("editDiscipline") as TextBox).Text)
+                    || (row.Cells[1].FindControl("editDiscipline") as TextBox).Text.Length < 3)
+                    throw new ApplicationException("Поле имя дисциплины не может быть пустым или меньше 3 символов");
+                Administraion.UpdateDisciplineName(e.RowIndex, (row.Cells[1].FindControl("editDiscipline") as TextBox).Text);
                 DisciplineList.EditIndex = -1;
                 RefreshDisciplineList();
             }
@@ -53,14 +56,15 @@ namespace TestKnowlige.administration
         {
             DisciplineList.DataSource = Administraion.DisciplineList();
             DisciplineList.DataBind();
+            AdminMenu.ActiveItem(3);
         }
 
         protected void Disciplinelist_RowDeleting(object sender, GridViewDeleteEventArgs e) 
         {
             try
             {
-                TableRow row = DisciplineList.Rows[e.RowIndex];
-                if (!Administraion.deleteDiscipline(row.Cells[1].Text))
+                GridViewRow row = DisciplineList.Rows[e.RowIndex];
+                if (!Administraion.deleteDiscipline((row.Cells[1].FindControl("ItemName") as Label).Text))
                 {
                     MessageError.Text = "Не удалось удалить дисциплину";
                     MessageError.Visible = true;
@@ -71,6 +75,28 @@ namespace TestKnowlige.administration
                 MessageError.Visible = true;
             }
             RefreshDisciplineList();
+        }
+
+        protected void Disciplinelist_RowCommand(object sender, GridViewCommandEventArgs e) 
+        {
+            if (e.CommandName.Equals("Insert"))
+            {
+                try
+                {
+                    GridViewRow row = DisciplineList.FooterRow;
+                    if (string.IsNullOrEmpty((row.Cells[1].FindControl("newDiscipline") as TextBox).Text)
+                        || (row.Cells[1].FindControl("newDiscipline") as TextBox).Text.Length < 3)
+                                throw new ApplicationException("Поле имя дисциплины не может быть пустым или меньше 3 символов");
+                    
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageError.Text = ex.Message;
+                    MessageError.Visible = true;
+                }
+                RefreshDisciplineList();
+            }
         }
     }
 }

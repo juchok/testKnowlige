@@ -3,7 +3,7 @@
 <div class="backgr"></div>
     <div class="usercontr">
         <asp:Label ID="HeaderControl" CssClass="UC_header" runat="server"></asp:Label>
-        <asp:Label ID="discipline" CssClass="UC_discipline" runat="server" ></asp:Label>
+        <asp:Label ID="discipline" CssClass="UC_discipline" runat="server" ></asp:Label>        
         <asp:HiddenField ID="discipline_id" runat="server" Visible="false" />
         <asp:Label ID="lblDisciplineOrCategories" CssClass="UC_DoC" runat="server"></asp:Label>
         <asp:TextBox ID="txtDisciplineOrCategories" CssClass="UC_txt" runat="server"></asp:TextBox>

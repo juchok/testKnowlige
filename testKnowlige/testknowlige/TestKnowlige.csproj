@@ -151,7 +151,9 @@
     </Compile>
     <Compile Include="classes\Administraion.cs" />
     <Compile Include="classes\AnswerItem.cs" />
+    <Compile Include="classes\Categorieses.cs" />
     <Compile Include="classes\CreateLogin.cs" />
+    <Compile Include="classes\Disciplines.cs" />
     <Compile Include="classes\login.cs" />
     <Compile Include="classes\Mail.cs" />
     <Compile Include="classes\Profile.cs" />
@@ -161,6 +163,8 @@
     <Compile Include="classes\testComplit.cs" />
     <Compile Include="classes\testItem.cs" />
     <Compile Include="classes\UpdatePassword.cs" />
+    <Compile Include="classes\UserInfo.cs" />
+    <Compile Include="classes\Users.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

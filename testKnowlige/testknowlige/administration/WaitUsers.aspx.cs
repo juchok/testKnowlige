@@ -13,8 +13,7 @@ namespace TestKnowlige.administration
     public partial class WaitUsers : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            AdminMenu.ActiveItem(8);
+        {            
             if (!Page.IsPostBack)
             {
                 RefreshWaitList();
@@ -81,6 +80,8 @@ namespace TestKnowlige.administration
                 MessageError.Text = ex.Message;
                 MessageError.Visible = true;
             }
+
+            AdminMenu.ActiveItem(7);
         }
     }
 }
