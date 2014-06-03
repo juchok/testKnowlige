@@ -38,6 +38,7 @@
             </ItemTemplate>
         </asp:Repeater>                    
     <asp:Button ID="Complite" Text="Завершить" runat="server"  PostBackUrl="~/testComplite.aspx" />    
+        <asp:HyperLink NavigateUrl="~/default.aspx" runat="server" Text="На главную" ID="lnkHome" CssClass="home" Visible="false"/>
     </div>
     </form>
 </body>

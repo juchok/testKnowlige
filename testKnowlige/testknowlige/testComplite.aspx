@@ -17,8 +17,8 @@
             <asp:Label ID="header_test" runat="server" CssClass=""></asp:Label>
         </div>            
         <asp:Repeater ID="bodyAnswers" runat="server">
-
         </asp:Repeater>
+         <asp:Label runat="server" ID="MessageError" Visible="false" CssClass="error"/>
         <asp:HyperLink ID="home" runat="server" NavigateUrl="~/default.aspx">На главную</asp:HyperLink>
     </div>    
     </form>

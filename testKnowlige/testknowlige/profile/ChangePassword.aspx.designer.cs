@@ -40,6 +40,15 @@ namespace TestKnowlige.login {
         protected global::System.Web.UI.WebControls.Label lblChangePasswordHeader;
         
         /// <summary>
+        /// MessageError элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MessageError;
+        
+        /// <summary>
         /// lblOldPass элемент управления.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace TestKnowlige.login {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidPassword;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// lblNewRePass элемент управления.

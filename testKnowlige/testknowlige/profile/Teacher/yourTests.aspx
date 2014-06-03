@@ -16,6 +16,7 @@
     <div class="main">
         <asp:Label Text="Список тестов созданных вами" runat="server" ID="header"/>
         <div class="listTests">
+            <asp:Label ID="MesssageError" Visible="false" CssClass="error" runat="server" />
         <asp:Repeater runat="server" ID="listTest">        
             <ItemTemplate>
             <div>

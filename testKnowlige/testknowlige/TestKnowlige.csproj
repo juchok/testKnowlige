@@ -162,7 +162,6 @@
     <Compile Include="classes\testComplit.cs" />
     <Compile Include="classes\testItem.cs" />
     <Compile Include="classes\UserInfo.cs" />
-    <Compile Include="classes\Users.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

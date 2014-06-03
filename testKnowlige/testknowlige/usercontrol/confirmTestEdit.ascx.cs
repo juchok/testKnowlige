@@ -63,10 +63,18 @@ namespace TestKnowlige.usercontrol
 
         protected void ConfirmDeleteAnswer_Click(object sender, EventArgs e)
         {
-            Test.DelAnswer(hideid.Value, true);
-            Test.TestBind(Page); 
-            this.Visible = false;
-            SaveComplite();
+            try
+            {                
+                Test.DelAnswer(hideid.Value, true);
+                Test.TestBind(Page);
+                this.Visible = false;
+                SaveComplite();
+            }
+            catch (Exception ex)
+            {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
+            }
         }
 
         protected void SaveComplite()

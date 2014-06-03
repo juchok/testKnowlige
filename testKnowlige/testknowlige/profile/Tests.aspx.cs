@@ -9,8 +9,17 @@ namespace TestKnowlige.profile
             if (string.IsNullOrEmpty(User.Identity.Name)) {
                 Response.Redirect("~/default.aspx");
             }
+
+            MessageError.Visible = false;
             menu.ActiveItem(3);
-            testComplite.Show(ListTests, User.Identity.Name);
+            try
+            {
+                testComplite.Show(ListTests, User.Identity.Name);
+            }
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
         }
     }
 }

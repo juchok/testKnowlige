@@ -12,8 +12,7 @@ namespace TestKnowlige.classes
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "select * from users where login = @login";
-            SqlCommand cmd = new SqlCommand(str, con);
-            //cmd.Parameters.AddWithValue("field", Field);
+            SqlCommand cmd = new SqlCommand(str, con);            
             cmd.Parameters.AddWithValue("login", UserName);
             try
             {
@@ -26,7 +25,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается отобразить информацию");
             }
             finally {
                 con.Close();
@@ -50,7 +49,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается обновить информацию");
             }
             finally {
                 con.Close();
@@ -86,7 +85,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается обновить дополнительную информацию");
             }
             finally {
                 con.Close();
@@ -97,8 +96,7 @@ namespace TestKnowlige.classes
         {
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "select * from moreinformation where user_id = @id";
-            SqlCommand cmd = new SqlCommand(str, con);
-            //cmd.Parameters.AddWithValue("field", Field);
+            SqlCommand cmd = new SqlCommand(str, con);            
             cmd.Parameters.AddWithValue("id", LoGiN.UserId(UserName));
             try
             {
@@ -112,7 +110,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось отобразить дополнительную информацию");
             }
             finally
             {

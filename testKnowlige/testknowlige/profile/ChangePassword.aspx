@@ -13,11 +13,12 @@
     <uc:menu Visible="true" ID="menu" runat="server"/>
     <div class="main">
         <asp:Label ID="lblChangePasswordHeader" runat="server" Text="Change password" CssClass="changeheader"></asp:Label>
+        <asp:Label ID="MessageError" Visible="false" CssClass="error" runat="server" />
         <div>
             <asp:Label ID="lblOldPass" runat="server" Text="Enter old password"></asp:Label>
             <asp:TextBox ID="txtOldPass" TextMode="Password" runat="server"></asp:TextBox>
         </div>
-        <asp:RequiredFieldValidator ID="ValidOldPass" runat="server" ControlToValidate="txtOldPass" 
+        <asp:RequiredFieldValidator ID="ValidOldPass" runat="server" ControlToValidate="txtOldPass" CssClass="error"        
         ErrorMessage="Пароль не может быть пустым" Display="Dynamic"></asp:RequiredFieldValidator>
         <div>
             <asp:Label ID="lblNewPass" runat="server" Text="Enter new password"></asp:Label>
@@ -25,14 +26,16 @@
         </div>
          <asp:RegularExpressionValidator runat="server" ControlToValidate="txtNewPass"
             ErrorMessage="Длинна пароля должна быть не менее 6 символов"
-            Display="Dynamic" id="ValidPassword"
+            Display="Dynamic" id="ValidPassword" CssClass="error"
             ValidationExpression="\S{6,}"></asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNewPass" CssClass="error"
+            ErrorMessage="Пароль не может быть пустым" Display="Dynamic"></asp:RequiredFieldValidator>
         <div>
             <asp:Label ID="lblNewRePass" runat="server" Text="Enter new re-password"></asp:Label>
             <asp:TextBox ID="txtNewRePass" TextMode="Password" runat="server"></asp:TextBox>
         </div>
         <asp:CompareValidator runat="server" ID="ValidRepass" ControlToValidate="txtNewRePass"
-        ControlToCompare="txtNewPass" Display="Dynamic" Type="String"
+        ControlToCompare="txtNewPass" Display="Dynamic" Type="String" CssClass="error"
         ErrorMessage="Пароли не одинаковые"></asp:CompareValidator>
         <div>
             <asp:Label ID="errorPas" runat="server" CssClass="errorPas" Visible="false">Не верный текущий пароль</asp:Label>

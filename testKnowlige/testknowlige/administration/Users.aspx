@@ -26,7 +26,7 @@
                     <asp:TemplateField HeaderStyle-HorizontalAlign="Left">
                         <EditItemTemplate>
                             <asp:LinkButton ID="lnkUpdate" runat="server" CausesValidation="True" CommandName="Update"
-                                Text="Обновить" OnClientClick="return confirm('Update?')" 
+                                Text="Обновить" OnClientClick="return confirm('Обновить информацию о пользователе?')" 
                                 ValidationGroup="Update"></asp:LinkButton>                                                                                            
                             <asp:LinkButton ID="lnkCancel" runat="server" CausesValidation="False" CommandName="Cancel"
                                 Text="Отмена"></asp:LinkButton>
@@ -35,7 +35,7 @@
                             <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="False" CommandName="Edit"
                                 Text="Правка"></asp:LinkButton>
                             <asp:LinkButton ID="lnkDelete" runat="server" CausesValidation="False" CommandName="Delete"
-                                Text="Удалить" OnClientClick="return confirm('Delete?')"></asp:LinkButton>
+                                Text="Удалить" OnClientClick="return confirm('Вы действительно хотите удалить пользователся?')"></asp:LinkButton>
                         </ItemTemplate>
                         <HeaderStyle HorizontalAlign="Left" />                        
                     </asp:TemplateField>                    

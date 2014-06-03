@@ -31,6 +31,15 @@ namespace TestKnowlige.profile {
         protected global::System.Web.UI.WebControls.Label AdminsHeader;
         
         /// <summary>
+        /// MessageError элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MessageError;
+        
+        /// <summary>
         /// listAdmins элемент управления.
         /// </summary>
         /// <remarks>

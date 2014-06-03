@@ -25,5 +25,8 @@
             <li>
                 <asp:HyperLink ID="administration" runat="server" NavigateUrl="~/administration/main.aspx">Администрирование</asp:HyperLink>
                 </li>    
+            <li>
+                <asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/default.aspx">На главную</asp:HyperLink>
+                </li>    
         </ul>
     </div>

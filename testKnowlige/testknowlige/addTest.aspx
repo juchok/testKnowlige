@@ -18,7 +18,7 @@
         <div>
             <asp:Label ID="testName" CssClass="testname" runat="server"></asp:Label>
             <asp:Label ID="testAuthor"  CssClass="testauthor" runat="server"></asp:Label>        
-            <asp:Label ID="MessageError" runat="server" Visible="true" />
+            <asp:Label ID="MessageError" runat="server" Visible="False" CssClass="errorTxtAdd" />
             <asp:HiddenField ID="test_id" runat="server" />             
             <asp:HiddenField ID="cat_id" runat="server" />
         </div>

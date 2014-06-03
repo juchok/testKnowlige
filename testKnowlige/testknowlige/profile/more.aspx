@@ -12,6 +12,7 @@
    <uc:menu Visible="true" ID="menu" runat="server"/>
     <div class="main">    
         <asp:Label ID="lblMore" runat="server" Text="Дополнительная информация"></asp:Label>
+        <asp:Label ID="MessageError" Visible="false" CssClass="error" runat="server" />
          <div>
             <asp:Label ID="lblMail" runat="server" Text="e-Mail"></asp:Label>
             <asp:TextBox ID="txtMail" Enabled="false" runat="server"></asp:TextBox>        

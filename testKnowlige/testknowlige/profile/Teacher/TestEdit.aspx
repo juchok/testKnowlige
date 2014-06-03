@@ -22,7 +22,7 @@
             <asp:Label ID="testAuthor"  CssClass="testauthor" runat="server"></asp:Label>                 
             <asp:HiddenField ID="test_id" runat="server" />             
         </div>
-
+        <asp:Label ID="MessageError" Visible="false" CssClass="errorTxtAdd" runat="server" />
         <asp:Repeater runat="server" ID="questions">        
             <ItemTemplate>
                 <div class="question">

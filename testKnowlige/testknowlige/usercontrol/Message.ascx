@@ -9,22 +9,26 @@
         </div>
         <asp:RegularExpressionValidator runat="server" ControlToValidate="txtFrom"
             ErrorMessage="Длинна логина должна быть не менее 4 символов"
-            Display="Dynamic" id="ValidFrom"
+            Display="Dynamic" id="ValidFrom" CssClass="error"
             ValidationExpression="\w{4,}"></asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator ID="ValidEmptyFrom" runat="server" ControlToValidate="txtFrom"
+            Display="Dynamic" CssClass="error" ErrorMessage="Поле не может быть пустым" ></asp:RequiredFieldValidator>
         <div>
             <asp:Label runat="server" ID="ToUser" CssClass="text">Кому</asp:Label>
             <asp:TextBox ID="txtToUser" runat="server"></asp:TextBox>
         </div>
          <asp:RegularExpressionValidator runat="server" ControlToValidate="txtToUser"
             ErrorMessage="Длинна логина должна быть не менее 4 символов"
-            Display="Dynamic" id="ValidToUser"
+            Display="Dynamic" id="ValidToUser" CssClass="error"
             ValidationExpression="\w{4,}"></asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator ID="ValidEmptyToUser" runat="server" ControlToValidate="txtToUser"
+            Display="Dynamic" CssClass="error" ErrorMessage="Поле не может быть пустым" ></asp:RequiredFieldValidator>
         <asp:HiddenField ID="hideid" Visible="false" runat="server" />     
           <div>
             <asp:Label ID="lblMessage" runat="server">Сообщение</asp:Label>            
             <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine"></asp:TextBox>
         </div>
-        <asp:RequiredFieldValidator ID="ValidMesasge" runat="server" ControlToValidate="txtMessage"
+        <asp:RequiredFieldValidator ID="ValidMesasge" runat="server" ControlToValidate="txtMessage" CssClass="error"
             Display="Dynamic" ErrorMessage="Сообщение не может быть пустым"></asp:RequiredFieldValidator>        
         <asp:Label ID="errorMessage" runat="server" Visible="false"></asp:Label>
         

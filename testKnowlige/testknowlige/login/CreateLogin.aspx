@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="CreateAccaunt" runat="server" class="CreateAccaunt">
+    <asp:Label ID="MessageError" Visible="false" CssClass="messError" runat="server" />
     <div>
         <asp:Label ID="lblCreateLoginHeader" runat="server" Text="Create accaunt" CssClass="loginHeader"></asp:Label>
         <asp:Label ID="ErrorMessage" runat="server" CssClass="messError" Visible="false"></asp:Label>

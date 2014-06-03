@@ -85,8 +85,15 @@ namespace TestKnowlige
                     addNewItem.Discipline = "Дисциплина: " + Request.QueryString["discipline"];
                     addNewItem.DisciplineOrCategories = "Введите название категории";
                     addNewItem.Author = "Автор: " + User.Identity.Name;
-                    addNewItem.DisciplineId = int.Parse(Discipliness.DisciplineId(Request.QueryString["discipline"]));
-                    addNewItem.Visible = true;
+                    try
+                    {
+                        addNewItem.DisciplineId = int.Parse(Discipliness.DisciplineId(Request.QueryString["discipline"]));
+                        addNewItem.Visible = true;
+                    }
+                    catch (Exception ex) {
+                        MessageError.Text = ex.Message;
+                        MessageError.Visible = true;
+                    }                    
                 }
                 else {
                     ErrorMes.ErrorHeader = "Ошибочка";
@@ -99,7 +106,15 @@ namespace TestKnowlige
                 if (!string.IsNullOrEmpty(Request.QueryString["categories"]))
                 {
                     Response.Cookies["categories"].Value = Request.QueryString["categories"];
-                    Response.Redirect("~/addTest.aspx?cat=2");
+                    try
+                    {
+                        Response.Redirect("~/addTest.aspx?cat=" + Categorieses.CategoriesId(Request.QueryString["categories"]));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageError.Text = ex.Message;
+                        MessageError.Visible = true;
+                    }                    
                 }
                 else
                 {

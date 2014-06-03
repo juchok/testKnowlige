@@ -135,10 +135,25 @@ namespace TestKnowlige.classes
             string str = "delete users where login = @login";
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("login", login);
+
+            string moreInfo = "delete moreinformation where user_id = @id";
+            SqlCommand delMoreInfo = new SqlCommand(moreInfo, con);
+            delMoreInfo.Parameters.AddWithValue("id", LoGiN.UserId(login));
+
             try
             {
                 con.Open();
+                delMoreInfo.ExecuteNonQuery();
                 cmd.ExecuteNonQuery();
+                foreach (string item in Roles.GetAllRoles())
+                {
+                    if (Roles.IsUserInRole(login, item))
+                    {
+                        Roles.RemoveUserFromRole(login, item);
+                    }
+
+                }
+                
             }
             catch (Exception)
             {

@@ -13,6 +13,7 @@
     <uc:menu Visible="true" ID="menu" runat="server"/>
     <div class="main">
         <asp:Label ID="lblHeader" runat="server" >Ваши пройденные тесты</asp:Label>        
+        <asp:Label ID="MessageError" Visible="false" CssClass="error" runat="server" />
         <asp:GridView ID="ListTests" runat="server" GridLines="None" AutoGenerateColumns="False">
         <Columns>
                 <asp:BoundField DataField="Discipline_name" HeaderText="Дисциплина" />

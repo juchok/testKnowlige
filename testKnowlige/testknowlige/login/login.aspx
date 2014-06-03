@@ -11,6 +11,7 @@
     <form id="login" runat="server" class="login">
     <div>
         <asp:Label ID="lblLoginHeader" runat="server" Text="Login" CssClass="loginHeader"></asp:Label>        
+        <asp:Label ID="MessageError" Visible="false" CssClass="messError" runat="server" />
         <div>
             <asp:Label ID="lblLogin" runat="server" Text="Login"></asp:Label>
             <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>

@@ -134,13 +134,13 @@ namespace TestKnowlige.usercontrol
             try
             {
                 Test.AddTempQuestion(txtAdd.Text, txtPoints.Text, (Page.FindControl("test_id") as HiddenField).Value);
+                Test.AnswerBind(Page);
+                this.Visible = false;
             }
             catch (Exception ex) {
                 (Page.FindControl("MessageError") as Label).Text = ex.Message;
                 (Page.FindControl("MessageError") as Label).Visible = true;
-            }
-            Test.AnswerBind(Page);
-            this.Visible = false;
+            }            
         }
 
         protected void btnAddAnswer_Click(object sender, EventArgs e)
@@ -148,14 +148,13 @@ namespace TestKnowlige.usercontrol
             try
             {
                 Test.AddTempAnswer(hideField.Value, txtAdd.Text, ckbCorrect.Checked);
+                this.Visible = false;
+                Test.AnswerBind(Page);
             }
             catch (Exception ex) {
                 (Page.FindControl("MessageError") as Label).Text = ex.Message;
                 (Page.FindControl("MessageError") as Label).Visible = true;
-            }
-           
-            this.Visible = false;
-            Test.AnswerBind(Page);
+            }            
         }
 
         protected void btnAddTest_Click(object sender, EventArgs e)
@@ -179,15 +178,31 @@ namespace TestKnowlige.usercontrol
         }
 
         protected void RedactQuestion_Click(object sender, EventArgs e) {
-            Test.UpdateTempQuestion(hideField.Value, txtAdd.Text, txtPoints.Text);
-            Test.AnswerBind(Page);
-            this.Visible = false;
+            try
+            {
+                Test.UpdateTempQuestion(hideField.Value, txtAdd.Text, txtPoints.Text);
+                Test.AnswerBind(Page);
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
+            }
         }
 
         protected void RedactAnswer_Click(object sender, EventArgs e) {
-            Test.UpdateTempAnswer(hideField.Value, txtAdd.Text, ckbCorrect.Checked);
-            Test.AnswerBind(Page);
-            this.Visible = false;
+            try
+            {
+                Test.UpdateTempAnswer(hideField.Value, txtAdd.Text, ckbCorrect.Checked);
+                Test.AnswerBind(Page);
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
+            }
         }
     }
 }

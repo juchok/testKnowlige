@@ -14,8 +14,12 @@ namespace TestKnowlige
                 testAuthor.Text = "Автор: " + User.Identity.Name;                
                 defaultButton();
                 addNewTest.Visible = true;
-                if (!string.IsNullOrEmpty(Response.Cookies["categories"].Value)) { 
-                    cat_id.Value = Categorieses.CategoriesId(Request.Cookies["categories"].Value).ToString();
+                if (!string.IsNullOrEmpty(Request.QueryString["cat"]))
+                {
+                    cat_id.Value = Request.QueryString["cat"];
+                }
+                else {
+                    Response.Redirect("~/default.aspx");
                 }                
             }
             if (!string.IsNullOrEmpty(test_id.Value))
@@ -102,9 +106,17 @@ namespace TestKnowlige
 
         protected void save_Click(object sender, EventArgs e)
         {
-            int userId = LoGiN.UserId(User.Identity.Name);
-            Test.CopyTempTest(test_id.Value, userId.ToString());
-            Test.DeleteTempTest(test_id.Value);
+            try
+            {
+                int userId = LoGiN.UserId(User.Identity.Name);
+                Test.CopyTempTest(test_id.Value, userId.ToString());
+                Test.DeleteTempTest(test_id.Value);
+                Response.Redirect("~/default.aspx");
+            }
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
         }
 
         protected void cancel_Click(object sender, EventArgs e)

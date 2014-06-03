@@ -1,5 +1,6 @@
 ﻿using System;
 using TestKnowlige.classes;
+using System.Web.UI.WebControls;
 
 namespace TestKnowlige.usercontrol
 {
@@ -53,16 +54,32 @@ namespace TestKnowlige.usercontrol
 
         protected void ConfirmDeleteQuestion_Click(object sender, EventArgs e)
         {
-            Test.DelTempQuestion(hideid.Value);
-            Test.AnswerBind(Page);
-            this.Visible = false;
+            try
+            {
+                Test.DelTempQuestion(hideid.Value);
+                Test.AnswerBind(Page);
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
+            }
         }
 
         protected void ConfirmDeleteAnswer_Click(object sender, EventArgs e)
         {
-            Test.DelTempAnswer(hideid.Value);
-            Test.AnswerBind(Page);
-            this.Visible = false;
+            try
+            {
+                Test.DelTempAnswer(hideid.Value);
+                Test.AnswerBind(Page);
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                (Page.FindControl("MessageError") as Label).Text = ex.Message;
+                (Page.FindControl("MessageError") as Label).Visible = true;
+            }
         }
     }
 }

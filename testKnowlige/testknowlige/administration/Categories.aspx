@@ -13,7 +13,7 @@
     <uc:menu ID="AdminMenu" runat="server" />
         <div class="main">
             <asp:Label ID="lblHeader" Text="Список категорий" runat="server" />
-            <asp:Label runat="server" ID="MessageError" Visible="false" CssClass="errorDelete"/>
+            <asp:Label runat="server" ID="MessageError" Visible="false" CssClass="error"/>
             <asp:GridView ID="CategoriesList" runat="server" ShowFooter="true"            
             AutoGenerateColumns="false" 
             OnRowEditing="CategoriesList_RowEditing"
@@ -26,7 +26,7 @@
                     <asp:TemplateField HeaderStyle-HorizontalAlign="Left">
                         <EditItemTemplate>
                             <asp:LinkButton ID="lnkUpdate" runat="server" CausesValidation="True" CommandName="Update"
-                                Text="Обновить" OnClientClick="return confirm('Update?')" 
+                                Text="Обновить" OnClientClick="return confirm('Вы действительно хотите обновить категорию?')" 
                                 ValidationGroup="Update"></asp:LinkButton>                            
                             <asp:LinkButton ID="lnkCancel" runat="server" CausesValidation="False" CommandName="Cancel"
                                 Text="Отмена"></asp:LinkButton>
@@ -39,7 +39,7 @@
                             <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="False" CommandName="Edit"
                                 Text="Правка"></asp:LinkButton>
                             <asp:LinkButton ID="lnkDelete" runat="server" CausesValidation="False" CommandName="Delete"
-                                Text="Удалить" OnClientClick="return confirm('Delete?')"></asp:LinkButton>
+                                Text="Удалить" OnClientClick="return confirm('Вы действительно хотите удалить категорию?')"></asp:LinkButton>
                         </ItemTemplate>
                         <HeaderStyle HorizontalAlign="Left" />
                         <FooterTemplate>
@@ -66,7 +66,7 @@
                     </asp:TemplateField>                    
                 </Columns>    
                 <Columns>                    
-                    <asp:TemplateField HeaderText="Роль">                        
+                    <asp:TemplateField HeaderText="Категория">                        
                         <ItemTemplate>                        
                             <asp:Label ID="CatName" Text='<%# Eval("Categories_name") %>' runat="server" />
                         </ItemTemplate>

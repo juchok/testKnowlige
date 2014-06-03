@@ -12,11 +12,19 @@ namespace TestKnowlige.profile
             {
                 Response.Redirect("~/default.aspx");
             }
+            MessageError.Visible = false;
             if (!Page.IsPostBack)
             {
-                Profile.MoreInformation(User.Identity.Name, txtMail, "Mail");
-                Profile.MoreInformation(User.Identity.Name, txtPhone, "Phone");
-                Profile.MoreInformation(User.Identity.Name, txtAddress, "address");
+                try
+                {
+                    Profile.MoreInformation(User.Identity.Name, txtMail, "Mail");
+                    Profile.MoreInformation(User.Identity.Name, txtPhone, "Phone");
+                    Profile.MoreInformation(User.Identity.Name, txtAddress, "address");
+                }
+                catch (Exception ex) {
+                    MessageError.Text = ex.Message;
+                    MessageError.Visible = true;
+                }
             }
             menu.ActiveItem(2);
         }
@@ -33,7 +41,15 @@ namespace TestKnowlige.profile
 
         protected void Save_Click(object sender, EventArgs e)
         {
-            Profile.SaveMoreInformation(User.Identity.Name, txtMail.Text, txtPhone.Text, txtAddress.Text);
+            try
+            {
+                Profile.SaveMoreInformation(User.Identity.Name, txtMail.Text, txtPhone.Text, txtAddress.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
             txtAddress.Enabled = false;
             txtMail.Enabled = false;
             txtPhone.Enabled = false;

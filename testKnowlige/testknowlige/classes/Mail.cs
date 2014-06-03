@@ -51,9 +51,10 @@ namespace TestKnowlige.classes
 
                 return 1;
             }
-            catch (Exception)
+            catch
             {
-                throw;
+                errorMessage.Text = "Не удалось отправить сообщение";
+                return 0;
             }
             finally
             {
@@ -74,7 +75,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось удалить отправленные сообщения");
             }
             finally {
                 con.Close();
@@ -128,7 +129,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось удалить входящие сообщения");
             }
             finally
             {

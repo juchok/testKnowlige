@@ -22,13 +22,13 @@ namespace TestKnowlige.profile {
         protected global::TestKnowlige.usercontrol.menu menu;
         
         /// <summary>
-        /// SendMessage элемент управления.
+        /// SendMes элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton SendMessage;
+        protected global::System.Web.UI.WebControls.ImageButton SendMes;
         
         /// <summary>
         /// refreshMessage элемент управления.
@@ -76,6 +76,15 @@ namespace TestKnowlige.profile {
         protected global::System.Web.UI.WebControls.Button SenderMessage;
         
         /// <summary>
+        /// MessageError элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MessageError;
+        
+        /// <summary>
         /// listMessage элемент управления.
         /// </summary>
         /// <remarks>
@@ -94,13 +103,13 @@ namespace TestKnowlige.profile {
         protected global::TestKnowlige.usercontrol.Message messageItem;
         
         /// <summary>
-        /// Div1 элемент управления.
+        /// sendMessage элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sendMessage;
         
         /// <summary>
         /// goodSend элемент управления.

@@ -22,7 +22,14 @@ namespace TestKnowlige
                 }                
             }
              else {
-                 Response.Redirect("~/default.aspx");
+                // если тут стоит редирект на главную страничку в случае если нет get параметра id то выскакивает ошибка:
+                //PreviousPage	"PreviousPage" запустило исключение типа "System.Threading.ThreadAbortException"	System.Web.UI.Page {System.Threading.ThreadAbortException}
+                //на стронице testcomplite.aspx куда передаем post методом страничку с завершенным методом для обработки результата
+                //Response.Redirect("~/default.aspx");
+                MessageError.Text = "Ну указан тест который хотите пройти. Вернитесь на главную страницу и выбирите тест";
+                MessageError.Visible = true;
+                Complite.Visible = false;
+                lnkHome.Visible = true;
             }
         }               
     }

@@ -14,8 +14,7 @@ namespace TestKnowlige
                         
             if (PreviousPage == null) {
                 Response.Redirect("~/default.aspx");
-            }
-            //string st = (PreviousPage.FindControl("questions").FindControl("answer") as CheckBox).Checked.ToString(); ;
+            }            
             SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
             string str = "select * from answer where question_id = @id";            
             SqlCommand cmd = new SqlCommand(str, con);
@@ -70,9 +69,10 @@ namespace TestKnowlige
                     Page.FindControl("bodyAnswers").Controls.Add(your_question_point);
                     test_points += points;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    MessageError.Text = ex.Message;
+                    MessageError.Visible = true;
                 }
                 finally {
                     con.Close();
@@ -84,22 +84,15 @@ namespace TestKnowlige
             test_point.Text = "Ваши баллы за тест: " + test_points + " баллов";
             test_point.CssClass = "test_points";
             Page.FindControl("bodyAnswers").Controls.Add(test_point);
-
-            string ins = "insert into complite_test (user_id, test_id, dateComplite, points) values (@user_id, @test_id, @date, @points)";
-            SqlCommand cmd_ins = new SqlCommand(ins, con);            
-            cmd_ins.Parameters.AddWithValue("user_id", LoGiN.UserId(User.Identity.Name));
-            cmd_ins.Parameters.AddWithValue("test_id", (PreviousPage.FindControl("tests").FindControl("test_id") as HiddenField).Value);
-            cmd_ins.Parameters.AddWithValue("date", System.DateTime.Now);
-            cmd_ins.Parameters.AddWithValue("points", test_points);
-
+                        
             try
             {
-                con.Open();
-                cmd_ins.ExecuteNonQuery();
+                Test.SaveTestComplite(User.Identity.Name, (PreviousPage.FindControl("tests").FindControl("test_id") as HiddenField).Value, test_points);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
             }
             finally {
                 con.Close();
@@ -127,7 +120,7 @@ namespace TestKnowlige
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается отобразить список завершенных тестов");
             }
             finally {
                 con.Close();

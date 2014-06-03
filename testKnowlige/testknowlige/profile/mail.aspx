@@ -7,6 +7,8 @@
 <head runat="server">
     <title>Почта</title>
     <link href="../style/general.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../js/script.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="mail" runat="server">
@@ -14,7 +16,7 @@
     <uc:menu Visible="true" ID="menu" runat="server"/>
     <div class="main">
         <div class="MailOption">
-            <asp:ImageButton ID="SendMessage" runat="server" 
+            <asp:ImageButton ID="SendMes" runat="server" 
                 ImageUrl="~/img/newMessage.png" onclick="SendMessage_Click" 
                 style="width: 21px" />
             <asp:ImageButton ID="refreshMessage" runat="server" 
@@ -29,7 +31,8 @@
             <asp:Button runat="server" ID="SenderMessage" Text="Отправленные" 
                 onclick="SenderMessage_Click"  />            
         </div>
-        <div class="listMessage">        
+        <div class="listMessage"> 
+            <asp:Label ID="MessageError" runat="server" CssClass="error" Visible="false"/>       
             <asp:Repeater runat="server" ID="listMessage">
                 <ItemTemplate>
                 <div>
@@ -44,7 +47,7 @@
     </div>
     </div>
     <uc:message ID="messageItem" runat="server" Visible="false"/>
-    <div runat="server" id="Div1" class="send" visible ="false">
+    <div runat="server" id="sendMessage" class="send" visible ="false">
         <asp:Label ID="goodSend" runat="server">Сообщение успешно отправленно</asp:Label>
     </div>
     </form>

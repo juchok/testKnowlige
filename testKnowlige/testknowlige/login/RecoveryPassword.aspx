@@ -13,6 +13,7 @@
     <form id="RecoveryPassword" runat="server" class="ChangePassword">
     <div>
         <asp:Label Text="Востановление пароля" runat="server" ID="header" CssClass="loginHeader"/>
+        <asp:Label ID="MessageError" Visible="false" CssClass="messError" runat="server" />
         <asp:MultiView ID="RecoveryPass" runat="server">
             <asp:View runat="server" ID="yourLogin">
                 <asp:Label ID="lbllogin" runat="server" >Введите ваш логин</asp:Label>

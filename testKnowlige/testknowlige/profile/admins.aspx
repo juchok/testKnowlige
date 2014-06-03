@@ -16,6 +16,7 @@
     <uc:menu Visible="true" ID="menu" runat="server"/>
     <div class="main">
         <asp:Label ID="AdminsHeader" runat="server" >Администрация сайта</asp:Label>
+        <asp:Label ID="MessageError" Visible="false" CssClass="error" runat="server" />
         <table border="0" cellpadding="0" cellspacing="0">
             <asp:Repeater ID="listAdmins" runat="server">
             <HeaderTemplate>

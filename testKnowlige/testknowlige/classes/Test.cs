@@ -25,8 +25,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Тест не найден");
             }            
             finally {
                 con.Close();
@@ -93,7 +92,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось найти текст");
             }
             finally {
                 con.Close();
@@ -113,7 +112,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось освободить памят");
             }
             finally {
                 con.Close();
@@ -129,8 +128,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Не удалось освободить память");
             }
             finally {
                 con.Close();
@@ -150,8 +148,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Не удалось освободить память");
             }
             finally
             {
@@ -173,7 +170,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось добавить ответ");
             }
             finally
             {
@@ -210,8 +207,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Не удалось проверить ответ");
             }
             finally {
                 con.Close();
@@ -234,7 +230,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось отредактировать вопрос");
             }
             finally
             {
@@ -293,7 +289,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось определить баллы за вопрос");
             }
             finally {
                 con.Close();
@@ -317,7 +313,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось отредактировать ответ");
             }
             finally
             {
@@ -343,8 +339,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Вопрос не найден");
             }
             finally
             {
@@ -370,8 +365,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-
-                throw;
+                throw new ApplicationException("Вопрос не найден");
             }
             finally
             {
@@ -403,7 +397,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается добавить тест");
             }
             finally {
                 con.Close();
@@ -428,7 +422,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось сохранить ответ");
             }
             finally {
                 con.Close();
@@ -450,7 +444,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось сохранить ответ");
             }
             finally {
                 con.Close();
@@ -471,7 +465,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось сохранить вопрос");
             }
             finally {
                 con.Close();
@@ -506,7 +500,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Тест не найден");
             }
             finally {
                 con.Close();
@@ -529,7 +523,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось сохранить вопрос");
             }
             finally {
                 con.Close();
@@ -555,7 +549,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Тест не найден");
             }
             finally {
                 con.Close();
@@ -578,7 +572,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается добавить тест");
             }
             finally {
                 con.Close();
@@ -599,7 +593,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удается очистить память от теста");
             }
             finally {
                 con.Close();
@@ -629,7 +623,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось освободить память");
             }
             finally {
                 con.Close();
@@ -649,7 +643,7 @@ namespace TestKnowlige.classes
             }
             catch (Exception)
             {
-                throw;
+                throw new ApplicationException("Не удалось освободить память");
             }
             finally {
                 con.Close();
@@ -1018,6 +1012,57 @@ namespace TestKnowlige.classes
             SqlDataSource ds = new SqlDataSource(con.ConnectionString, str);
             ds.SelectParameters.Add("id", LoGiN.UserId(UserName).ToString());
             return ds;
+        }
+
+        internal static void SaveTestComplite(string UserName, string Test_id, float test_points)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);
+            string ins = "insert into complite_test (user_id, test_id, dateComplite, points) values (@user_id, @test_id, @date, @points)";
+            SqlCommand cmd_ins = new SqlCommand(ins, con);
+            cmd_ins.Parameters.AddWithValue("user_id", LoGiN.UserId(UserName));
+            cmd_ins.Parameters.AddWithValue("test_id", Test_id);
+            cmd_ins.Parameters.AddWithValue("date", System.DateTime.Now);
+            cmd_ins.Parameters.AddWithValue("points", test_points);
+
+            try
+            {
+                con.Open();
+                cmd_ins.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удалось сохранить результат завершенного теста");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal static void DeleteTest(string test_id)
+        {            
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["connectionstring"].ConnectionString);            
+            string delTest = "delete test where test_id = @id";            
+            SqlCommand cmd = new SqlCommand(delTest, con);
+            cmd.Parameters.AddWithValue("id", test_id);
+
+            string delTestQuestion = "delete test_question where test_id = @id";
+            SqlCommand cmdDelTestQuestion = new SqlCommand(delTestQuestion, con);
+            cmdDelTestQuestion.Parameters.AddWithValue("id", test_id);
+            try
+            {
+                con.Open();
+                cmdDelTestQuestion.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Не удается удалить тест");
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }

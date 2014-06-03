@@ -13,6 +13,7 @@
     <uc:menu ID="menu" runat="server" Visible="true"/>
     <div class="main">    
         <asp:Label ID="lblGeneral" runat="server" Text="Общая информация"></asp:Label>
+        <asp:Label ID="MessageError" Visible="false" CssClass="error" runat="server" />
          <div>
             <asp:Label ID="lblFirsname" runat="server" Text="Firstname"></asp:Label>
             <asp:TextBox ID="txtFirstname" Enabled="false" runat="server"></asp:TextBox>        
@@ -21,6 +22,8 @@
             ErrorMessage="Имя должно быть только из Букв или цифр, длинной не менее 2 символов"
             Display="Dynamic" id="validFirstname" CssClass="error"
             ValidationExpression="[a-zA-z0-9]{2,}"></asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtFirstname"
+            ErrorMessage="Поле должно быть заполненным" Display="Dynamic" CssClass="error"></asp:RequiredFieldValidator>        
         <div>
             <asp:Label ID="lblLastname" runat="server" Text="Lastname"></asp:Label>
             <asp:TextBox ID="txtLastname" Enabled="false" runat="server"></asp:TextBox>        
@@ -29,6 +32,8 @@
             ErrorMessage="Фамиля должна быть только из Букв, длинной не менее 2 символов"
             Display="Dynamic" id="ValidLastname" CssClass="error"
             ValidationExpression="[a-zA-z]{2,}"></asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtLastname"
+            ErrorMessage="Поле должно быть заполненным" Display="Dynamic" CssClass="error"></asp:RequiredFieldValidator>  
         <div>
             <asp:Label ID="lblQuestioin" runat="server" Text="Your special question"></asp:Label>            
             <asp:TextBox ID="txtQuestion" runat="server" Enabled="false" CssClass="question"></asp:TextBox>        

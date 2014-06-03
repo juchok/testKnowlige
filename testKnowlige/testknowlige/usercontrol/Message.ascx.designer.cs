@@ -49,6 +49,15 @@ namespace TestKnowlige.usercontrol {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidFrom;
         
         /// <summary>
+        /// ValidEmptyFrom элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidEmptyFrom;
+        
+        /// <summary>
         /// ToUser элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace TestKnowlige.usercontrol {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidToUser;
+        
+        /// <summary>
+        /// ValidEmptyToUser элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidEmptyToUser;
         
         /// <summary>
         /// hideid элемент управления.

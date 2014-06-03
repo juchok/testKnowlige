@@ -15,10 +15,17 @@ namespace TestKnowlige.profile
             }            
             if (!Page.IsPostBack)
             {
-                Profile.Information(User.Identity.Name, txtFirstname, "FirstName");
-                Profile.Information(User.Identity.Name, txtLastname, "lastname");
-                Profile.Information(User.Identity.Name, txtQuestion, "question");
-                Profile.Information(User.Identity.Name, txtAnswer, "answer");
+                try
+                {
+                    Profile.Information(User.Identity.Name, txtFirstname, "FirstName");
+                    Profile.Information(User.Identity.Name, txtLastname, "lastname");
+                    Profile.Information(User.Identity.Name, txtQuestion, "question");
+                    Profile.Information(User.Identity.Name, txtAnswer, "answer");
+                }
+                catch (Exception ex) {
+                    MessageError.Text = ex.Message;
+                    MessageError.Visible = true;
+                }
             }
             menu.ActiveItem(1);
         }
@@ -35,8 +42,16 @@ namespace TestKnowlige.profile
         }
 
         protected void Save_Click(object sender, EventArgs e)
-        {            
-            Profile.Save(User.Identity.Name, txtFirstname.Text, txtLastname.Text, txtQuestion.Text, txtAnswer.Text);
+        {
+            try
+            {
+                Profile.Save(User.Identity.Name, txtFirstname.Text, txtLastname.Text, txtQuestion.Text, txtAnswer.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
             txtAnswer.Enabled = false;
             txtQuestion.Enabled = false;
             txtFirstname.Enabled = false;

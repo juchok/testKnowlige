@@ -63,5 +63,18 @@ namespace TestKnowlige.administration
             TestList.EditIndex = -1;
             RefreshTest();
         }
+
+        protected void TestList_RowDeleting(object sender, GridViewDeleteEventArgs e) {
+            string test_id = ((sender as GridView).Rows[e.RowIndex].Cells[4].FindControl("TestEditLink") as HyperLink).NavigateUrl.Split('=')[1];
+            try
+            {
+                Test.DeleteTest(test_id);
+            }
+            catch (Exception ex)
+            {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
+            }
+        }
     }
 }

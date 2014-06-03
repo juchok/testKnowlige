@@ -9,11 +9,12 @@ namespace TestKnowlige.profile
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
+            MessageError.Visible = false;
+            if (!Page.IsPostBack)
             {
                 NewMessage_Click(sender, e);
             }
-            
+            sendMessage.Visible = false;  
             menu.ActiveItem(4);
         }
 
@@ -36,18 +37,27 @@ namespace TestKnowlige.profile
         }
 
         protected void deleteMessage_Click(object sender, ImageClickEventArgs e)
-        {            
-            foreach (RepeaterItem item in listMessage.Controls)
+        {
+            try
             {
-                if ((item.FindControl("selectMessage") as CheckBox).Checked)
+                foreach (RepeaterItem item in listMessage.Controls)
                 {
-                    if (WhatList.Value.ToLower() == "new") {
-                        Mail.DeleteInputMessage(int.Parse((item.FindControl("message_id") as HiddenField).Value));
+                    if ((item.FindControl("selectMessage") as CheckBox).Checked)
+                    {
+                        if (WhatList.Value.ToLower() == "new")
+                        {
+                            Mail.DeleteInputMessage(int.Parse((item.FindControl("message_id") as HiddenField).Value));
+                        }
+                        else if (WhatList.Value.ToLower() == "sent")
+                        {
+                            Mail.DeleteOutputMessage(int.Parse((item.FindControl("message_id") as HiddenField).Value));
+                        }
                     }
-                    else if (WhatList.Value.ToLower() == "sent") {
-                        Mail.DeleteOutputMessage(int.Parse((item.FindControl("message_id") as HiddenField).Value));
-                    }
-                }                    
+                }
+            }
+            catch (Exception ex) {
+                MessageError.Text = ex.Message;
+                MessageError.Visible = true;
             }
 
             refreshMessage_Click(sender, e);
@@ -55,7 +65,7 @@ namespace TestKnowlige.profile
 
         protected void SenderMessage_Click(object sender, EventArgs e)
         {            
-            Mail.SentMessage(listMessage, LoGiN.UserId(User.Identity.Name));
+            Mail.SentMessage(listMessage, LoGiN.UserId(User.Identity.Name));         
             WhatList.Value = "sent";
             SenderMessage.CssClass = "active_mail";
             NewMessage.CssClass = "";
